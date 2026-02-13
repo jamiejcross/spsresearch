@@ -1,1 +1,1 @@
-Data pulled from the UKRI GTR repository using this bespoke [UKRI GTR Scanner](https://github.com/jamiejcross/UKRI-GTR-Scanner)  
+Data pulled from the UKRI GTR repository using a bespoke [UKRI GTR Scanner](https://github.com/jamiejcross/UKRI-GTR-Scanner). Data visualisations and interactive dashboard built using Chart.js for charts, D3.js for the network graph, and a university location lookup for the map.
