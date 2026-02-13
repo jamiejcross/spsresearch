@@ -1,1 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UofG SPS – UKRI Research Portfolio Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --navy: #003865;
+  --navy-light: #00508a;
+  --bg: #ffffff;
+  --card: #ffffff;
+  --border: #e0e0e0;
+  --text: #1a1a1a;
+  --muted: #5f6368;
+  --accent: #003865;
+  --accent-light: rgba(0,56,101,0.08);
+  --radius: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#f5f5f5;color:var(--text);line-height:1.5}
 
+/* ── UofG Banner ── */
+.uofg-banner{
+  background:var(--navy);
+  color:#fff;
+  padding:14px 2.5rem;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.uofg-banner img{height:52px;width:auto}
+.uofg-banner .banner-text{display:flex;flex-direction:column}
+.uofg-banner .banner-title{font-size:0.82rem;font-weight:400;opacity:0.85;letter-spacing:0.02em}
+.uofg-banner .banner-dept{font-size:0.72rem;font-weight:400;opacity:0.65}
+
+/* ── Header ── */
+header{padding:1.5rem 2.5rem 1.2rem;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem}
+header .header-left{}
+header h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--navy)}
+header p{color:var(--muted);font-size:0.85rem;margin-top:0.15rem}
+
+/* ── Status filter + refresh ── */
+.header-controls{display:flex;align-items:center;gap:0.75rem}
+.status-filter{display:inline-flex;gap:0;border-radius:6px;overflow:hidden}
+.status-filter button{font-size:0.78rem;padding:0.38rem 0.85rem;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;font-weight:500;transition:all 0.15s}
+.status-filter button:first-child{border-radius:6px 0 0 6px}
+.status-filter button:last-child{border-radius:0 6px 6px 0;border-left:none}
+.status-filter button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.refresh-btn{font-size:0.78rem;padding:0.38rem 0.85rem;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;font-weight:500;border-radius:6px;display:flex;align-items:center;gap:0.35rem;transition:all 0.15s}
+.refresh-btn:hover{border-color:var(--navy);color:var(--navy)}
+.refresh-btn.spinning svg{animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.refresh-status{font-size:0.72rem;color:var(--muted);max-width:220px;text-align:right}
+
+/* ── Tabs ── */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 2.5rem;background:#fff}
+.tab-btn{padding:0.8rem 1.3rem;font-size:0.84rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
+.tab-panel{display:none;padding:2rem 2.5rem}
+.tab-panel.active{display:block}
+
+/* ── KPIs ── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin-bottom:2rem}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.kpi-label{color:var(--muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;font-weight:500}
+.kpi-value{font-size:1.65rem;font-weight:700;margin-top:0.15rem;letter-spacing:-0.02em;color:var(--navy)}
+.kpi-sub{color:var(--muted);font-size:0.78rem;margin-top:0.1rem}
+
+/* ── Chart Grid ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+@media(max-width:1100px){.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.card h3{font-size:0.86rem;font-weight:600;margin-bottom:0.9rem;color:var(--navy);display:flex;align-items:center;flex-wrap:wrap;gap:0.4rem}
+.card canvas{max-height:340px}
+.card.tall canvas{max-height:460px}
+
+/* ── Export dropdown ── */
+.export-wrap{position:absolute;top:0.8rem;right:0.8rem;z-index:5}
+.export-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:0.25rem 0.5rem;font-size:0.72rem;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:0.25rem;transition:all 0.15s}
+.export-btn:hover{border-color:var(--navy);color:var(--navy)}
+.export-btn svg{width:13px;height:13px}
+.export-menu{display:none;position:absolute;right:0;top:100%;margin-top:4px;background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.1);overflow:hidden;min-width:100px}
+.export-menu.open{display:block}
+.export-menu button{display:block;width:100%;text-align:left;padding:0.45rem 0.75rem;font-size:0.78rem;border:none;background:none;cursor:pointer;color:var(--text)}
+.export-menu button:hover{background:var(--accent-light)}
+
+/* ── Table ── */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+th{text-align:left;color:var(--muted);font-weight:500;padding:0.55rem 0.75rem;border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:0.55rem 0.75rem;border-bottom:1px solid #eee;vertical-align:top}
+tr:hover td{background:rgba(0,56,101,0.03)}
+.tag{display:inline-block;background:var(--accent-light);color:var(--navy);padding:0.12rem 0.45rem;border-radius:4px;font-size:0.72rem;margin:0.08rem;white-space:nowrap}
+.money{font-variant-numeric:tabular-nums;text-align:right}
+
+th.sortable{cursor:pointer;user-select:none;position:relative;padding-right:1.4rem}
+th.sortable:hover{color:var(--text)}
+th.sortable::after{content:'⇅';position:absolute;right:0.3rem;top:50%;transform:translateY(-50%);font-size:0.7rem;opacity:0.35}
+th.sortable.asc::after{content:'↑';opacity:0.9}
+th.sortable.desc::after{content:'↓';opacity:0.9}
+
+/* ── Sort toggles ── */
+.sort-toggle{display:inline-flex;gap:0;margin-left:0.5rem;vertical-align:middle}
+.sort-toggle button{font-size:0.68rem;padding:0.18rem 0.5rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.sort-toggle button:first-child{border-radius:4px 0 0 4px}
+.sort-toggle button:last-child{border-radius:0 4px 4px 0;border-left:none}
+.sort-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ── Network ── */
+#network-svg{width:100%;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+.node-label{fill:var(--text);font-size:10px;pointer-events:none}
+.tooltip-box{position:absolute;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.8rem;font-size:0.78rem;color:var(--text);pointer-events:none;z-index:100;max-width:300px;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+
+/* ── Map ── */
+#map{height:520px;border-radius:var(--radius);border:1px solid var(--border)}
+.leaflet-popup-content-wrapper{background:#fff;color:var(--text);border:1px solid var(--border);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+.leaflet-popup-tip{background:#fff}
+.leaflet-popup-content{font-size:0.82rem;line-height:1.5}
+
+/* ── Timeline ── */
+#timeline-canvas{width:100%}
+.legend-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.8rem;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:0.3rem;font-size:0.75rem;color:var(--muted);cursor:pointer;position:relative}
+.legend-swatch{width:12px;height:12px;border-radius:3px}
+.legend-subcats{font-size:0.65rem;color:#999;margin-left:0.15rem;font-style:italic;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Subcategory tooltip on hover */
+.legend-item .subcat-tooltip{display:none;position:absolute;bottom:100%;left:0;margin-bottom:6px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.7rem;font-size:0.7rem;color:var(--text);white-space:normal;width:240px;box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:50;font-style:normal;line-height:1.4}
+.legend-item:hover .subcat-tooltip{display:block}
+
+.loading{text-align:center;padding:4rem;color:var(--muted);font-size:1rem}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ UofG BANNER ═══════════ -->
+<div class="uofg-banner">
+  <img src="glasgow-logo.png" alt="University of Glasgow">
+  <div class="banner-text">
+    <span class="banner-title">University of Glasgow</span>
+    <span class="banner-dept">School of Social &amp; Political Sciences</span>
+  </div>
+</div>
+
+<header>
+  <div class="header-left">
+    <h1>UKRI Research Portfolio</h1>
+    <p id="header-subtitle">Active projects + Closed from 2020 onwards</p>
+  </div>
+  <div class="header-controls">
+    <div class="status-filter" id="status-filter">
+      <button class="active" data-filter="all">All Projects</button>
+      <button data-filter="active">Active Only</button>
+    </div>
+    <button class="refresh-btn" id="refresh-btn" title="Re-query GTR API and refresh data">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 00-4.546 2.914.5.5 0 01-.908-.418A6 6 0 0114 8a.5.5 0 01-1 0 5 5 0 00-5-5z"/><path d="M3 8a.5.5 0 01.5.5 5 5 0 009.046 2.914.5.5 0 01.908.418A6 6 0 012 8a.5.5 0 01.5-.5z"/><path d="M8 1.5a.5.5 0 01.5.5v3a.5.5 0 01-1 0V2a.5.5 0 01.5-.5z"/><path d="M5.354 3.354a.5.5 0 010-.708l2.5-2.5a.5.5 0 01.707 0l2.5 2.5a.5.5 0 01-.707.707L8.5 1.5 6.061 3.354a.5.5 0 01-.707 0z"/></svg>
+      Refresh Data
+    </button>
+    <div class="refresh-status" id="refresh-status"></div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="network">People Network</button>
+  <button class="tab-btn" data-tab="geography">Partner Geography</button>
+  <button class="tab-btn" data-tab="timeline">Category Timeline</button>
+  <button class="tab-btn" data-tab="table">Project Table</button>
+</div>
+
+<!-- ═══════════ OVERVIEW TAB ═══════════ -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="kpi-row" id="kpi-container"></div>
+  <div class="grid-2">
+    <div class="card" id="card-cat-count">
+      <h3>Grants by Category — Count
+        <span class="sort-toggle" id="toggle-cat-count">
+          <button class="active" data-sort="fixed">Default</button>
+          <button data-sort="count">By Count</button>
+          <button data-sort="value">By Value</button>
+        </span>
+      </h3>
+      <canvas id="ch-cat-count"></canvas>
+    </div>
+    <div class="card" id="card-cat-value">
+      <h3>Grants by Category — Total Value
+        <span class="sort-toggle" id="toggle-cat-value">
+          <button class="active" data-sort="fixed">Default</button>
+          <button data-sort="count">By Count</button>
+          <button data-sort="value">By Value</button>
+        </span>
+      </h3>
+      <canvas id="ch-cat-value"></canvas>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card" id="card-funder-value"><h3>Funding by Research Council</h3><canvas id="ch-funder-value"></canvas></div>
+    <div class="card" id="card-funder-count"><h3>Projects by Funder — Count</h3><canvas id="ch-funder-count"></canvas></div>
+  </div>
+  <div class="grid-3">
+    <div class="card" id="card-grant-type"><h3>Grant Category (type)</h3><canvas id="ch-grant-type"></canvas></div>
+    <div class="card" id="card-status"><h3>Project Status</h3><canvas id="ch-status"></canvas></div>
+    <div class="card" id="card-size-dist"><h3>Grant Size Distribution</h3><canvas id="ch-size-dist"></canvas></div>
+  </div>
+  <div class="grid-2">
+    <div class="card tall" id="card-orgs"><h3>Top 15 Lead Organisations by Funding</h3><canvas id="ch-orgs"></canvas></div>
+    <div class="card tall" id="card-staff"><h3>Staff with Most Projects (Top 20)</h3><canvas id="ch-staff"></canvas></div>
+  </div>
+</div>
+
+<!-- ═══════════ NETWORK TAB ═══════════ -->
+<div class="tab-panel" id="tab-network">
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem">
+    Nodes = SPS staff. Links = co-involvement on the same project. Node size = number of projects. Hover for details. Drag to rearrange.
+  </p>
+  <div class="card" id="card-network" style="padding:0;overflow:hidden">
+    <svg id="network-svg" height="620" style="border:none"></svg>
+  </div>
+  <div class="tooltip-box" id="net-tooltip"></div>
+</div>
+
+<!-- ═══════════ GEOGRAPHY TAB ═══════════ -->
+<div class="tab-panel" id="tab-geography">
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem">
+    Lead organisations mapped by location. Circle size = total funding. Click for details.
+  </p>
+  <div id="map"></div>
+</div>
+
+<!-- ═══════════ TIMELINE TAB ═══════════ -->
+<div class="tab-panel" id="tab-timeline">
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem">
+    Stacked area chart: total budget per thematic category by year (based on project start date). All 12 categories shown. Hover legend for subcategory keywords. Click legend to toggle.
+  </p>
+  <div class="card" id="card-timeline" style="padding:1.5rem">
+    <canvas id="timeline-canvas" height="400"></canvas>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</div>
+
+<!-- ═══════════ TABLE TAB ═══════════ -->
+<div class="tab-panel" id="tab-table">
+  <div class="card">
+    <h3 id="table-heading">All Projects</h3>
+    <div class="tbl-wrap">
+      <table id="project-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="sortable" data-col="title">Title</th>
+            <th class="sortable" data-col="funder">Funder</th>
+            <th class="sortable" data-col="grant_offer" style="text-align:right">Grant (£)</th>
+            <th class="sortable" data-col="lead_org">Lead Org</th>
+            <th class="sortable" data-col="start_date">Start</th>
+            <th class="sortable" data-col="end_date">End</th>
+            <th class="sortable" data-col="staff_members">Staff</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="loading" id="loading">Loading data…</div>
+
+<script>
+/* ════════════════════════════════════════
+   GLOBALS
+   ════════════════════════════════════════ */
+Chart.defaults.color = '#5f6368';
+Chart.defaults.borderColor = '#e0e0e0';
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif";
+
+const P = ['#003865','#0068a8','#2196f3','#00897b','#43a047','#f9a825','#e65100','#ad1457','#6a1b9a','#00838f','#c62828','#558b2f','#4527a0','#ef6c00','#00695c','#1565c0','#d81b60'];
+const TAG_COLORS = {
+  'Governance & Policy':'#003865','Health & Wellbeing':'#00897b','Inequality & Social Justice':'#c62828',
+  'Migration & Citizenship':'#e65100','Environment & Sustainability':'#2e7d32','Culture & Heritage':'#6a1b9a',
+  'Conflict & Security':'#ad1457','Global Health':'#00838f','Economy & Development':'#1565c0',
+  'Housing & Urban':'#f9a825','Data & Digital':'#0277bd','Gender & Equality':'#d81b60'
+};
+const TAG_ORDER = Object.keys(TAG_COLORS);
+
+/* ── Subcategory keywords for each tag (human-readable) ── */
+const TAG_SUBCATEGORIES = {
+  'Governance & Policy': ['governance', 'policy', 'regulation', 'legislation', 'democracy', 'parliament', 'election', 'voting', 'public administration', 'bureaucracy', 'political parties'],
+  'Health & Wellbeing': ['health', 'wellbeing', 'mental health', 'epidemiology', 'pandemic', 'disease', 'medical', 'clinical', 'NHS', 'public health', 'disability', 'patient', 'social care'],
+  'Inequality & Social Justice': ['inequality', 'justice', 'poverty', 'deprivation', 'exclusion', 'discrimination', 'racism', 'human rights', 'social justice', 'social mobility', 'redistribution'],
+  'Migration & Citizenship': ['migration', 'refugee', 'asylum', 'diaspora', 'citizenship', 'immigration', 'borders', 'displacement', 'ethnicity', 'multiculturalism', 'integration'],
+  'Environment & Sustainability': ['environment', 'climate', 'sustainability', 'carbon', 'renewable', 'energy transition', 'net zero', 'biodiversity', 'ecology', 'pollution', 'green economy', 'natural resources'],
+  'Culture & Heritage': ['culture', 'heritage', 'identity', 'museum', 'arts', 'media', 'journalism', 'film', 'narrative', 'history', 'memory', 'commemoration'],
+  'Conflict & Security': ['conflict', 'security', 'war', 'peace', 'violence', 'terrorism', 'extremism', 'geopolitics', 'military', 'nuclear', 'cyber security', 'defence'],
+  'Global Health': ['global health', 'tropical', 'infectious disease', 'vaccine', 'AIDS', 'HIV', 'malaria', 'tuberculosis', 'WHO', 'health systems', 'pandemic', 'COVID'],
+  'Economy & Development': ['economy', 'development', 'trade', 'financial', 'market', 'globalisation', 'international aid', 'growth', 'industry', 'labour', 'employment', 'workforce'],
+  'Housing & Urban': ['housing', 'homelessness', 'urban', 'cities', 'neighbourhood', 'urban planning', 'gentrification', 'tenants', 'rent', 'infrastructure'],
+  'Data & Digital': ['data', 'digital', 'algorithm', 'AI', 'machine learning', 'computing', 'automation', 'platform', 'social media', 'online', 'surveillance', 'privacy', 'cyber', 'big data', 'smart cities', 'internet'],
+  'Gender & Equality': ['gender', 'feminism', 'women', 'masculinity', 'sexuality', 'LGBT', 'queer', 'transgender', 'patriarchy', 'gender-based violence', 'reproductive', 'maternal', 'equality', 'diversity', 'inclusion', 'intersectionality'],
+};
+
+function fmtGBP(n){if(n>=1e6)return'£'+(n/1e6).toFixed(1)+'M';if(n>=1e3)return'£'+(n/1e3).toFixed(0)+'K';return'£'+n.toFixed(0)}
+function commas(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+
+/* ── Filter state ── */
+let _filterMode = 'all'; // 'all' or 'active'
+let _allData = [];
+
+function getFilteredData(){
+  if(_filterMode === 'active') return _allData.filter(d => d.status === 'Active');
+  return _allData;
+}
+
+/* ── Export helper ── */
+const EXPORT_ICON = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
+
+function addExportButton(cardId, chartCanvasId, title){
+  const card = document.getElementById(cardId);
+  if(!card) return;
+  // Remove existing export button if present (for rebuilds)
+  card.querySelectorAll('.export-wrap').forEach(e=>e.remove());
+  const wrap = document.createElement('div');
+  wrap.className = 'export-wrap';
+  wrap.innerHTML = `
+    <button class="export-btn">${EXPORT_ICON} Export</button>
+    <div class="export-menu">
+      <button data-fmt="png">Download PNG</button>
+      <button data-fmt="jpg">Download JPG</button>
+      <button data-fmt="pdf">Download PDF</button>
+    </div>`;
+  card.appendChild(wrap);
+
+  const btn = wrap.querySelector('.export-btn');
+  const menu = wrap.querySelector('.export-menu');
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelectorAll('.export-menu.open').forEach(m=>{if(m!==menu)m.classList.remove('open')});
+    menu.classList.toggle('open');
+  });
+  document.addEventListener('click', () => menu.classList.remove('open'));
+
+  menu.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.remove('open');
+      exportChart(chartCanvasId, b.dataset.fmt, title);
+    });
+  });
+}
+
+function exportChart(canvasId, fmt, title){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const tmpCanvas = document.createElement('canvas');
+  const scale = 2;
+  tmpCanvas.width = canvas.width * scale;
+  tmpCanvas.height = canvas.height * scale;
+  const ctx = tmpCanvas.getContext('2d');
+  ctx.scale(scale, scale);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
+
+  const safeName = title.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+  if(fmt === 'png'){
+    const link = document.createElement('a'); link.download = safeName+'.png'; link.href = tmpCanvas.toDataURL('image/png'); link.click();
+  } else if(fmt === 'jpg'){
+    const link = document.createElement('a'); link.download = safeName+'.jpg'; link.href = tmpCanvas.toDataURL('image/jpeg',0.95); link.click();
+  } else if(fmt === 'pdf'){
+    const { jsPDF } = window.jspdf;
+    const w = tmpCanvas.width / scale, h = tmpCanvas.height / scale;
+    const pdf = new jsPDF({ orientation: w>h?'landscape':'portrait', unit:'px', format:[w+40,h+60] });
+    pdf.setFontSize(12); pdf.setTextColor(0,56,101); pdf.text(title,20,25);
+    pdf.addImage(tmpCanvas.toDataURL('image/png'),'PNG',20,40,w,h);
+    pdf.save(safeName+'.pdf');
+  }
+}
+
+function exportSVG(svgEl, fmt, title){
+  const svgClone = svgEl.cloneNode(true);
+  svgClone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+  rect.setAttribute('width','100%'); rect.setAttribute('height','100%'); rect.setAttribute('fill','#ffffff');
+  svgClone.insertBefore(rect, svgClone.firstChild);
+  const svgData = new XMLSerializer().serializeToString(svgClone);
+  const img = new Image();
+  const blob = new Blob([svgData],{type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  img.onload = function(){
+    const canvas = document.createElement('canvas');
+    const scale = 2;
+    canvas.width = img.width*scale; canvas.height = img.height*scale;
+    const ctx = canvas.getContext('2d'); ctx.scale(scale,scale);
+    ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,img.width,img.height); ctx.drawImage(img,0,0);
+    URL.revokeObjectURL(url);
+    const safeName = title.replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();
+    if(fmt==='png'){const a=document.createElement('a');a.download=safeName+'.png';a.href=canvas.toDataURL('image/png');a.click()}
+    else if(fmt==='jpg'){const a=document.createElement('a');a.download=safeName+'.jpg';a.href=canvas.toDataURL('image/jpeg',0.95);a.click()}
+    else if(fmt==='pdf'){const{jsPDF}=window.jspdf;const w=img.width,h=img.height;const pdf=new jsPDF({orientation:w>h?'landscape':'portrait',unit:'px',format:[w+40,h+60]});pdf.setFontSize(12);pdf.setTextColor(0,56,101);pdf.text(title,20,25);pdf.addImage(canvas.toDataURL('image/png'),'PNG',20,40,w,h);pdf.save(safeName+'.pdf')}
+  };
+  img.width = svgEl.getBoundingClientRect().width;
+  img.height = svgEl.getBoundingClientRect().height;
+  img.src = url;
+}
+
+function addSvgExportButton(cardId, svgId, title){
+  const card = document.getElementById(cardId);
+  if(!card) return;
+  card.querySelectorAll('.export-wrap').forEach(e=>e.remove());
+  const wrap = document.createElement('div');
+  wrap.className = 'export-wrap';
+  wrap.innerHTML = `
+    <button class="export-btn">${EXPORT_ICON} Export</button>
+    <div class="export-menu">
+      <button data-fmt="png">Download PNG</button>
+      <button data-fmt="jpg">Download JPG</button>
+      <button data-fmt="pdf">Download PDF</button>
+    </div>`;
+  card.appendChild(wrap);
+  const btn = wrap.querySelector('.export-btn');
+  const menu = wrap.querySelector('.export-menu');
+  btn.addEventListener('click', e => { e.stopPropagation(); menu.classList.toggle('open'); });
+  document.addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', e => { e.stopPropagation(); menu.classList.remove('open'); exportSVG(document.getElementById(svgId), b.dataset.fmt, title); });
+  });
+}
+
+/* ── Tab switching ── */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    const data = getFilteredData();
+    if(btn.dataset.tab==='network') buildNetwork(data);
+    if(btn.dataset.tab==='geography') buildMap(data);
+    if(btn.dataset.tab==='timeline') buildTimeline(data);
+  });
+});
+
+/* ── Status filter toggle ── */
+document.querySelectorAll('#status-filter button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#status-filter button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    _filterMode = btn.dataset.filter;
+    // Update subtitle
+    document.getElementById('header-subtitle').textContent =
+      _filterMode === 'active' ? 'Showing active (live) projects only' : 'Active projects + Closed from 2020 onwards';
+    rebuildAll();
+  });
+});
+
+/* ── Refresh button ── */
+document.getElementById('refresh-btn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('refresh-btn');
+  const statusEl = document.getElementById('refresh-status');
+  if(btn.classList.contains('spinning')) return;
+
+  btn.classList.add('spinning');
+  statusEl.textContent = 'Starting refresh...';
+
+  try {
+    const res = await fetch('/api/refresh', {method:'POST'});
+    const json = await res.json();
+    if(json.status === 'already_running'){
+      statusEl.textContent = 'Refresh already running...';
+    } else if(json.status === 'started'){
+      statusEl.textContent = 'Querying GTR API...';
+      // Poll for status
+      const poll = setInterval(async ()=>{
+        try {
+          const sr = await fetch('/api/refresh-status');
+          const sj = await sr.json();
+          statusEl.textContent = sj.progress || '...';
+          if(!sj.running){
+            clearInterval(poll);
+            btn.classList.remove('spinning');
+            if(sj.result && sj.result.status === 'ok'){
+              statusEl.textContent = `Done! ${sj.result.projects} projects. Reloading...`;
+              setTimeout(()=>location.reload(), 1000);
+            } else {
+              statusEl.textContent = 'Error: ' + (sj.result?.error || 'Unknown');
+            }
+          }
+        } catch(e){ statusEl.textContent = 'Poll error'; }
+      }, 3000);
+    }
+  } catch(e){
+    btn.classList.remove('spinning');
+    statusEl.textContent = 'Server not running. Use: python python/dashboard_server.py';
+  }
+});
+
+/* ════════════════════════════════════════
+   REBUILD ALL — called on filter change
+   ════════════════════════════════════════ */
+function rebuildAll(){
+  const data = getFilteredData();
+  // Destroy all existing Chart.js instances
+  Object.values(Chart.instances).forEach(c=>c.destroy());
+  _catCountChart = null; _catValueChart = null; _timelineChart = null;
+  _tagStats = {};
+  // Reset lazy-load flags
+  window._netDone = false; window._mapDone = false; window._tlDone = false;
+  // Clear dynamic content
+  document.getElementById('kpi-container').innerHTML = '';
+  document.querySelector('#project-table tbody').innerHTML = '';
+  // Clear SVG network
+  d3.select('#network-svg').selectAll('*').remove();
+  // Clear map
+  const mapEl = document.getElementById('map');
+  if(window._leafletMap){ window._leafletMap.remove(); window._leafletMap = null; }
+
+  buildOverview(data);
+  buildTable(data);
+
+  // Rebuild active tab if it's not overview
+  const activeTab = document.querySelector('.tab-btn.active');
+  if(activeTab){
+    const tab = activeTab.dataset.tab;
+    if(tab === 'network') buildNetwork(data);
+    if(tab === 'geography') buildMap(data);
+    if(tab === 'timeline') buildTimeline(data);
+  }
+}
+
+/* ════════════════════════════════════════
+   LOAD CSV
+   ════════════════════════════════════════ */
+Papa.parse('uofg_sps_staff_gtr_projects.csv',{
+  download:true, header:true, skipEmptyLines:true,
+  complete(res){
+    const data=res.data.filter(r=>r.title);
+    _allData = data;
+    document.getElementById('loading').style.display='none';
+    document.querySelectorAll('.tab-panel,.tab-bar').forEach(e=>e.style.visibility='visible');
+    buildOverview(data);
+    buildTable(data);
+  },
+  error(e){document.getElementById('loading').textContent='Error: '+e.message}
+});
+
+/* ════════════════════════════════════════
+   1. OVERVIEW
+   ════════════════════════════════════════ */
+let _tagStats = {};
+let _catCountChart = null;
+let _catValueChart = null;
+
+function buildOverview(data){
+  const N=data.length;
+  const active=data.filter(d=>d.status==='Active').length;
+  const grants=data.map(d=>+d.grant_offer||0);
+  const totalF=grants.reduce((a,b)=>a+b,0);
+  const avgF=totalF/(grants.filter(g=>g>0).length||1);
+  const staff=new Set(); data.forEach(d=>(d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>staff.add(s)));
+  const orgs=new Set(data.map(d=>d.lead_org).filter(Boolean));
+  const funders=new Set(data.map(d=>d.funder).filter(Boolean));
+  const gla=data.filter(d=>(d.lead_org||'').toLowerCase().includes('glasgow')).length;
+
+  const filterLabel = _filterMode === 'active' ? '(active only)' : '';
+  const kpis=[
+    {l:'Projects',v:N,s:_filterMode==='active'?'active projects only':`${active} active · ${N-active} closed`},
+    {l:'Total Funding',v:fmtGBP(totalF),s:`avg ${fmtGBP(avgF)} per project`},
+    {l:'Named Staff',v:staff.size,s:'as PI, Co-I or Fellow'},
+    {l:'Lead Organisations',v:orgs.size,s:`${gla} led by Glasgow`},
+    {l:'Research Councils',v:funders.size,s:[...funders].sort().join(', ')},
+  ];
+  const kc=document.getElementById('kpi-container');
+  kc.innerHTML='';
+  kpis.forEach(k=>{kc.innerHTML+=`<div class="kpi"><div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`});
+
+  _tagStats = {};
+  TAG_ORDER.forEach(t=>{_tagStats[t]={count:0,value:0}});
+  data.forEach(d=>{
+    const g=+d.grant_offer||0;
+    (d.tags||'').split(';').map(t=>t.trim()).filter(Boolean).forEach(t=>{
+      if(!_tagStats[t])_tagStats[t]={count:0,value:0};
+      _tagStats[t].count++;
+      _tagStats[t].value+=g;
+    });
+  });
+
+  renderCatCharts('fixed');
+
+  document.querySelectorAll('.sort-toggle').forEach(container=>{
+    // Remove old listeners by replacing with clone
+    const clone = container.cloneNode(true);
+    container.parentNode.replaceChild(clone, container);
+    clone.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        clone.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const otherId=clone.id==='toggle-cat-count'?'toggle-cat-value':'toggle-cat-count';
+        const other=document.getElementById(otherId);
+        other.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        other.querySelector(`[data-sort="${btn.dataset.sort}"]`).classList.add('active');
+        renderCatCharts(btn.dataset.sort);
+      });
+    });
+  });
+
+  const funderV={},funderC={};
+  data.forEach(d=>{const f=d.funder||'Other';funderV[f]=(funderV[f]||0)+(+d.grant_offer||0);funderC[f]=(funderC[f]||0)+1});
+  const fsV=Object.entries(funderV).sort((a,b)=>b[1]-a[1]);
+  const fsC=Object.entries(funderC).sort((a,b)=>b[1]-a[1]);
+  hBar('ch-funder-value',fsV.map(f=>f[0]),fsV.map(f=>f[1]),P,v=>fmtGBP(v));
+  hBar('ch-funder-count',fsC.map(f=>f[0]),fsC.map(f=>f[1]),P,v=>v+' projects');
+
+  const catC={};data.forEach(d=>{const c=d.grant_category||'Unknown';catC[c]=(catC[c]||0)+1});
+  donut('ch-grant-type',catC,N);
+
+  const stC={};data.forEach(d=>{stC[d.status||'Unknown']=(stC[d.status||'Unknown']||0)+1});
+  donut('ch-status',stC,N,s=>s==='Active'?'#00897b':'#003865');
+
+  const nzg=grants.filter(g=>g>0);
+  const bk=[{l:'< £50K',a:0,b:5e4},{l:'£50K–200K',a:5e4,b:2e5},{l:'£200K–500K',a:2e5,b:5e5},{l:'£500K–1M',a:5e5,b:1e6},{l:'£1M–5M',a:1e6,b:5e6},{l:'> £5M',a:5e6,b:Infinity}];
+  new Chart(document.getElementById('ch-size-dist'),{type:'bar',data:{labels:bk.map(b=>b.l),datasets:[{data:bk.map(b=>nzg.filter(g=>g>=b.a&&g<b.b).length),backgroundColor:'#003865',borderRadius:4,borderSkipped:false}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.06)'}},x:{grid:{display:false}}}}});
+
+  const orgV={},orgC={};data.forEach(d=>{const o=d.lead_org||'Unknown';orgV[o]=(orgV[o]||0)+(+d.grant_offer||0);orgC[o]=(orgC[o]||0)+1});
+  const osV=Object.entries(orgV).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  hBar('ch-orgs',osV.map(o=>o[0].length>30?o[0].slice(0,28)+'…':o[0]),osV.map(o=>o[1]),['#0068a8'],v=>fmtGBP(v));
+
+  const stfC={};data.forEach(d=>(d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>{stfC[s]=(stfC[s]||0)+1}));
+  const ssC=Object.entries(stfC).sort((a,b)=>b[1]-a[1]).slice(0,20);
+  hBar('ch-staff',ssC.map(s=>s[0]),ssC.map(s=>s[1]),['#003865'],v=>v+' projects');
+
+  addExportButton('card-cat-count','ch-cat-count','Grants by Category - Count');
+  addExportButton('card-cat-value','ch-cat-value','Grants by Category - Total Value');
+  addExportButton('card-funder-value','ch-funder-value','Funding by Research Council');
+  addExportButton('card-funder-count','ch-funder-count','Projects by Funder');
+  addExportButton('card-grant-type','ch-grant-type','Grant Category Type');
+  addExportButton('card-status','ch-status','Project Status');
+  addExportButton('card-size-dist','ch-size-dist','Grant Size Distribution');
+  addExportButton('card-orgs','ch-orgs','Top 15 Lead Organisations');
+  addExportButton('card-staff','ch-staff','Staff with Most Projects');
+}
+
+function renderCatCharts(sortMode){
+  if(_catCountChart){_catCountChart.destroy();_catCountChart=null}
+  if(_catValueChart){_catValueChart.destroy();_catValueChart=null}
+  let tagLabels=TAG_ORDER.filter(t=>_tagStats[t]&&_tagStats[t].count>0);
+  if(sortMode==='count') tagLabels.sort((a,b)=>_tagStats[b].count-_tagStats[a].count);
+  else if(sortMode==='value') tagLabels.sort((a,b)=>_tagStats[b].value-_tagStats[a].value);
+  const tagColors=tagLabels.map(t=>TAG_COLORS[t]||'#999');
+  _catCountChart=hBarReturn('ch-cat-count',tagLabels,tagLabels.map(t=>_tagStats[t].count),tagColors,v=>v+' projects');
+  _catValueChart=hBarReturn('ch-cat-value',tagLabels,tagLabels.map(t=>_tagStats[t].value),tagColors,v=>fmtGBP(v));
+}
+
+function hBar(id,labels,vals,colors,fmt){
+  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:colors.length===1?colors[0]:colors,borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},scales:{x:{ticks:{callback:v=>typeof v==='number'&&v>=1e3?fmtGBP(v):v},grid:{color:'rgba(0,0,0,0.06)'}},y:{grid:{display:false},ticks:{font:{size:11},color:'#333'}}}}});
+}
+function hBarReturn(id,labels,vals,colors,fmt){
+  return new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:colors.length===1?colors[0]:colors,borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},scales:{x:{ticks:{callback:v=>typeof v==='number'&&v>=1e3?fmtGBP(v):v},grid:{color:'rgba(0,0,0,0.06)'}},y:{grid:{display:false},ticks:{font:{size:11},color:'#333'}}}}});
+}
+function donut(id,obj,total,colorFn){
+  const labels=Object.keys(obj).sort((a,b)=>obj[b]-obj[a]);
+  const cols=colorFn?labels.map(colorFn):P.slice(0,labels.length);
+  new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data:labels.map(l=>obj[l]),backgroundColor:cols,borderWidth:2,borderColor:'#fff'}]},options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:11},color:'#333'}},tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} (${((c.raw/total)*100).toFixed(0)}%)`}}}}});
+}
+
+/* ════════════════════════════════════════
+   2. PEOPLE NETWORK
+   ════════════════════════════════════════ */
+function buildNetwork(data){
+  window._netDone=true;
+  // Clear previous
+  d3.select('#network-svg').selectAll('*').remove();
+
+  const personProjects={};
+  const personCount={};
+  data.forEach(d=>{
+    const people=(d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean);
+    people.forEach(p=>{
+      if(!personProjects[p])personProjects[p]=[];
+      personProjects[p].push(d.title);
+      personCount[p]=(personCount[p]||0)+1;
+    });
+  });
+
+  const pairCount={};
+  const linkList=[];
+  const linkSet=new Set();
+  data.forEach(d=>{
+    const people=(d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean);
+    for(let i=0;i<people.length;i++){
+      for(let j=i+1;j<people.length;j++){
+        const key=[people[i],people[j]].sort().join('|||');
+        pairCount[key]=(pairCount[key]||0)+1;
+        if(!linkSet.has(key)){
+          linkSet.add(key);
+          linkList.push({source:people[i],target:people[j],key});
+        }
+      }
+    }
+  });
+
+  const connDegree={};
+  linkList.forEach(l=>{
+    connDegree[l.source]=(connDegree[l.source]||0)+1;
+    connDegree[l.target]=(connDegree[l.target]||0)+1;
+  });
+
+  const linkedPeople=new Set();
+  linkList.forEach(l=>{linkedPeople.add(l.source);linkedPeople.add(l.target)});
+  const allPeople=Object.keys(personCount);
+  const nodePeople=allPeople.filter(p=>linkedPeople.has(p)||personCount[p]>=2);
+
+  const nodes=nodePeople.map(p=>({id:p,count:personCount[p],projects:personProjects[p],degree:connDegree[p]||0}));
+  const nodeSet=new Set(nodePeople);
+  const validLinks=linkList.filter(l=>nodeSet.has(l.source)&&nodeSet.has(l.target))
+    .map(l=>({...l,weight:pairCount[l.key]||1}));
+
+  const maxDegree=Math.max(...nodes.map(n=>n.degree),1);
+  function purpleScale(degree){
+    const t=degree/maxDegree;
+    const r=Math.round(46 + t*(196-46));
+    const g=Math.round(16 + t*(181-16));
+    const b=Math.round(101 + t*(253-101));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  const maxWeight=Math.max(...validLinks.map(l=>l.weight),1);
+  function linkPurple(weight){
+    const t=weight/maxWeight;
+    const r=Math.round(62 + t*(167-62));
+    const g=Math.round(28 + t*(139-28));
+    const b=Math.round(120 + t*(250-120));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  const svg=d3.select('#network-svg');
+  const width=svg.node().getBoundingClientRect().width;
+  const height=620;
+  svg.attr('viewBox',`0 0 ${width} ${height}`);
+
+  const tooltip=document.getElementById('net-tooltip');
+
+  const sim=d3.forceSimulation(nodes)
+    .force('link',d3.forceLink(validLinks).id(d=>d.id).distance(80))
+    .force('charge',d3.forceManyBody().strength(-120))
+    .force('center',d3.forceCenter(width/2,height/2))
+    .force('collision',d3.forceCollide().radius(d=>Math.sqrt(d.count)*6+8));
+
+  const link=svg.append('g').selectAll('line').data(validLinks).join('line')
+    .attr('stroke',d=>linkPurple(d.weight))
+    .attr('stroke-opacity',d=>0.35 + 0.55*(d.weight/maxWeight))
+    .attr('stroke-width',d=>1.5 + 3*(d.weight/maxWeight));
+
+  const node=svg.append('g').selectAll('circle').data(nodes).join('circle')
+    .attr('r',d=>Math.sqrt(d.count)*5+4)
+    .attr('fill',d=>linkedPeople.has(d.id)?purpleScale(d.degree):'#c8c8d0')
+    .attr('stroke','#fff').attr('stroke-width',1.5)
+    .style('cursor','pointer')
+    .call(d3.drag().on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y})
+      .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y})
+      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}));
+
+  node.on('mouseover',(e,d)=>{
+    tooltip.style.display='block';
+    const projs=d.projects.map(p=>'• '+p.slice(0,60)).join('<br>');
+    tooltip.innerHTML=`<strong>${d.id}</strong><br>${d.count} project${d.count>1?'s':''} · ${d.degree} connection${d.degree!==1?'s':''}<br><br>${projs}`;
+  }).on('mousemove',e=>{
+    tooltip.style.left=(e.pageX+12)+'px';
+    tooltip.style.top=(e.pageY-10)+'px';
+  }).on('mouseout',()=>{tooltip.style.display='none'});
+
+  const label=svg.append('g').selectAll('text').data(nodes.filter(d=>d.count>=3)).join('text')
+    .attr('class','node-label').attr('dy',d=>-Math.sqrt(d.count)*5-7)
+    .attr('text-anchor','middle').text(d=>d.id.split(' ').pop());
+
+  sim.on('tick',()=>{
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('cx',d=>d.x=Math.max(20,Math.min(width-20,d.x))).attr('cy',d=>d.y=Math.max(20,Math.min(height-20,d.y)));
+    label.attr('x',d=>d.x).attr('y',d=>d.y);
+  });
+
+  addSvgExportButton('card-network','network-svg','People Network');
+}
+
+/* ════════════════════════════════════════
+   3. PARTNER GEOGRAPHY (Leaflet)
+   ════════════════════════════════════════ */
+const ORG_COORDS={
+  'University of Glasgow':[55.8721,-4.2882],'University of Edinburgh':[55.9445,-3.1892],
+  'University of St Andrews':[56.3398,-2.7967],'University of Aberdeen':[57.1645,-2.0999],
+  'University of Dundee':[56.4579,-2.9783],'University of Strathclyde':[55.8622,-4.2434],
+  'Glasgow Caledonian University':[55.8667,-4.2509],'Heriot-Watt University':[55.9097,-3.3201],
+  'University of Stirling':[56.1463,-3.9198],'University of the Highlands and Islands':[57.4778,-4.2247],
+  'Robert Gordon University':[57.1189,-2.1361],'Edinburgh Napier University':[55.9315,-3.2135],
+  "Queen Margaret University, Edinburgh":[55.9241,-3.0718],
+  'University of the West of Scotland':[55.8432,-4.2868],
+  'SRUC':[55.9097,-3.3201],'James Hutton Institute':[56.4573,-3.0699],
+  'University of Oxford':[51.7548,-1.2544],'University of Cambridge':[52.2053,0.1218],
+  'Imperial College London':[51.4988,-0.1749],"King's College London":[51.5115,-0.1160],
+  'University College London':[51.5246,-0.1340],'London School of Economics':[51.5144,-0.1165],
+  'SOAS University of London':[51.5223,-0.1292],
+  "City St George's, University of London":[51.5281,-0.1025],
+  'Queen Mary University of London':[51.5240,-0.0400],
+  'University of Manchester':[53.4668,-2.2339],'University of Liverpool':[53.4055,-2.9673],
+  'Liverpool School of Tropical Medicine':[53.4118,-2.9646],
+  'University of Leeds':[53.8067,-1.5550],'University of Sheffield':[53.3811,-1.4886],
+  'University of York':[53.9471,-1.0553],'University of Lancaster':[54.0104,-2.7877],
+  'University of Durham':[54.7668,-1.5724],'Durham University':[54.7668,-1.5724],
+  'Newcastle University':[54.9783,-1.6178],
+  'University of Birmingham':[52.4508,-1.9305],'University of Warwick':[52.3793,-1.5615],
+  'University of Nottingham':[52.9388,-1.1966],'University of Leicester':[52.6219,-1.1250],
+  'Loughborough University':[52.7650,-1.2270],
+  'University of Bristol':[51.4590,-2.6031],'University of Bath':[51.3794,-2.3281],
+  'University of Exeter':[50.7351,-3.5349],'University of Southampton':[50.9340,-1.3960],
+  'University of Sussex':[50.8674,-0.0873],'University of Surrey':[51.2431,-0.5894],
+  'University of Kent':[51.2996,1.0690],'University of East Anglia':[52.6218,1.2399],
+  'Bournemouth University':[50.7421,-1.8980],
+  'Cardiff University':[51.4876,-3.1775],'CARDIFF UNIVERSITY':[51.4876,-3.1775],
+  'Swansea University':[51.6101,-3.9197],'Bangor University':[53.2285,-4.1292],
+  "Queen's University Belfast":[54.5847,-5.9345],'Ulster University':[54.8665,-6.7280],
+  'Brunel University London':[51.5326,-0.4727],
+  'University of Essex':[51.8774,0.9445],
+  'University of Plymouth':[50.3755,-4.1427],
+  'European Bioinformatics Institute':[52.0800,0.1861],
+  'British Geological Survey':[52.8788,-1.0824],
+  'Goethe University Frankfurt':[50.1283,8.6693],
+  'African Population and Health Research Center':[-1.2921,36.8219],
+  'Ifakara Health Institute (IHI)':[-8.1405,36.6838],
+  'Universidade Eduardo Mondlane':[-25.9653,32.5892],
+  'University of the Witwatersrand':[-26.1882,28.0282],
+  'University of Cape Town':[-33.9575,18.4612],
+  'University of Pretoria':[-25.7545,28.2314],
+  'University of Rwanda':[-1.9560,30.1036],
+  'Stellenbosch University':[-33.9321,18.8602],
+};
+
+function buildMap(data){
+  window._mapDone=true;
+  // Remove old map if exists
+  if(window._leafletMap){ window._leafletMap.remove(); window._leafletMap = null; }
+
+  const map=L.map('map',{scrollWheelZoom:true}).setView([54.5,-2],5);
+  window._leafletMap = map;
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    maxZoom:19
+  }).addTo(map);
+
+  const orgData={};
+  data.forEach(d=>{
+    const o=d.lead_org;if(!o)return;
+    if(!orgData[o])orgData[o]={count:0,value:0,projects:[],staff:new Set()};
+    orgData[o].count++;
+    orgData[o].value+=(+d.grant_offer||0);
+    orgData[o].projects.push(d.title);
+    (d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>orgData[o].staff.add(s));
+  });
+
+  const maxVal=Math.max(...Object.values(orgData).map(o=>o.value));
+  Object.entries(orgData).forEach(([name,info])=>{
+    const coords=ORG_COORDS[name];
+    if(!coords)return;
+    const r=Math.max(6,Math.sqrt(info.value/maxVal)*35);
+    const isGlasgow=name.toLowerCase().includes('glasgow');
+    const circle=L.circleMarker(coords,{
+      radius:r,fillColor:isGlasgow?'#00897b':'#003865',color:isGlasgow?'#00695c':'#002244',
+      weight:1.5,fillOpacity:0.7
+    }).addTo(map);
+
+    const staffList=[...info.staff].sort().map(s=>'• '+s).join('<br>');
+    const projList=info.projects.slice(0,5).map(p=>'• '+p.slice(0,50)).join('<br>');
+    const more=info.projects.length>5?`<br>… and ${info.projects.length-5} more`:'';
+
+    circle.bindPopup(`
+      <strong>${name}</strong><br>
+      ${info.count} project${info.count>1?'s':''} · ${fmtGBP(info.value)}<br><br>
+      <strong>Staff:</strong><br>${staffList}<br><br>
+      <strong>Projects:</strong><br>${projList}${more}
+    `,{maxWidth:320});
+  });
+
+  setTimeout(()=>map.invalidateSize(),200);
+}
+
+/* ════════════════════════════════════════
+   4. CATEGORY TIMELINE (2014–2030)
+   ════════════════════════════════════════ */
+let _timelineChart = null;
+let _tlHidden = new Set();
+
+function buildTimeline(data){
+  window._tlDone=true;
+  const years=[];
+  for(let y=2014;y<=2030;y++)years.push(y.toString());
+
+  const tagYearVal={};
+  TAG_ORDER.forEach(t=>{tagYearVal[t]={};years.forEach(y=>{tagYearVal[t][y]=0})});
+
+  data.forEach(d=>{
+    const y=(d.start_date||'').slice(0,4);
+    if(!y||+y<2014||+y>2030)return;
+    const g=+d.grant_offer||0;
+    (d.tags||'').split(';').map(t=>t.trim()).filter(Boolean).forEach(t=>{
+      if(tagYearVal[t])tagYearVal[t][y]+=g;
+    });
+  });
+
+  if(_timelineChart){_timelineChart.destroy();_timelineChart=null}
+
+  const datasets=TAG_ORDER.map(tag=>({
+    label:tag,
+    data:years.map(y=>tagYearVal[tag][y]),
+    backgroundColor:TAG_COLORS[tag]+'33',
+    borderColor:TAG_COLORS[tag],
+    borderWidth:2,
+    fill:true,
+    tension:0.35,
+    pointRadius:3,
+    pointBackgroundColor:TAG_COLORS[tag],
+    hidden:false,
+  }));
+
+  _timelineChart=new Chart(document.getElementById('timeline-canvas'),{
+    type:'line',
+    data:{labels:years,datasets},
+    options:{
+      responsive:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label:ctx=>ctx.raw?`${ctx.dataset.label}: ${fmtGBP(ctx.raw)}`:null,
+            footer:items=>{
+              const total=items.reduce((s,i)=>s+(i.raw||0),0);
+              return total?'Total: '+fmtGBP(total):'';
+            }
+          }
+        }
+      },
+      scales:{
+        y:{stacked:true,ticks:{callback:v=>fmtGBP(v)},grid:{color:'rgba(0,0,0,0.06)'}},
+        x:{grid:{display:false}}
+      }
+    }
+  });
+
+  const leg=document.getElementById('timeline-legend');
+  leg.innerHTML='';
+  TAG_ORDER.forEach((tag,idx)=>{
+    const subcats = TAG_SUBCATEGORIES[tag] || [];
+    const item=document.createElement('div');
+    item.className='legend-item';
+    item.style.opacity='1';
+    item.innerHTML=`<div class="legend-swatch" style="background:${TAG_COLORS[tag]}"></div><span>${tag}</span>` +
+      (subcats.length ? `<div class="subcat-tooltip"><strong>${tag}</strong><br>${subcats.join(', ')}</div>` : '');
+    item.addEventListener('click',()=>{
+      const isHidden=_timelineChart.isDatasetVisible(idx);
+      if(isHidden){
+        _timelineChart.hide(idx);
+        item.style.opacity='0.3';
+        item.querySelector('.legend-swatch').style.background='#bbb';
+        _tlHidden.add(tag);
+      } else {
+        _timelineChart.show(idx);
+        item.style.opacity='1';
+        item.querySelector('.legend-swatch').style.background=TAG_COLORS[tag];
+        _tlHidden.delete(tag);
+      }
+    });
+    leg.appendChild(item);
+  });
+
+  addExportButton('card-timeline','timeline-canvas','Category Timeline 2014-2030');
+}
+
+/* ════════════════════════════════════════
+   5. SORTABLE TABLE
+   ════════════════════════════════════════ */
+let _tableData = [];
+let _sortCol = 'grant_offer';
+let _sortDir = 'desc';
+
+function buildTable(data){
+  _tableData = data;
+  renderTable();
+  document.querySelectorAll('#project-table th.sortable').forEach(th=>{
+    // Clone to remove old listeners
+    const clone = th.cloneNode(true);
+    th.parentNode.replaceChild(clone, th);
+    clone.addEventListener('click',()=>{
+      const col=clone.dataset.col;
+      if(_sortCol===col){_sortDir=_sortDir==='asc'?'desc':'asc'}
+      else{_sortCol=col;_sortDir=(col==='grant_offer')?'desc':'asc'}
+      document.querySelectorAll('#project-table th.sortable').forEach(h=>{h.classList.remove('asc','desc')});
+      clone.classList.add(_sortDir);
+      renderTable();
+    });
+  });
+  const initTh=document.querySelector('#project-table th[data-col="grant_offer"]');
+  if(initTh) initTh.classList.add('desc');
+}
+
+function renderTable(){
+  const sorted=[..._tableData].sort((a,b)=>{
+    let va=a[_sortCol]||'',vb=b[_sortCol]||'';
+    if(_sortCol==='grant_offer'){va=+va||0;vb=+vb||0}
+    else{va=va.toString().toLowerCase();vb=vb.toString().toLowerCase()}
+    if(va<vb)return _sortDir==='asc'?-1:1;
+    if(va>vb)return _sortDir==='asc'?1:-1;
+    return 0;
+  });
+
+  const label = _filterMode==='active' ? `${sorted.length} Active Projects` : `All ${sorted.length} Projects`;
+  document.getElementById('table-heading').textContent=label;
+  const tbody=document.querySelector('#project-table tbody');
+  tbody.innerHTML='';
+  sorted.forEach((d,i)=>{
+    const tr=document.createElement('tr');
+    const tags=(d.tags||'').split(';').map(t=>t.trim()).filter(Boolean).map(t=>`<span class="tag" style="background:${TAG_COLORS[t]||'var(--accent-light)'}18;color:${TAG_COLORS[t]||'var(--navy)'}">${t}</span>`).join(' ');
+    const g=+d.grant_offer||0;
+    tr.innerHTML=`
+      <td>${i+1}</td>
+      <td style="max-width:280px">${d.title}</td>
+      <td>${d.funder||'—'}</td>
+      <td class="money">${g?'£'+commas(g.toFixed(0)):'—'}</td>
+      <td>${d.lead_org||'—'}</td>
+      <td style="white-space:nowrap">${d.start_date||'—'}</td>
+      <td style="white-space:nowrap">${d.end_date||'—'}</td>
+      <td style="max-width:160px;font-size:0.78rem">${(d.staff_members||'').replace(/;/g,', ')}</td>
+      <td>${tags||'—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+</script>
+</body>
+</html>
