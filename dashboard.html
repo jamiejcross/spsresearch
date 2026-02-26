@@ -139,6 +139,25 @@ th.sortable.desc::after{content:'↓';opacity:0.9}
 .legend-item .subcat-tooltip{display:none;position:absolute;bottom:100%;left:0;margin-bottom:6px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.5rem 0.7rem;font-size:0.7rem;color:var(--text);white-space:normal;width:240px;box-shadow:0 4px 12px rgba(0,0,0,0.1);z-index:50;font-style:normal;line-height:1.4}
 .legend-item:hover .subcat-tooltip{display:block}
 
+/* ── Partner Network ── */
+#partner-network-svg{width:100%;background:#fff;border-radius:var(--radius)}
+.partner-node-label{fill:var(--text);font-size:9px;pointer-events:none}
+.partner-tooltip{position:absolute;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.8rem;font-size:0.78rem;color:var(--text);pointer-events:none;z-index:100;max-width:340px;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.bipartite-legend{display:flex;gap:1.2rem;padding:0.6rem 1.4rem;font-size:0.75rem;color:var(--muted);flex-wrap:wrap}
+.bipartite-legend span{display:flex;align-items:center;gap:0.3rem}
+.bipartite-legend .swatch{width:12px;height:12px;border-radius:50%;display:inline-block}
+.bipartite-legend .swatch-sq{width:12px;height:12px;border-radius:2px;display:inline-block}
+.network-focus-toggle{display:inline-flex;gap:0.9rem;margin-left:auto;align-items:center}
+.network-focus-toggle label{display:flex;align-items:center;gap:0.3rem;font-size:0.72rem;color:var(--muted);cursor:pointer;font-weight:500;white-space:nowrap}
+.network-focus-toggle input[type="checkbox"]{accent-color:var(--navy);cursor:pointer}
+#partner-search{padding:0.4rem 0.8rem;border:1px solid var(--border);border-radius:6px;font-size:0.82rem;width:280px;outline:none}
+#partner-search:focus{border-color:var(--navy);box-shadow:0 0 0 2px rgba(0,56,101,0.1)}
+/* ── Map legend ── */
+.map-legend{background:#fff;padding:0.8rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.8;font-size:0.78rem}
+.map-legend h4{margin:0 0 0.4rem;font-size:0.82rem;color:var(--navy)}
+.map-legend label{display:flex;align-items:center;gap:0.4rem;cursor:pointer}
+.map-legend .legend-circle{width:12px;height:12px;border-radius:50%;display:inline-block}
+
 .loading{text-align:center;padding:4rem;color:var(--muted);font-size:1rem}
 </style>
 </head>
@@ -174,7 +193,8 @@ th.sortable.desc::after{content:'↓';opacity:0.9}
 <div class="tab-bar">
   <button class="tab-btn active" data-tab="overview">Overview</button>
   <button class="tab-btn" data-tab="network">People Network</button>
-  <button class="tab-btn" data-tab="geography">Partner Geography</button>
+  <button class="tab-btn" data-tab="partners">Project Partners</button>
+  <button class="tab-btn" data-tab="geography">Collaboration Map</button>
   <button class="tab-btn" data-tab="timeline">Category Timeline</button>
   <button class="tab-btn" data-tab="table">Project Table</button>
 </div>
@@ -230,10 +250,85 @@ th.sortable.desc::after{content:'↓';opacity:0.9}
   <div class="tooltip-box" id="net-tooltip"></div>
 </div>
 
-<!-- ═══════════ GEOGRAPHY TAB ═══════════ -->
+<!-- ═══════════ PROJECT PARTNERS TAB ═══════════ -->
+<div class="tab-panel" id="tab-partners">
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem">
+    External organisations partnering with SPS-linked UKRI projects. Data from GTR API
+    (project partners, collaborators, and participants).
+    <span id="partner-load-status" style="font-style:italic"></span>
+  </p>
+  <div class="kpi-row" id="partner-kpi-container"></div>
+  <div class="card" id="card-partner-network" style="padding:0;overflow:hidden;margin-bottom:1.25rem">
+    <h3 style="padding:1rem 1.4rem 0">Partner–Staff Network</h3>
+    <div class="bipartite-legend">
+      <span><span class="swatch" style="background:#003865"></span> Academic Partner</span>
+      <span><span class="swatch" style="background:#e65100"></span> Non-Academic Partner</span>
+      <span><span class="swatch-sq" style="background:#003865"></span> SPS Staff</span>
+      <div class="network-focus-toggle" id="network-focus-toggle">
+        <label><input type="checkbox" data-category="acad" checked> Academic</label>
+        <label><input type="checkbox" data-category="nonacad" checked> Non-Academic</label>
+        <label><input type="checkbox" data-category="staff" checked> SPS Staff</label>
+      </div>
+    </div>
+    <svg id="partner-network-svg" height="620" style="width:100%;border:none"></svg>
+  </div>
+  <div class="grid-2">
+    <div class="card" id="card-partner-roles">
+      <h3>Partner Relationship Types</h3>
+      <canvas id="ch-partner-roles"></canvas>
+    </div>
+    <div class="card" id="card-partner-type-split">
+      <h3>Academic vs Non-Academic Partners</h3>
+      <canvas id="ch-partner-type-split"></canvas>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card tall" id="card-partner-top-academic">
+      <h3>Top 20 Academic Partner Organisations — by Project Count</h3>
+      <canvas id="ch-partner-top-academic"></canvas>
+    </div>
+    <div class="card tall" id="card-partner-top-nonacademic">
+      <h3>Top 20 Non-Academic Partner Organisations — by Project Count</h3>
+      <canvas id="ch-partner-top-nonacademic"></canvas>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card tall" id="card-partner-top-value">
+      <h3>Top 20 Partner Organisations — by Associated Funding</h3>
+      <canvas id="ch-partner-top-value"></canvas>
+    </div>
+    <div class="card" id="card-partner-placeholder" style="display:flex;align-items:center;justify-content:center;min-height:300px">
+    </div>
+  </div>
+  <div class="card">
+    <h3 id="partner-table-heading">Partner Organisations</h3>
+    <div style="margin-bottom:0.8rem">
+      <input type="text" id="partner-search" placeholder="Search partners...">
+    </div>
+    <div class="tbl-wrap">
+      <table id="partner-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th class="sortable" data-col="partner_org">Organisation</th>
+            <th class="sortable" data-col="org_type">Type</th>
+            <th class="sortable" data-col="project_count" style="text-align:right">Projects</th>
+            <th class="sortable" data-col="total_funding" style="text-align:right">Assoc. Funding (£)</th>
+            <th class="sortable" data-col="roles">Roles</th>
+            <th>Staff Connections</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="partner-tooltip" id="partner-tooltip"></div>
+
+<!-- ═══════════ NATIONAL & INTERNATIONAL RESEARCH COLLABORATIONS TAB ═══════════ -->
 <div class="tab-panel" id="tab-geography">
   <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem">
-    Lead organisations mapped by location. Circle size = total funding. Click for details.
+    National and international research collaborations. Lead organisations, project partners, and collaborators mapped by location. Circle size = total funding. Click for details. Use the legend to toggle categories.
   </p>
   <div id="map"></div>
 </div>
@@ -316,10 +411,37 @@ function commas(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
 let _filterMode = 'all'; // 'all' or 'active'
 let _allData = [];
 
+/* ── Partner data ── */
+let _partnerData = [];
+let _partnerIndex = {};
+let _partnersLoaded = false;
+
 function getFilteredData(){
   if(_filterMode === 'active') return _allData.filter(d => d.status === 'Active');
   return _allData;
 }
+
+function getFilteredPartners(){
+  const ids = new Set(getFilteredData().map(d=>d.id));
+  return _partnerData.filter(r=>ids.has(r.project_id));
+}
+
+function buildPartnerIndex(){
+  _partnerIndex = {};
+  _partnerData.forEach(row=>{
+    const pid = row.project_id;
+    if(!_partnerIndex[pid]) _partnerIndex[pid] = [];
+    _partnerIndex[pid].push({org:row.partner_org, org_id:row.partner_org_id, role:row.partner_role});
+  });
+}
+
+const ACADEMIC_PATTERNS = /universit|universid|universié|universi|college|école|escuela|polytechnic|institut[eo]?\b|akademi|academ|school of|faculty of|hochschule|grandes écoles/i;
+function isAcademic(name){
+  if(!name) return false;
+  return ACADEMIC_PATTERNS.test(name);
+}
+const ACAD_COLOR = '#003865';
+const NON_ACAD_COLOR = '#e65100';
 
 /* ── Export helper ── */
 const EXPORT_ICON = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
@@ -445,6 +567,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
     const data = getFilteredData();
     if(btn.dataset.tab==='network') buildNetwork(data);
+    if(btn.dataset.tab==='partners') buildPartners(data);
     if(btn.dataset.tab==='geography') buildMap(data);
     if(btn.dataset.tab==='timeline') buildTimeline(data);
   });
@@ -514,12 +637,16 @@ function rebuildAll(){
   _catCountChart = null; _catValueChart = null; _timelineChart = null;
   _tagStats = {};
   // Reset lazy-load flags
-  window._netDone = false; window._mapDone = false; window._tlDone = false;
+  window._netDone = false; window._mapDone = false; window._tlDone = false; window._partnersDone = false;
   // Clear dynamic content
   document.getElementById('kpi-container').innerHTML = '';
+  document.getElementById('partner-kpi-container').innerHTML = '';
   document.querySelector('#project-table tbody').innerHTML = '';
-  // Clear SVG network
+  const ptb = document.querySelector('#partner-table tbody');
+  if(ptb) ptb.innerHTML = '';
+  // Clear SVG networks
   d3.select('#network-svg').selectAll('*').remove();
+  d3.select('#partner-network-svg').selectAll('*').remove();
   // Clear map
   const mapEl = document.getElementById('map');
   if(window._leafletMap){ window._leafletMap.remove(); window._leafletMap = null; }
@@ -532,6 +659,7 @@ function rebuildAll(){
   if(activeTab){
     const tab = activeTab.dataset.tab;
     if(tab === 'network') buildNetwork(data);
+    if(tab === 'partners') buildPartners(data);
     if(tab === 'geography') buildMap(data);
     if(tab === 'timeline') buildTimeline(data);
   }
@@ -540,17 +668,42 @@ function rebuildAll(){
 /* ════════════════════════════════════════
    LOAD CSV
    ════════════════════════════════════════ */
+let _csvLoaded = 0;
+const CSV_TOTAL = 2;
+
+function onAllCsvLoaded(){
+  document.getElementById('loading').style.display='none';
+  document.querySelectorAll('.tab-panel,.tab-bar').forEach(e=>e.style.visibility='visible');
+  buildPartnerIndex();
+  const data = getFilteredData();
+  buildOverview(data);
+  buildTable(data);
+}
+
 Papa.parse('uofg_sps_staff_gtr_projects.csv',{
   download:true, header:true, skipEmptyLines:true,
   complete(res){
-    const data=res.data.filter(r=>r.title);
-    _allData = data;
-    document.getElementById('loading').style.display='none';
-    document.querySelectorAll('.tab-panel,.tab-bar').forEach(e=>e.style.visibility='visible');
-    buildOverview(data);
-    buildTable(data);
+    _allData = res.data.filter(r=>r.title);
+    _csvLoaded++;
+    if(_csvLoaded >= CSV_TOTAL) onAllCsvLoaded();
   },
   error(e){document.getElementById('loading').textContent='Error: '+e.message}
+});
+
+Papa.parse('uofg_sps_partners.csv',{
+  download:true, header:true, skipEmptyLines:true,
+  complete(res){
+    _partnerData = res.data.filter(r=>r.project_id && r.partner_org);
+    _partnersLoaded = true;
+    _csvLoaded++;
+    if(_csvLoaded >= CSV_TOTAL) onAllCsvLoaded();
+  },
+  error(e){
+    console.warn('Partner CSV not available:',e.message);
+    _partnersLoaded = false;
+    _csvLoaded++;
+    if(_csvLoaded >= CSV_TOTAL) onAllCsvLoaded();
+  }
 });
 
 /* ════════════════════════════════════════
@@ -841,7 +994,110 @@ const ORG_COORDS={
   'University of Pretoria':[-25.7545,28.2314],
   'University of Rwanda':[-1.9560,30.1036],
   'Stellenbosch University':[-33.9321,18.8602],
+  // ── Additional academic institutions ──
+  'University of Salford':[53.4876,-2.2747],
+  'University College Dublin':[53.3071,-6.2190],
+  'Makerere University':[0.3340,32.5695],
+  'University of Melbourne':[-37.7983,144.9610],
+  'University of Sydney':[-33.8882,151.1871],
+  'Alan Turing Institute':[51.5299,-0.1275],
+  'The Alan Turing Institute':[51.5299,-0.1275],
+  'China Agricultural University (CAU)':[39.9938,116.3513],
+  'UNIVERSITY OF READING':[51.4414,-0.9418],
+  'Fuzhou University':[26.0612,119.2010],
+  'University of Seoul':[37.5832,127.0583],
+  'University of Reading':[51.4414,-0.9418],
+  'Oslo Metropolitan University':[59.9217,10.7335],
+  'University of Ghana':[5.6505,-0.1862],
+  'University of Delaware':[39.6780,-75.7506],
+  'Korea Advanced Institute of Science and Technology (KAIST)':[36.3700,127.3600],
+  'Goldsmiths, University of London':[51.4742,-0.0356],
+  'University of Pennsylvania':[39.9522,-75.1932],
+  'University of Amsterdam':[52.3556,4.9553],
+  'McMaster University':[43.2609,-79.9192],
+  'University of Twente':[52.2396,6.8500],
+  'Boston College':[42.3355,-71.1685],
+  'University of Florida':[29.6436,-82.3549],
+  'National University of Singapore':[1.2966,103.7764],
+  'University of Ulster':[55.1539,-6.7654],
+  'Northumbria University':[54.9780,-1.6050],
+  'Addis Ababa University':[9.0360,38.7630],
+  'Tongji University':[31.2836,121.5016],
+  'University of Lincoln':[53.2283,-0.5478],
+  'University of Nairobi':[-1.2790,36.8172],
+  'Wageningen University & Research':[51.9691,5.6653],
+  'National University of Colombia':[4.6383,-74.0830],
+  'University of Wolverhampton':[52.5876,-2.1290],
+  'Norwegian School of Economics':[60.3748,5.3430],
+  'London School of Hygiene and Tropical Medicine':[51.5207,-0.1306],
+  'Manchester University':[53.4668,-2.2339],
+  'Ifakara Health Institute':[-8.1405,36.6838],
+  'Potsdam Institute for Climate Impact Res':[52.3810,13.0640],
+  'Western Norway University of Applied Sciences':[60.3692,5.3509],
+  // ── Non-academic partner organisations ──
+  'Glasgow City Council':[55.8596,-4.2584],
+  'Government of Scotland':[55.9533,-3.1883],
+  'Scottish Parliament':[55.9519,-3.1748],
+  'OFFICE FOR NATIONAL STATISTICS':[51.5846,-2.9960],
+  'SCOTTISH GOVERNMENT':[55.9533,-3.1883],
+  'Sustrans':[51.4493,-2.5832],
+  'Public Health Scotland':[55.9485,-3.2021],
+  'Dept Levelling Up, Housing & Communities':[51.5020,-0.1343],
+  'Medical Research Council (MRC)':[51.5274,-0.1313],
+  'Cycling Scotland':[55.8600,-4.2579],
+  'Government of the UK':[51.5020,-0.1343],
+  'Glasgow Centre for Population Health':[55.8555,-4.2488],
+  'NHS Health Scotland':[55.9485,-3.2021],
+  'Cabinet Office':[51.5033,-0.1279],
+  'Improbable':[51.5236,-0.0845],
+  'United Nations (UN)':[46.2264,6.1403],
+  'Ordnance Survey':[50.9379,-1.4710],
+  'DEPARTMENT FOR WORK AND PENSIONS':[51.5020,-0.1343],
+  'Local Government Association':[51.5192,-0.1072],
+  'World Health Organization':[46.2339,6.1337],
+  'Zero Waste Scotland':[56.1165,-3.9369],
+  'ENVIRONMENT AGENCY':[51.4525,-2.6130],
+  'Star Refrigeration Ltd':[55.8553,-4.2714],
+  'Experian':[53.0160,-1.1500],
+  'Ipsos-MORI':[51.5219,-0.1410],
+  'Unilever UK & Ireland':[51.5027,-0.1117],
+  'PepsiCo International Limited':[51.4672,-0.4878],
+  'Royal Institution of Chartered Surveyors':[51.5015,-0.1347],
+  'Home Office':[51.5020,-0.1343],
+  'The Electoral Commission':[51.5008,-0.1356],
+  'Royal Society of Edinburgh (RSE)':[55.9533,-3.1919],
+  'Johnson Matthey (United Kingdom)':[51.5200,-0.0900],
+  'UK Health Security Agency':[51.5320,-0.1250],
+  'Arup':[51.5204,-0.0874],
+  'NESTA':[51.5168,-0.0941],
+  'Wikimedia UK':[55.9533,-3.1883],
+  'FinTech North':[53.7976,-1.5440],
+  'Commonwealth Scientific and Industrial Research Organisation':[-35.2809,149.1300],
+  'NHS England':[51.5126,-0.1413],
+  'Procter & Gamble':[55.9139,-3.3228],
+  'LEEDS TEACHING HOSPITALS NHS TRUST':[53.8067,-1.5218],
+  'LEEDS CITY COUNCIL':[53.7996,-1.5491],
+  'World Health Organization (WHO)':[46.2339,6.1337],
+  'Department for Science, Innovation & Technology':[51.5020,-0.1343],
+  'Glasgow Council for the Voluntary Sector':[55.8596,-4.2584],
+  'Ramboll UK':[51.5174,-0.1208],
+  'Royal Town Planning Institute':[51.5194,-0.0870],
+  'Chartered Institute of Housing':[52.0520,-0.7350],
+  'PepsiCo':[51.4672,-0.4878],
+  'Public Health Dorset':[50.7220,-1.8808],
+  'Transport Systems Catapult':[52.0406,-0.7594],
+  'British Standards Institute (BSI Group)':[51.3902,-0.0885],
+  'Open Data Institute':[51.5223,-0.0856],
+  'National Institute of Economic and Social Research (NIESR)':[51.5150,-0.1272],
+  'National Institute for Health and Care Excellence (NICE)':[53.4668,-2.2339],
 };
+
+// Case-insensitive coordinate lookup
+const _orgCoordsLower = {};
+Object.entries(ORG_COORDS).forEach(([k,v])=>{ _orgCoordsLower[k.toLowerCase()] = v; });
+function getOrgCoords(name){
+  return ORG_COORDS[name] || _orgCoordsLower[(name||'').toLowerCase()] || null;
+}
 
 function buildMap(data){
   window._mapDone=true;
@@ -855,26 +1111,70 @@ function buildMap(data){
     maxZoom:19
   }).addTo(map);
 
-  const orgData={};
+  // Category colours
+  const CAT_COLORS = {
+    lead:      {fill:'#003865', stroke:'#002244', label:'Lead Organisation'},
+    acadPart:  {fill:'#00897b', stroke:'#00695c', label:'Academic Partner'},
+    nonAcPart: {fill:'#e65100', stroke:'#bf4500', label:'Non-Academic Partner'},
+  };
+
+  // Layer groups for toggling
+  const layers = {
+    lead:      L.layerGroup(),
+    acadPart:  L.layerGroup(),
+    nonAcPart: L.layerGroup(),
+  };
+
+  // ── 1. Lead organisations from main data ──
+  const leadData={};
   data.forEach(d=>{
     const o=d.lead_org;if(!o)return;
-    if(!orgData[o])orgData[o]={count:0,value:0,projects:[],staff:new Set()};
-    orgData[o].count++;
-    orgData[o].value+=(+d.grant_offer||0);
-    orgData[o].projects.push(d.title);
-    (d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>orgData[o].staff.add(s));
+    if(!leadData[o])leadData[o]={count:0,value:0,projects:[],staff:new Set(),category:'lead'};
+    leadData[o].count++;
+    leadData[o].value+=(+d.grant_offer||0);
+    leadData[o].projects.push(d.title);
+    (d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>leadData[o].staff.add(s));
   });
 
-  const maxVal=Math.max(...Object.values(orgData).map(o=>o.value));
-  Object.entries(orgData).forEach(([name,info])=>{
-    const coords=ORG_COORDS[name];
+  // ── 2. Partner/Collaborator organisations ──
+  const partnerMapData = {};
+  if(_partnersLoaded && _partnerData.length > 0){
+    const filteredPartners = getFilteredPartners();
+    const projectMap = {};
+    data.forEach(d=>{ projectMap[d.id] = d; });
+
+    filteredPartners.forEach(row=>{
+      const org = row.partner_org;
+      if(!org) return;
+      // Skip orgs that are already lead orgs to avoid duplication
+      if(leadData[org]) return;
+      const cat = isAcademic(org) ? 'acadPart' : 'nonAcPart';
+      if(!partnerMapData[org]) partnerMapData[org] = {count:0, value:0, projects:[], staff:new Set(), category:cat, roles:new Set()};
+      const proj = projectMap[row.project_id];
+      if(proj){
+        partnerMapData[org].count++;
+        partnerMapData[org].value += (+proj.grant_offer||0);
+        partnerMapData[org].projects.push(proj.title);
+        partnerMapData[org].roles.add(row.partner_role);
+        (proj.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>partnerMapData[org].staff.add(s));
+      }
+    });
+  }
+
+  // Combine for max value calculation
+  const allOrgs = {...leadData, ...partnerMapData};
+  const maxVal=Math.max(...Object.values(allOrgs).map(o=>o.value),1);
+
+  // ── Plot lead orgs ──
+  Object.entries(leadData).forEach(([name,info])=>{
+    const coords=getOrgCoords(name);
     if(!coords)return;
     const r=Math.max(6,Math.sqrt(info.value/maxVal)*35);
-    const isGlasgow=name.toLowerCase().includes('glasgow');
+    const cc = CAT_COLORS.lead;
     const circle=L.circleMarker(coords,{
-      radius:r,fillColor:isGlasgow?'#00897b':'#003865',color:isGlasgow?'#00695c':'#002244',
+      radius:r,fillColor:cc.fill,color:cc.stroke,
       weight:1.5,fillOpacity:0.7
-    }).addTo(map);
+    });
 
     const staffList=[...info.staff].sort().map(s=>'• '+s).join('<br>');
     const projList=info.projects.slice(0,5).map(p=>'• '+p.slice(0,50)).join('<br>');
@@ -882,11 +1182,66 @@ function buildMap(data){
 
     circle.bindPopup(`
       <strong>${name}</strong><br>
+      <em>Lead Organisation</em><br>
       ${info.count} project${info.count>1?'s':''} · ${fmtGBP(info.value)}<br><br>
       <strong>Staff:</strong><br>${staffList}<br><br>
       <strong>Projects:</strong><br>${projList}${more}
     `,{maxWidth:320});
+    layers.lead.addLayer(circle);
   });
+
+  // ── Plot partner orgs ──
+  Object.entries(partnerMapData).forEach(([name,info])=>{
+    const coords=getOrgCoords(name);
+    if(!coords)return;
+    const r=Math.max(5,Math.sqrt(info.value/maxVal)*30);
+    const cc = CAT_COLORS[info.category];
+    const circle=L.circleMarker(coords,{
+      radius:r,fillColor:cc.fill,color:cc.stroke,
+      weight:1.5,fillOpacity:0.65
+    });
+
+    const roleLabels = info.roles ? [...info.roles].map(r=>ROLE_LABELS[r]||r).join(', ') : '';
+    const staffList=[...info.staff].sort().slice(0,10).map(s=>'• '+s).join('<br>');
+    const projList=info.projects.slice(0,5).map(p=>'• '+p.slice(0,50)).join('<br>');
+    const more=info.projects.length>5?`<br>… and ${info.projects.length-5} more`:'';
+
+    circle.bindPopup(`
+      <strong>${name}</strong><br>
+      <em>${cc.label}</em>${roleLabels?' · '+roleLabels:''}<br>
+      ${info.count} project${info.count>1?'s':''} · ${fmtGBP(info.value)}<br><br>
+      <strong>SPS Staff:</strong><br>${staffList}<br><br>
+      <strong>Projects:</strong><br>${projList}${more}
+    `,{maxWidth:320});
+    layers[info.category].addLayer(circle);
+  });
+
+  // Add all layers to map
+  Object.values(layers).forEach(lg=>lg.addTo(map));
+
+  // ── Custom legend control ──
+  const legend = L.control({position:'bottomright'});
+  legend.onAdd = function(){
+    const div = L.DomUtil.create('div','map-legend');
+    div.innerHTML = '<h4>Map Legend</h4>';
+    Object.entries(CAT_COLORS).forEach(([key, cc])=>{
+      const checked = 'checked';
+      div.innerHTML += `<label><input type="checkbox" data-layer="${key}" ${checked}><span class="legend-circle" style="background:${cc.fill}"></span>${cc.label}</label>`;
+    });
+    // Prevent map click-through
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+    // Wire up toggles
+    div.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+      cb.addEventListener('change',()=>{
+        const layerKey = cb.dataset.layer;
+        if(cb.checked){ map.addLayer(layers[layerKey]); }
+        else { map.removeLayer(layers[layerKey]); }
+      });
+    });
+    return div;
+  };
+  legend.addTo(map);
 
   setTimeout(()=>map.invalidateSize(),200);
 }
@@ -1038,6 +1393,393 @@ function renderTable(){
       <td style="white-space:nowrap">${d.end_date||'—'}</td>
       <td style="max-width:160px;font-size:0.78rem">${(d.staff_members||'').replace(/;/g,', ')}</td>
       <td>${tags||'—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ════════════════════════════════════════
+   6. PROJECT PARTNERS
+   ════════════════════════════════════════ */
+let _partnerTableData = [];
+let _partnerSortCol = 'project_count';
+let _partnerSortDir = 'desc';
+
+const ROLE_LABELS = {'PP_ORG':'Project Partner','COLLAB_ORG':'Collaborator','PARTICIPANT_ORG':'Participant'};
+const ROLE_COLORS = {'PP_ORG':'#003865','COLLAB_ORG':'#00897b','PARTICIPANT_ORG':'#f9a825'};
+
+function buildPartners(data){
+  window._partnersDone = true;
+
+  if(!_partnersLoaded || _partnerData.length === 0){
+    document.getElementById('partner-load-status').textContent =
+      '(Partner data not available \u2014 run fetch_partners.py to generate uofg_sps_partners.csv)';
+    return;
+  }
+  document.getElementById('partner-load-status').textContent = '';
+
+  const filteredPartners = getFilteredPartners();
+  const projectMap = {};
+  data.forEach(d=>{ projectMap[d.id] = d; });
+
+  // Aggregate per org
+  const orgStats = {};
+  filteredPartners.forEach(row=>{
+    const org = row.partner_org;
+    if(!orgStats[org]) orgStats[org] = {count:0, funding:0, roles:new Set(), staff:new Set(), projects:new Set()};
+    const proj = projectMap[row.project_id];
+    if(proj){
+      orgStats[org].projects.add(proj.title);
+      orgStats[org].count++;
+      orgStats[org].funding += (+proj.grant_offer||0);
+      orgStats[org].roles.add(row.partner_role);
+      (proj.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>orgStats[org].staff.add(s));
+    }
+  });
+
+  // ── KPIs ──
+  const uniqueOrgs = Object.keys(orgStats).length;
+  const projectsWithPartners = new Set(filteredPartners.map(r=>r.project_id)).size;
+  const sorted = Object.entries(orgStats).sort((a,b)=>b[1].count-a[1].count);
+  const mostCommon = sorted[0];
+  const avgPartners = filteredPartners.length / (projectsWithPartners||1);
+  const roleCounts = {};
+  filteredPartners.forEach(r=>{ roleCounts[r.partner_role] = (roleCounts[r.partner_role]||0)+1; });
+
+  const kpis = [
+    {l:'Partner Organisations',v:commas(uniqueOrgs),s:'unique external partners'},
+    {l:'Projects with Partners',v:commas(projectsWithPartners),s:`${((projectsWithPartners/data.length)*100).toFixed(0)}% of all projects`},
+    {l:'Most Common Partner',v:mostCommon?mostCommon[0]:'—',s:mostCommon?mostCommon[1].count+' projects':'',small:true},
+    {l:'Avg Partners / Project',v:avgPartners.toFixed(1),s:'across projects with partners'},
+  ];
+  const kc = document.getElementById('partner-kpi-container');
+  kc.innerHTML = '';
+  kpis.forEach(k=>{
+    const fs = k.small && k.v.length > 18 ? 'font-size:0.95rem' : '';
+    kc.innerHTML += `<div class="kpi"><div class="kpi-label">${k.l}</div><div class="kpi-value" style="${fs}">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`;
+  });
+
+  // ── Role donut ──
+  buildPartnerRolesDonut(roleCounts, filteredPartners.length);
+
+  // ── Academic / Non-academic donut ──
+  const acadCount = Object.keys(orgStats).filter(o=>isAcademic(o)).length;
+  const nonAcadCount = Object.keys(orgStats).length - acadCount;
+  buildPartnerTypeSplit({Academic:acadCount,'Non-Academic':nonAcadCount}, Object.keys(orgStats).length);
+
+  // ── Top bars (split academic / non-academic) ──
+  buildPartnerTopAcademic(orgStats);
+  buildPartnerTopNonAcademic(orgStats);
+  buildPartnerTopValue(orgStats);
+
+  // ── Network ──
+  buildPartnerNetwork(data, filteredPartners, orgStats, projectMap);
+
+  // ── Table ──
+  buildPartnerTable(orgStats);
+
+  // ── Exports ──
+  addExportButton('card-partner-roles','ch-partner-roles','Partner Relationship Types');
+  addExportButton('card-partner-type-split','ch-partner-type-split','Academic vs Non-Academic');
+  addExportButton('card-partner-top-academic','ch-partner-top-academic','Top Academic Partners');
+  addExportButton('card-partner-top-nonacademic','ch-partner-top-nonacademic','Top Non-Academic Partners');
+  addExportButton('card-partner-top-value','ch-partner-top-value','Top Partners by Funding');
+  addSvgExportButton('card-partner-network','partner-network-svg','Partner-Staff Network');
+}
+
+function buildPartnerRolesDonut(roleCounts, total){
+  const labels = Object.keys(roleCounts).sort((a,b)=>roleCounts[b]-roleCounts[a]);
+  const readableLabels = labels.map(l=>ROLE_LABELS[l]||l);
+  const vals = labels.map(l=>roleCounts[l]);
+  const cols = labels.map(l=>ROLE_COLORS[l]||'#999');
+  new Chart(document.getElementById('ch-partner-roles'),{
+    type:'doughnut',
+    data:{labels:readableLabels,datasets:[{data:vals,backgroundColor:cols,borderWidth:2,borderColor:'#fff'}]},
+    options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:11},color:'#333'}},
+      tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} (${((c.raw/total)*100).toFixed(0)}%)`}}}}
+  });
+}
+
+function buildPartnerTypeSplit(counts, total){
+  const labels = Object.keys(counts);
+  const vals = labels.map(l=>counts[l]);
+  const cols = [ACAD_COLOR, NON_ACAD_COLOR];
+  new Chart(document.getElementById('ch-partner-type-split'),{
+    type:'doughnut',
+    data:{labels,datasets:[{data:vals,backgroundColor:cols,borderWidth:2,borderColor:'#fff'}]},
+    options:{cutout:'60%',plugins:{legend:{position:'bottom',labels:{font:{size:11},color:'#333'}},
+      tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} (${((c.raw/total)*100).toFixed(0)}%)`}}}}
+  });
+}
+
+function buildPartnerTopAcademic(orgStats){
+  const s = Object.entries(orgStats).filter(([o])=>isAcademic(o)).sort((a,b)=>b[1].count-a[1].count).slice(0,20);
+  hBar('ch-partner-top-academic',s.map(o=>o[0].length>35?o[0].slice(0,33)+'…':o[0]),s.map(o=>o[1].count),[ACAD_COLOR],v=>v+' projects');
+}
+
+function buildPartnerTopNonAcademic(orgStats){
+  const s = Object.entries(orgStats).filter(([o])=>!isAcademic(o)).sort((a,b)=>b[1].count-a[1].count).slice(0,20);
+  hBar('ch-partner-top-nonacademic',s.map(o=>o[0].length>35?o[0].slice(0,33)+'…':o[0]),s.map(o=>o[1].count),[NON_ACAD_COLOR],v=>v+' projects');
+}
+
+function buildPartnerTopValue(orgStats){
+  const s = Object.entries(orgStats).sort((a,b)=>b[1].funding-a[1].funding).slice(0,20);
+  const cols = s.map(([o])=>isAcademic(o)?ACAD_COLOR:NON_ACAD_COLOR);
+  hBar('ch-partner-top-value',s.map(o=>o[0].length>35?o[0].slice(0,33)+'…':o[0]),s.map(o=>o[1].funding),cols,v=>fmtGBP(v));
+}
+
+function buildPartnerNetwork(data, filteredPartners, orgStats, projectMap){
+  d3.select('#partner-network-svg').selectAll('*').remove();
+
+  // Build bipartite links: org <-> staff
+  const linkMap = {};
+  filteredPartners.forEach(row=>{
+    const proj = projectMap[row.project_id];
+    if(!proj) return;
+    (proj.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(staff=>{
+      const key = row.partner_org+'|||'+staff;
+      linkMap[key] = (linkMap[key]||0) + 1;
+    });
+  });
+
+  // Degree counts
+  const orgDegree = {}, staffDegree = {};
+  Object.keys(linkMap).forEach(key=>{
+    const [org,staff] = key.split('|||');
+    orgDegree[org] = (orgDegree[org]||0)+1;
+    staffDegree[staff] = (staffDegree[staff]||0)+1;
+  });
+
+  // Cap for readability
+  const topOrgs = Object.entries(orgDegree).sort((a,b)=>b[1]-a[1]).slice(0,40).map(e=>e[0]);
+  const topStaff = Object.entries(staffDegree).sort((a,b)=>b[1]-a[1]).slice(0,50).map(e=>e[0]);
+  const orgSet = new Set(topOrgs);
+  const staffSet = new Set(topStaff);
+
+  const nodes = [
+    ...topOrgs.map(o=>({id:o,type:'org',acad:isAcademic(o),count:orgStats[o]?orgStats[o].count:0,degree:orgDegree[o]||0})),
+    ...topStaff.map(s=>({id:s,type:'staff',acad:false,count:staffDegree[s]||0,degree:staffDegree[s]||0}))
+  ];
+
+  const links = Object.entries(linkMap)
+    .filter(([key])=>{const[org,staff]=key.split('|||');return orgSet.has(org)&&staffSet.has(staff)})
+    .map(([key,weight])=>{const[org,staff]=key.split('|||');return{source:org,target:staff,weight}});
+
+  if(nodes.length === 0){
+    d3.select('#partner-network-svg').append('text')
+      .attr('x','50%').attr('y','50%').attr('text-anchor','middle')
+      .attr('fill','#999').attr('font-size','14px').text('No partner-staff connections to display');
+    return;
+  }
+
+  const svg = d3.select('#partner-network-svg');
+  const width = svg.node().getBoundingClientRect().width || 800;
+  const height = 620;
+  svg.attr('viewBox',`0 0 ${width} ${height}`);
+
+  const tooltip = document.getElementById('partner-tooltip');
+  const maxWeight = Math.max(...links.map(l=>l.weight),1);
+  const maxDegree = Math.max(...nodes.map(n=>n.degree),1);
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link',d3.forceLink(links).id(d=>d.id).distance(80).strength(0.4))
+    .force('charge',d3.forceManyBody().strength(-120))
+    .force('center',d3.forceCenter(width/2,height/2))
+    .force('collision',d3.forceCollide().radius(d=>d.type==='org'?Math.sqrt(d.count)*4+8:Math.sqrt(d.count)*3+6));
+
+  const linkG = svg.append('g');
+  const linkEls = linkG.selectAll('line').data(links).join('line')
+    .attr('stroke','#ccc')
+    .attr('stroke-opacity',d=>0.2+0.5*(d.weight/maxWeight))
+    .attr('stroke-width',d=>0.8+2*(d.weight/maxWeight));
+
+  // Org nodes: circles — color by academic/non-academic
+  const orgG = svg.append('g');
+  const orgNodes = orgG.selectAll('circle')
+    .data(nodes.filter(n=>n.type==='org')).join('circle')
+    .attr('r',d=>Math.sqrt(d.count)*4+5)
+    .attr('fill',d=>d.acad?ACAD_COLOR:NON_ACAD_COLOR)
+    .attr('stroke','#fff').attr('stroke-width',1.5)
+    .style('cursor','pointer')
+    .call(d3.drag()
+      .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y})
+      .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y})
+      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}));
+
+  // Staff nodes: rectangles (navy)
+  const staffG = svg.append('g');
+  const staffNodes = staffG.selectAll('rect')
+    .data(nodes.filter(n=>n.type==='staff')).join('rect')
+    .attr('width',d=>Math.sqrt(d.count)*6+8)
+    .attr('height',d=>Math.sqrt(d.count)*6+8)
+    .attr('fill','#003865')
+    .attr('stroke','#fff').attr('stroke-width',1.5)
+    .attr('rx',2)
+    .style('cursor','pointer')
+    .call(d3.drag()
+      .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y})
+      .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y})
+      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}));
+
+  // Labels
+  const labelG = svg.append('g');
+  const labels = labelG.selectAll('text')
+    .data(nodes.filter(d=>d.degree>=3)).join('text')
+    .attr('class','partner-node-label')
+    .attr('text-anchor','middle')
+    .text(d=>d.type==='staff'?d.id.split(' ').pop():(d.id.length>22?d.id.slice(0,20)+'…':d.id));
+
+  // Node lookup map for efficient link visibility checks
+  const nodeMap = {};
+  nodes.forEach(n=>{ nodeMap[n.id] = n; });
+
+  // Focus toggle: independently show/hide Academic, Non-Academic, Staff
+  function applyFocus(showAcad, showNonAcad, showStaff){
+    const t = d3.transition().duration(300);
+    // Org nodes: show/hide by academic status
+    orgG.selectAll('circle').transition(t)
+      .style('opacity', d => (d.acad ? showAcad : showNonAcad) ? 1 : 0)
+      .style('pointer-events', d => (d.acad ? showAcad : showNonAcad) ? 'all' : 'none');
+    // Staff nodes
+    staffG.selectAll('rect').transition(t)
+      .style('opacity', showStaff ? 1 : 0)
+      .style('pointer-events', showStaff ? 'all' : 'none');
+    // Links: visible only if both endpoints are visible
+    linkEls.transition(t).style('opacity', d => {
+      const sId = typeof d.source === 'object' ? d.source.id : d.source;
+      const tId = typeof d.target === 'object' ? d.target.id : d.target;
+      const sn = nodeMap[sId], tn = nodeMap[tId];
+      if(!sn||!tn) return 0;
+      const sVis = sn.type==='staff' ? showStaff : (sn.acad ? showAcad : showNonAcad);
+      const tVis = tn.type==='staff' ? showStaff : (tn.acad ? showAcad : showNonAcad);
+      return (sVis && tVis) ? 1 : 0;
+    });
+    // Labels follow their node
+    labelG.selectAll('text').transition(t).style('opacity', d => {
+      if(d.type==='staff') return showStaff ? 1 : 0;
+      return (d.acad ? showAcad : showNonAcad) ? 1 : 0;
+    });
+  }
+
+  // Wire up checkbox toggles
+  const toggleContainer = document.getElementById('network-focus-toggle');
+  if(toggleContainer){
+    const clone = toggleContainer.cloneNode(true);
+    toggleContainer.parentNode.replaceChild(clone, toggleContainer);
+    clone.id = 'network-focus-toggle';
+    function readToggles(){
+      const showAcad = clone.querySelector('[data-category="acad"]').checked;
+      const showNonAcad = clone.querySelector('[data-category="nonacad"]').checked;
+      const showStaff = clone.querySelector('[data-category="staff"]').checked;
+      applyFocus(showAcad, showNonAcad, showStaff);
+    }
+    clone.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+      cb.addEventListener('change', readToggles);
+    });
+  }
+
+  // Tooltips
+  orgNodes.on('mouseover',(e,d)=>{
+    tooltip.style.display='block';
+    const info = orgStats[d.id];
+    const acadLabel = d.acad ? ' (Academic)' : ' (Non-Academic)';
+    const projs = info?[...info.projects].slice(0,5).map(p=>'• '+p.slice(0,55)).join('<br>'):'';
+    const more = info&&info.projects.size>5?`<br>… and ${info.projects.size-5} more`:'';
+    const staffList = info?[...info.staff].sort().slice(0,8).join(', '):'';
+    tooltip.innerHTML=`<strong>${d.id}</strong>${acadLabel}<br>${d.count} project${d.count>1?'s':''} · ${d.degree} staff connection${d.degree!==1?'s':''}<br><br>${projs}${more}${staffList?'<br><br><strong>Staff:</strong> '+staffList:''}`;
+  }).on('mousemove',e=>{
+    tooltip.style.left=(e.pageX+12)+'px';tooltip.style.top=(e.pageY-10)+'px';
+  }).on('mouseout',()=>{tooltip.style.display='none'});
+
+  staffNodes.on('mouseover',(e,d)=>{
+    tooltip.style.display='block';
+    tooltip.innerHTML=`<strong>${d.id}</strong><br>${d.degree} partner org${d.degree!==1?'s':''}`;
+  }).on('mousemove',e=>{
+    tooltip.style.left=(e.pageX+12)+'px';tooltip.style.top=(e.pageY-10)+'px';
+  }).on('mouseout',()=>{tooltip.style.display='none'});
+
+  sim.on('tick',()=>{
+    linkEls.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    orgNodes.attr('cx',d=>d.x=Math.max(20,Math.min(width-20,d.x)))
+            .attr('cy',d=>d.y=Math.max(20,Math.min(height-20,d.y)));
+    staffNodes
+      .attr('x',d=>{d.x=Math.max(20,Math.min(width-20,d.x));return d.x-(Math.sqrt(d.count)*3+4)})
+      .attr('y',d=>{d.y=Math.max(20,Math.min(height-20,d.y));return d.y-(Math.sqrt(d.count)*3+4)});
+    labels.attr('x',d=>d.x)
+          .attr('y',d=>d.type==='org'?d.y-Math.sqrt(d.count)*4-8:d.y-Math.sqrt(d.count)*3-8);
+  });
+}
+
+function buildPartnerTable(orgStats){
+  _partnerTableData = Object.entries(orgStats).map(([org,info])=>({
+    partner_org: org,
+    org_type: isAcademic(org) ? 'Academic' : 'Non-Academic',
+    project_count: info.count,
+    total_funding: info.funding,
+    roles: [...info.roles].map(r=>ROLE_LABELS[r]||r).join(', '),
+    staff: [...info.staff].sort().join('; ')
+  }));
+
+  renderPartnerTable();
+
+  document.querySelectorAll('#partner-table th.sortable').forEach(th=>{
+    const clone = th.cloneNode(true);
+    th.parentNode.replaceChild(clone,th);
+    clone.addEventListener('click',()=>{
+      const col = clone.dataset.col;
+      if(_partnerSortCol===col){_partnerSortDir=_partnerSortDir==='asc'?'desc':'asc'}
+      else{_partnerSortCol=col;_partnerSortDir=(col==='project_count'||col==='total_funding')?'desc':'asc'}
+      document.querySelectorAll('#partner-table th.sortable').forEach(h=>{h.classList.remove('asc','desc')});
+      clone.classList.add(_partnerSortDir);
+      renderPartnerTable();
+    });
+  });
+
+  const initTh = document.querySelector('#partner-table th[data-col="project_count"]');
+  if(initTh) initTh.classList.add('desc');
+
+  const searchInput = document.getElementById('partner-search');
+  // Remove old listeners via clone
+  const searchClone = searchInput.cloneNode(true);
+  searchInput.parentNode.replaceChild(searchClone, searchInput);
+  searchClone.addEventListener('input',()=>renderPartnerTable());
+}
+
+function renderPartnerTable(){
+  const query = (document.getElementById('partner-search')?.value||'').toLowerCase();
+  let filtered = _partnerTableData;
+  if(query){
+    filtered = filtered.filter(r=>
+      r.partner_org.toLowerCase().includes(query)||
+      r.org_type.toLowerCase().includes(query)||
+      r.staff.toLowerCase().includes(query)||
+      r.roles.toLowerCase().includes(query)
+    );
+  }
+  const sorted = [...filtered].sort((a,b)=>{
+    let va=a[_partnerSortCol]||'',vb=b[_partnerSortCol]||'';
+    if(_partnerSortCol==='project_count'||_partnerSortCol==='total_funding'){va=+va||0;vb=+vb||0}
+    else{va=va.toString().toLowerCase();vb=vb.toString().toLowerCase()}
+    if(va<vb)return _partnerSortDir==='asc'?-1:1;
+    if(va>vb)return _partnerSortDir==='asc'?1:-1;
+    return 0;
+  });
+
+  document.getElementById('partner-table-heading').textContent=`${sorted.length} Partner Organisations`;
+  const tbody = document.querySelector('#partner-table tbody');
+  tbody.innerHTML = '';
+  sorted.forEach((d,i)=>{
+    const tr = document.createElement('tr');
+    const g = +d.total_funding||0;
+    const staffShort = d.staff.length>80?d.staff.slice(0,78)+'…':d.staff;
+    const typeColor = d.org_type==='Academic'?ACAD_COLOR:NON_ACAD_COLOR;
+    tr.innerHTML=`
+      <td>${i+1}</td>
+      <td style="max-width:250px">${d.partner_org}</td>
+      <td><span style="color:${typeColor};font-weight:500;font-size:0.78rem">${d.org_type}</span></td>
+      <td class="money">${d.project_count}</td>
+      <td class="money">${g?'£'+commas(g.toFixed(0)):'—'}</td>
+      <td>${d.roles}</td>
+      <td style="max-width:200px;font-size:0.78rem" title="${d.staff}">${staffShort}</td>`;
     tbody.appendChild(tr);
   });
 }
