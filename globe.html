@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UofG SPS – 3D Research Collaboration Globe</title>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="https://unpkg.com/globe.gl"></script>
+<style>
+:root{
+  --navy:#003865;--navy-light:#00508a;--bg:#ffffff;--card:#ffffff;
+  --border:#e0e0e0;--text:#1a1a1a;--muted:#5f6368;--accent:#003865;
+  --accent-light:rgba(0,56,101,0.08);--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#fff;color:var(--text);line-height:1.5}
+
+/* ── UofG Banner ── */
+.uofg-banner{background:var(--navy);color:#fff;padding:14px 2.5rem;display:flex;align-items:center;gap:18px}
+.uofg-banner img{height:52px;width:auto}
+.uofg-banner .banner-text{display:flex;flex-direction:column}
+.uofg-banner .banner-title{font-size:0.82rem;font-weight:400;opacity:0.85;letter-spacing:0.02em}
+.uofg-banner .banner-dept{font-size:0.72rem;font-weight:400;opacity:0.65}
+
+/* ── Page Header ── */
+.page-header{padding:1.5rem 2.5rem 1.2rem;background:#fff;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--navy)}
+.page-header p{color:var(--muted);font-size:0.85rem;margin-top:0.15rem}
+
+/* ── Globe Container ── */
+#globe-wrap{position:relative;width:100%;height:calc(100vh - 150px);min-height:500px;background:#ffffff;overflow:hidden}
+#globeViz{width:100%;height:100%}
+
+/* ── Loading ── */
+#loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.95rem;color:var(--muted);z-index:5}
+
+/* ── Legend ── */
+.globe-legend{position:absolute;bottom:20px;right:20px;background:#fff;padding:0.8rem 1rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.9;font-size:0.78rem;z-index:10}
+.globe-legend h4{margin:0 0 0.4rem;font-size:0.82rem;color:var(--navy);font-weight:600}
+.globe-legend label{display:flex;align-items:center;gap:0.4rem;cursor:pointer}
+.globe-legend .legend-circle{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
+.globe-legend input[type="checkbox"]{accent-color:var(--navy);cursor:pointer}
+
+/* ── Status Toggle ── */
+.globe-status-toggle{position:absolute;top:16px;right:20px;display:inline-flex;gap:0;border-radius:6px;overflow:hidden;z-index:10;box-shadow:0 1px 5px rgba(0,0,0,0.15)}
+.globe-status-toggle button{font-size:0.75rem;padding:0.35rem 0.8rem;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;font-weight:500;transition:all 0.15s}
+.globe-status-toggle button:first-child{border-radius:6px 0 0 6px}
+.globe-status-toggle button:last-child{border-radius:0 6px 6px 0;border-left:none}
+.globe-status-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ── Tooltip ── */
+.globe-tooltip{position:fixed;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.8rem;font-size:0.78rem;color:var(--text);pointer-events:none;z-index:200;max-width:340px;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.globe-tooltip strong{color:var(--navy)}
+.globe-tooltip .tag{display:inline-block;padding:0.1rem 0.4rem;border-radius:4px;font-size:0.68rem;margin:0.1rem;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ UofG BANNER ═══════════ -->
+<div class="uofg-banner">
+  <img src="glasgow-logo.png" alt="University of Glasgow">
+  <div class="banner-text">
+    <span class="banner-title">University of Glasgow</span>
+    <span class="banner-dept">School of Social &amp; Political Sciences</span>
+  </div>
+</div>
+
+<div class="page-header">
+  <h1>3D Research Collaboration Globe</h1>
+  <p id="globe-subtitle">UKRI-funded research partnerships across <strong id="org-count">—</strong> organisations worldwide</p>
+</div>
+
+<div id="globe-wrap">
+  <div id="globeViz"></div>
+  <div id="loading">Loading collaboration data…</div>
+  <div id="debug-info" style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,0.9);padding:8px 12px;border-radius:6px;font-size:11px;color:#666;z-index:15;font-family:monospace;display:none"></div>
+
+  <div class="globe-status-toggle" id="globe-status-toggle">
+    <button class="active" data-mode="all">All Collaborations</button>
+    <button data-mode="active">Active Projects</button>
+  </div>
+
+  <div class="globe-legend" id="globe-legend">
+    <h4>Connection Type</h4>
+    <label><input type="checkbox" data-cat="lead" checked>
+      <span class="legend-circle" style="background:#003865"></span> Lead Organisation</label>
+    <label><input type="checkbox" data-cat="acadPart" checked>
+      <span class="legend-circle" style="background:#00897b"></span> Academic Partner</label>
+    <label><input type="checkbox" data-cat="nonAcPart" checked>
+      <span class="legend-circle" style="background:#e65100"></span> Non-Academic Partner</label>
+  </div>
+</div>
+
+<div class="globe-tooltip" id="globe-tooltip"></div>
+
+<script>
+/* ════════════════════════════════════════
+   CONSTANTS
+   ════════════════════════════════════════ */
+
+const GLASGOW = {lat:55.8721,lng:-4.2882};
+
+const CAT_COLORS = {
+  lead:      {fill:'#003865',stroke:'#002244',label:'Lead Organisation'},
+  acadPart:  {fill:'#00897b',stroke:'#00695c',label:'Academic Partner'},
+  nonAcPart: {fill:'#e65100',stroke:'#bf4500',label:'Non-Academic Partner'},
+};
+
+const TAG_COLORS = {
+  'Governance & Policy':'#003865','Health & Wellbeing':'#00897b',
+  'Inequality & Social Justice':'#c62828','Migration & Citizenship':'#e65100',
+  'Environment & Sustainability':'#2e7d32','Culture & Heritage':'#6a1b9a',
+  'Conflict & Security':'#ad1457','Global Health':'#00838f',
+  'Economy & Development':'#1565c0','Housing & Urban':'#f9a825',
+  'Data & Digital':'#0277bd','Gender & Equality':'#d81b60'
+};
+
+const ACADEMIC_PATTERNS = /universit|universid|universié|universi|college|école|escuela|polytechnic|institut[eo]?\b|akademi|academ|school of|faculty of|hochschule|grandes écoles/i;
+function isAcademic(name){ return name ? ACADEMIC_PATTERNS.test(name) : false; }
+
+function fmtGBP(n){if(n>=1e6)return'£'+(n/1e6).toFixed(1)+'M';if(n>=1e3)return'£'+(n/1e3).toFixed(0)+'K';return'£'+n.toFixed(0)}
+function commas(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+
+/* ── Organisation Coordinates (loaded from org_coords.json) ── */
+let ORG_COORDS = {};
+let _orgCoordsLower = {};
+function getOrgCoords(name){
+  return ORG_COORDS[name] || _orgCoordsLower[(name||'').toLowerCase()] || null;
+}
+
+const ROLE_LABELS = {'PP_ORG':'Project Partner','COLLAB_ORG':'Collaborator','PARTICIPANT_ORG':'Participant'};
+
+let _statusMode = 'all'; // 'all' or 'active'
+let _datasets = { all: null, active: null };
+
+/* ════════════════════════════════════════
+   DATA LOADING
+   ════════════════════════════════════════ */
+let _allData = [];
+let _partnerData = [];
+let _countriesGeoJson = null;
+let _loadCount = 0;
+const LOAD_TOTAL = 4;
+const _dbg = document.getElementById('debug-info');
+function dbg(msg){ if(_dbg){ _dbg.style.display='block'; _dbg.innerHTML += msg+'<br>'; } console.log('[Globe] '+msg); }
+
+function checkLoaded(){
+  _loadCount++;
+  dbg('Loaded ' + _loadCount + '/' + LOAD_TOTAL);
+  if(_loadCount >= LOAD_TOTAL) onAllLoaded();
+}
+
+function onAllLoaded(){
+  dbg('Projects: ' + _allData.length + ' | Partners: ' + _partnerData.length + ' | Countries: ' + (_countriesGeoJson ? _countriesGeoJson.length : 0));
+  if(_allData.length === 0 && _partnerData.length === 0){
+    document.getElementById('loading').textContent = 'Error: CSV files could not be loaded. Make sure to open via http://localhost:8777/globe.html (not as a local file).';
+    dbg('ERROR: Both CSVs empty — likely a network/CORS issue');
+    return;
+  }
+  document.getElementById('loading').style.display = 'none';
+  try {
+    processData();
+  } catch(e) {
+    console.error('[Globe] processData error:', e);
+    dbg('ERROR in processData: ' + e.message);
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loading').textContent = 'Error: ' + e.message;
+  }
+}
+
+// 1. Main projects CSV
+Papa.parse('uofg_sps_staff_gtr_projects.csv',{
+  download:true, header:true, skipEmptyLines:true,
+  complete(res){
+    _allData = res.data.filter(r=>r.title);
+    dbg('CSV1 ok: ' + _allData.length + ' projects');
+    checkLoaded();
+  },
+  error(e){ dbg('CSV1 ERROR: ' + e.message); checkLoaded(); }
+});
+
+// 2. Partners CSV
+Papa.parse('uofg_sps_partners.csv',{
+  download:true, header:true, skipEmptyLines:true,
+  complete(res){
+    _partnerData = res.data.filter(r=>r.project_id && r.partner_org);
+    dbg('CSV2 ok: ' + _partnerData.length + ' partners');
+    checkLoaded();
+  },
+  error(e){ dbg('CSV2 ERROR: ' + e.message); checkLoaded(); }
+});
+
+// 3. Country boundaries GeoJSON (for polygon outlines)
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+  .then(r=>r.json())
+  .then(topo=>{
+    _countriesGeoJson = topojson.feature(topo, topo.objects.countries).features;
+    dbg('GeoJSON ok: ' + _countriesGeoJson.length + ' countries');
+    checkLoaded();
+  })
+  .catch(e=>{
+    dbg('GeoJSON WARN: ' + e.message + ' — proceeding without country outlines');
+    _countriesGeoJson = [];
+    checkLoaded();
+  });
+
+// 4. Organisation coordinates JSON
+fetch('org_coords.json')
+  .then(r => r.json())
+  .then(data => {
+    ORG_COORDS = data;
+    Object.entries(data).forEach(([k,v]) => { _orgCoordsLower[k.toLowerCase()] = v; });
+    dbg('Coords JSON ok: ' + Object.keys(data).length + ' orgs');
+    checkLoaded();
+  })
+  .catch(e => {
+    dbg('Coords JSON WARN: ' + e.message + ' — using empty coords');
+    checkLoaded();
+  });
+
+/* ════════════════════════════════════════
+   DATA PROCESSING
+   ════════════════════════════════════════ */
+
+/* Build a { points, arcs } dataset from a filtered set of projects + partners */
+function buildDataset(projects, partners){
+  const projectMap = {};
+  projects.forEach(d=>{ projectMap[d.id] = d; });
+
+  // ── 1. Lead org aggregation ──
+  const leadData = {};
+  projects.forEach(d=>{
+    const o = d.lead_org; if(!o) return;
+    if(!leadData[o]) leadData[o] = {count:0,value:0,projects:[],tags:new Set(),staff:new Set(),category:'lead'};
+    leadData[o].count++;
+    leadData[o].value += (+d.grant_offer||0);
+    leadData[o].projects.push(d.title);
+    (d.tags||'').split(';').map(t=>t.trim()).filter(Boolean).forEach(t=>leadData[o].tags.add(t));
+    (d.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>leadData[o].staff.add(s));
+  });
+
+  // ── 2. Partner org aggregation ──
+  const partnerMapData = {};
+  partners.forEach(row=>{
+    const org = row.partner_org; if(!org) return;
+    if(leadData[org]) return;
+    if(!projectMap[row.project_id]) return; // skip partners of excluded projects
+    const cat = isAcademic(org) ? 'acadPart' : 'nonAcPart';
+    if(!partnerMapData[org]) partnerMapData[org] = {count:0,value:0,projects:[],tags:new Set(),staff:new Set(),category:cat,roles:new Set()};
+    const proj = projectMap[row.project_id];
+    if(proj){
+      partnerMapData[org].count++;
+      partnerMapData[org].value += (+proj.grant_offer||0);
+      partnerMapData[org].projects.push(proj.title);
+      partnerMapData[org].roles.add(row.partner_role);
+      (proj.tags||'').split(';').map(t=>t.trim()).filter(Boolean).forEach(t=>partnerMapData[org].tags.add(t));
+      (proj.staff_members||'').split(';').map(s=>s.trim()).filter(Boolean).forEach(s=>partnerMapData[org].staff.add(s));
+    }
+  });
+
+  // ── 3. Build globe data arrays ──
+  const allOrgs = {...leadData, ...partnerMapData};
+  const orgValues = Object.values(allOrgs);
+  const maxCount = orgValues.reduce((mx,o) => Math.max(mx, o.count), 1);
+
+  const pointsData = [];
+  const arcsData = [];
+
+  // Glasgow hub point (always visible)
+  pointsData.push({
+    lat:GLASGOW.lat, lng:GLASGOW.lng, name:'University of Glasgow',
+    category:'lead', count:leadData['University of Glasgow']?.count||0,
+    value:leadData['University of Glasgow']?.value||0,
+    tags:[...(leadData['University of Glasgow']?.tags||[])],
+    size:0.6, color:'#003865', isGlasgow:true
+  });
+
+  let coordHits = 0, coordMisses = 0;
+  Object.entries(allOrgs).forEach(([name,info])=>{
+    const coords = getOrgCoords(name);
+    if(!coords){ coordMisses++; return; }
+    coordHits++;
+    const [lat,lng] = coords;
+    const isGlasgow = name.toLowerCase().includes('university of glasgow');
+
+    if(!isGlasgow){
+      pointsData.push({
+        lat, lng, name, category:info.category,
+        count:info.count, value:info.value,
+        tags:[...info.tags],
+        size: 0.15 + (info.count/maxCount)*0.45,
+        color: CAT_COLORS[info.category].fill,
+        isGlasgow:false
+      });
+
+      // Forward arc: Glasgow → org
+      arcsData.push({
+        startLat:GLASGOW.lat, startLng:GLASGOW.lng,
+        endLat:lat, endLng:lng,
+        name, category:info.category,
+        count:info.count, value:info.value,
+        tags:[...info.tags],
+        color: CAT_COLORS[info.category].fill,
+        direction: 'outward'
+      });
+      // Reverse arc: org → Glasgow (bidirectional charged flow)
+      arcsData.push({
+        startLat:lat, startLng:lng,
+        endLat:GLASGOW.lat, endLng:GLASGOW.lng,
+        name, category:info.category,
+        count:info.count, value:info.value,
+        tags:[...info.tags],
+        color: CAT_COLORS[info.category].fill,
+        direction: 'inward'
+      });
+    }
+  });
+
+  return { points: pointsData, arcs: arcsData, coordHits, coordMisses,
+           leadCount: Object.keys(leadData).length,
+           partnerCount: Object.keys(partnerMapData).length,
+           totalOrgs: Object.keys(allOrgs).length };
+}
+
+/* Top-level: build both "all" and "active" datasets, then apply current mode */
+function processData(){
+  _datasets.all = buildDataset(_allData, _partnerData);
+  const ds = _datasets.all;
+  dbg('ALL — Lead: ' + ds.leadCount + ' | Partners: ' + ds.partnerCount + ' | Total: ' + ds.totalOrgs);
+  dbg('ALL — Coords: ' + ds.coordHits + ' hits, ' + ds.coordMisses + ' misses');
+  dbg('ALL — Points: ' + ds.points.length + ' | Arcs: ' + ds.arcs.length);
+
+  const activeProjects = _allData.filter(d => d.status === 'Active');
+  _datasets.active = buildDataset(activeProjects, _partnerData);
+  const da = _datasets.active;
+  dbg('ACTIVE — Projects: ' + activeProjects.length + ' | Points: ' + da.points.length + ' | Arcs: ' + da.arcs.length);
+
+  applyDataset();
+}
+
+/* Switch between "all" and "active" datasets */
+function applyDataset(){
+  const ds = _datasets[_statusMode];
+  if(!ds) return;
+  _allPoints = ds.points;
+  _allArcs = ds.arcs;
+
+  // Update subtitle
+  const subtitle = document.getElementById('globe-subtitle');
+  if(subtitle){
+    const count = commas(ds.points.length);
+    subtitle.innerHTML = _statusMode === 'active'
+      ? 'Active UKRI-funded partnerships across <strong id="org-count">' + count + '</strong> organisations'
+      : 'UKRI-funded research partnerships across <strong id="org-count">' + count + '</strong> organisations worldwide';
+  }
+
+  if(!_globe){
+    buildGlobe(ds.points, ds.arcs);
+  } else {
+    updateGlobeFilters();
+  }
+}
+
+/* ════════════════════════════════════════
+   GLOBE RENDERING
+   ════════════════════════════════════════ */
+let _globe = null;
+let _allPoints = [];
+let _allArcs = [];
+let _visibleCats = new Set(['lead','acadPart','nonAcPart']);
+
+function buildGlobe(pointsData, arcsData){
+  _allPoints = pointsData;
+  _allArcs = arcsData;
+
+  const container = document.getElementById('globeViz');
+
+  // Check Globe constructor is available
+  if(typeof Globe === 'undefined'){
+    console.error('[Globe] Globe constructor not found — CDN script may have failed to load');
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loading').textContent = 'Globe library failed to load — check network';
+    return;
+  }
+
+  dbg('Creating globe...');
+
+  _globe = new Globe(container)
+    .backgroundColor('#ffffff')
+    .showAtmosphere(true)
+    .atmosphereColor('rgba(0,56,101,0.15)')
+    .atmosphereAltitude(0.18)
+
+    // Country polygons — transparent caps (no depth occlusion) with visible border strokes
+    .polygonsData(_countriesGeoJson || [])
+    .polygonCapColor(()=>'rgba(245, 245, 245, 0.92)')
+    .polygonSideColor(()=>'rgba(0,0,0,0)')
+    .polygonStrokeColor(()=>'rgba(160, 160, 160, 0.6)')
+    .polygonAltitude(0.005)
+
+    // Points — 3D cylinders above polygon layer
+    .pointsData(pointsData)
+    .pointLat('lat')
+    .pointLng('lng')
+    .pointColor('color')
+    .pointRadius('size')
+    .pointAltitude(0.015)
+    .pointResolution(12)
+    .pointsMerge(false)
+
+    // Arcs — bidirectional paired connections (forward + reverse per org)
+    .arcsData(arcsData)
+    .arcStartLat('startLat')
+    .arcStartLng('startLng')
+    .arcEndLat('endLat')
+    .arcEndLng('endLng')
+    .arcColor(d => {
+      const c = d.color;
+      // Outward arcs: solid→faded; Inward arcs: faded→solid (creates bidirectional flow)
+      return d.direction === 'outward' ? [c+'99', c+'33'] : [c+'33', c+'99'];
+    })
+    .arcStroke(0.3)
+    .arcAltitudeAutoScale(0.4)
+    .arcDashLength(0.25)
+    .arcDashGap(0.15)
+    .arcDashInitialGap(d => d.direction === 'inward' ? 0.5 : 0)
+    .arcDashAnimateTime(d => d.direction === 'outward' ? 3500 : 4200)
+
+    // Hover
+    .onPointHover(handlePointHover)
+    .onArcHover(handleArcHover)
+
+    // Size
+    .width(container.clientWidth)
+    .height(container.clientHeight);
+
+  // Style the globe surface — clean light appearance
+  try {
+    const mat = _globe.globeMaterial();
+    mat.color.set(0xf8f8f8);
+    mat.emissive.set(0xeeeeee);
+    mat.emissiveIntensity = 0.2;
+  } catch(e){ console.warn('[Globe] Material customization skipped:', e.message); }
+
+  // Ensure polygon materials have depthWrite disabled so points/arcs render on top
+  // globe.gl sets transparent=true when rgba alpha<1, but depthWrite may still be true
+  try {
+    const innerGlobe = _globe.scene().children.find(c => c.type === 'Group' || c.__globeObjType);
+    const fixPolygonDepth = () => {
+      _globe.scene().traverse(child => {
+        if(child.isMesh && child.material && child.material.transparent){
+          child.material.depthWrite = false;
+        }
+      });
+      dbg('Polygon depth-write fix applied ✓');
+    };
+    // Apply after globe finishes building polygon meshes
+    setTimeout(fixPolygonDepth, 1000);
+    setTimeout(fixPolygonDepth, 3000);
+  } catch(e){ console.warn('[Globe] Polygon material tweak skipped:', e.message); }
+
+  // Initial camera: show UK/Europe
+  _globe.pointOfView({lat:52, lng:-2, altitude:2.2}, 0);
+
+  // Slow auto-rotation
+  try {
+    const controls = _globe.controls();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.3;
+    controls.enableDamping = true;
+    controls.addEventListener('start',()=>{ controls.autoRotate = false; });
+  } catch(e){ console.warn('[Globe] Controls setup skipped:', e.message); }
+
+  // Responsive resize
+  window.addEventListener('resize',()=>{
+    if(_globe) _globe.width(container.clientWidth).height(container.clientHeight);
+  });
+
+  // Wire legend toggles
+  document.querySelectorAll('.globe-legend input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      const cat = cb.dataset.cat;
+      if(cb.checked) _visibleCats.add(cat); else _visibleCats.delete(cat);
+      updateGlobeFilters();
+    });
+  });
+
+  // Wire status toggle (All Collaborations / Active Projects)
+  document.querySelectorAll('#globe-status-toggle button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#globe-status-toggle button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      _statusMode = btn.dataset.mode;
+      applyDataset();
+    });
+  });
+
+  dbg('Globe created ✓');
+}
+
+function updateGlobeFilters(){
+  if(!_globe) return;
+  _globe
+    .pointsData(_allPoints.filter(p=>p.isGlasgow || _visibleCats.has(p.category)))
+    .arcsData(_allArcs.filter(a=>_visibleCats.has(a.category)));
+}
+
+/* ════════════════════════════════════════
+   TOOLTIPS
+   ════════════════════════════════════════ */
+const tooltip = document.getElementById('globe-tooltip');
+
+function buildTagsHtml(tags){
+  if(!tags || tags.length===0) return '';
+  return '<div style="margin-top:4px">' +
+    tags.map(t=>{
+      const col = TAG_COLORS[t]||'#003865';
+      return `<span class="tag" style="background:${col}18;color:${col}">${t}</span>`;
+    }).join(' ') + '</div>';
+}
+
+function handlePointHover(point){
+  if(point){
+    tooltip.style.display = 'block';
+    const catLabel = point.isGlasgow ? 'Hub — University of Glasgow' : CAT_COLORS[point.category].label;
+    tooltip.innerHTML = `
+      <strong>${point.name}</strong><br>
+      <em style="color:${point.color}">${catLabel}</em><br>
+      ${point.count} project${point.count>1?'s':''} · ${fmtGBP(point.value)}
+      ${buildTagsHtml(point.tags)}`;
+  } else {
+    tooltip.style.display = 'none';
+  }
+}
+
+function handleArcHover(arc){
+  if(arc){
+    tooltip.style.display = 'block';
+    tooltip.innerHTML = `
+      <strong>Glasgow ↔ ${arc.name}</strong><br>
+      <em style="color:${arc.color}">${CAT_COLORS[arc.category].label}</em><br>
+      ${arc.count} project${arc.count>1?'s':''} · ${fmtGBP(arc.value)}
+      ${buildTagsHtml(arc.tags)}`;
+  } else {
+    tooltip.style.display = 'none';
+  }
+}
+
+// Track cursor for tooltip positioning
+document.addEventListener('mousemove',e=>{
+  tooltip.style.left = (e.clientX+15)+'px';
+  tooltip.style.top = (e.clientY+15)+'px';
+});
+</script>
+</body>
+</html>

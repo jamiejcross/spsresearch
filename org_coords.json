@@ -1,0 +1,4610 @@
+{
+  "University of Glasgow": [
+    55.8721,
+    -4.2882
+  ],
+  "University of Edinburgh": [
+    55.9445,
+    -3.1892
+  ],
+  "University of St Andrews": [
+    56.3398,
+    -2.7967
+  ],
+  "University of Aberdeen": [
+    57.1645,
+    -2.0999
+  ],
+  "University of Dundee": [
+    56.4579,
+    -2.9783
+  ],
+  "University of Strathclyde": [
+    55.8622,
+    -4.2434
+  ],
+  "Glasgow Caledonian University": [
+    55.8667,
+    -4.2509
+  ],
+  "Heriot-Watt University": [
+    55.9097,
+    -3.3201
+  ],
+  "University of Stirling": [
+    56.1463,
+    -3.9198
+  ],
+  "University of the Highlands and Islands": [
+    57.4778,
+    -4.2247
+  ],
+  "Robert Gordon University": [
+    57.1189,
+    -2.1361
+  ],
+  "Edinburgh Napier University": [
+    55.9315,
+    -3.2135
+  ],
+  "Queen Margaret University, Edinburgh": [
+    55.9241,
+    -3.0718
+  ],
+  "University of the West of Scotland": [
+    55.8432,
+    -4.2868
+  ],
+  "SRUC": [
+    55.9097,
+    -3.3201
+  ],
+  "James Hutton Institute": [
+    56.4573,
+    -3.0699
+  ],
+  "University of Oxford": [
+    51.7548,
+    -1.2544
+  ],
+  "University of Cambridge": [
+    52.2053,
+    0.1218
+  ],
+  "Imperial College London": [
+    51.4988,
+    -0.1749
+  ],
+  "King's College London": [
+    51.5115,
+    -0.116
+  ],
+  "University College London": [
+    51.5246,
+    -0.134
+  ],
+  "London School of Economics": [
+    51.5144,
+    -0.1165
+  ],
+  "SOAS University of London": [
+    51.5223,
+    -0.1292
+  ],
+  "City St George's, University of London": [
+    51.5281,
+    -0.1025
+  ],
+  "Queen Mary University of London": [
+    51.524,
+    -0.04
+  ],
+  "University of Manchester": [
+    53.4668,
+    -2.2339
+  ],
+  "University of Liverpool": [
+    53.4055,
+    -2.9673
+  ],
+  "Liverpool School of Tropical Medicine": [
+    53.4118,
+    -2.9646
+  ],
+  "University of Leeds": [
+    53.8067,
+    -1.555
+  ],
+  "University of Sheffield": [
+    53.3811,
+    -1.4886
+  ],
+  "University of York": [
+    53.9471,
+    -1.0553
+  ],
+  "University of Lancaster": [
+    54.0104,
+    -2.7877
+  ],
+  "University of Durham": [
+    54.7668,
+    -1.5724
+  ],
+  "Durham University": [
+    54.7668,
+    -1.5724
+  ],
+  "Newcastle University": [
+    54.9783,
+    -1.6178
+  ],
+  "University of Birmingham": [
+    52.4508,
+    -1.9305
+  ],
+  "University of Warwick": [
+    52.3793,
+    -1.5615
+  ],
+  "University of Nottingham": [
+    52.9388,
+    -1.1966
+  ],
+  "University of Leicester": [
+    52.6219,
+    -1.125
+  ],
+  "Loughborough University": [
+    52.765,
+    -1.227
+  ],
+  "University of Bristol": [
+    51.459,
+    -2.6031
+  ],
+  "University of Bath": [
+    51.3794,
+    -2.3281
+  ],
+  "University of Exeter": [
+    50.7351,
+    -3.5349
+  ],
+  "University of Southampton": [
+    50.934,
+    -1.396
+  ],
+  "University of Sussex": [
+    50.8674,
+    -0.0873
+  ],
+  "University of Surrey": [
+    51.2431,
+    -0.5894
+  ],
+  "University of Kent": [
+    51.2996,
+    1.069
+  ],
+  "University of East Anglia": [
+    52.6218,
+    1.2399
+  ],
+  "Bournemouth University": [
+    50.7421,
+    -1.898
+  ],
+  "Cardiff University": [
+    51.4876,
+    -3.1775
+  ],
+  "CARDIFF UNIVERSITY": [
+    51.4876,
+    -3.1775
+  ],
+  "Swansea University": [
+    51.6101,
+    -3.9197
+  ],
+  "Bangor University": [
+    53.2285,
+    -4.1292
+  ],
+  "Queen's University Belfast": [
+    54.5847,
+    -5.9345
+  ],
+  "Ulster University": [
+    54.8665,
+    -6.728
+  ],
+  "Brunel University London": [
+    51.5326,
+    -0.4727
+  ],
+  "University of Essex": [
+    51.8774,
+    0.9445
+  ],
+  "University of Plymouth": [
+    50.3755,
+    -4.1427
+  ],
+  "European Bioinformatics Institute": [
+    52.08,
+    0.1861
+  ],
+  "British Geological Survey": [
+    52.8788,
+    -1.0824
+  ],
+  "Goethe University Frankfurt": [
+    50.1283,
+    8.6693
+  ],
+  "African Population and Health Research Center": [
+    -1.2921,
+    36.8219
+  ],
+  "Ifakara Health Institute (IHI)": [
+    -8.1405,
+    36.6838
+  ],
+  "Universidade Eduardo Mondlane": [
+    -25.9653,
+    32.5892
+  ],
+  "University of the Witwatersrand": [
+    -26.1882,
+    28.0282
+  ],
+  "University of Cape Town": [
+    -33.9575,
+    18.4612
+  ],
+  "University of Pretoria": [
+    -25.7545,
+    28.2314
+  ],
+  "University of Rwanda": [
+    -1.956,
+    30.1036
+  ],
+  "Stellenbosch University": [
+    -33.9321,
+    18.8602
+  ],
+  "University of Salford": [
+    53.4876,
+    -2.2747
+  ],
+  "University College Dublin": [
+    53.3071,
+    -6.219
+  ],
+  "Makerere University": [
+    0.334,
+    32.5695
+  ],
+  "University of Melbourne": [
+    -37.7983,
+    144.961
+  ],
+  "University of Sydney": [
+    -33.8882,
+    151.1871
+  ],
+  "Alan Turing Institute": [
+    51.5299,
+    -0.1275
+  ],
+  "The Alan Turing Institute": [
+    51.5299,
+    -0.1275
+  ],
+  "China Agricultural University (CAU)": [
+    39.9938,
+    116.3513
+  ],
+  "UNIVERSITY OF READING": [
+    51.4414,
+    -0.9418
+  ],
+  "Fuzhou University": [
+    26.0612,
+    119.201
+  ],
+  "University of Seoul": [
+    37.5832,
+    127.0583
+  ],
+  "University of Reading": [
+    51.4414,
+    -0.9418
+  ],
+  "Oslo Metropolitan University": [
+    59.9217,
+    10.7335
+  ],
+  "University of Ghana": [
+    5.6505,
+    -0.1862
+  ],
+  "University of Delaware": [
+    39.678,
+    -75.7506
+  ],
+  "Korea Advanced Institute of Science and Technology (KAIST)": [
+    36.37,
+    127.36
+  ],
+  "Goldsmiths, University of London": [
+    51.4742,
+    -0.0356
+  ],
+  "University of Pennsylvania": [
+    39.9522,
+    -75.1932
+  ],
+  "University of Amsterdam": [
+    52.3556,
+    4.9553
+  ],
+  "McMaster University": [
+    43.2609,
+    -79.9192
+  ],
+  "University of Twente": [
+    52.2396,
+    6.85
+  ],
+  "Boston College": [
+    42.3355,
+    -71.1685
+  ],
+  "University of Florida": [
+    29.6436,
+    -82.3549
+  ],
+  "National University of Singapore": [
+    1.2966,
+    103.7764
+  ],
+  "University of Ulster": [
+    55.1539,
+    -6.7654
+  ],
+  "Northumbria University": [
+    54.978,
+    -1.605
+  ],
+  "Addis Ababa University": [
+    9.036,
+    38.763
+  ],
+  "Tongji University": [
+    31.2836,
+    121.5016
+  ],
+  "University of Lincoln": [
+    53.2283,
+    -0.5478
+  ],
+  "University of Nairobi": [
+    -1.279,
+    36.8172
+  ],
+  "Wageningen University & Research": [
+    51.9691,
+    5.6653
+  ],
+  "National University of Colombia": [
+    4.6383,
+    -74.083
+  ],
+  "University of Wolverhampton": [
+    52.5876,
+    -2.129
+  ],
+  "Norwegian School of Economics": [
+    60.3748,
+    5.343
+  ],
+  "London School of Hygiene and Tropical Medicine": [
+    51.5207,
+    -0.1306
+  ],
+  "Manchester University": [
+    53.4668,
+    -2.2339
+  ],
+  "Ifakara Health Institute": [
+    -8.1405,
+    36.6838
+  ],
+  "Potsdam Institute for Climate Impact Res": [
+    52.381,
+    13.064
+  ],
+  "Western Norway University of Applied Sciences": [
+    60.3692,
+    5.3509
+  ],
+  "Glasgow City Council": [
+    55.8596,
+    -4.2584
+  ],
+  "Government of Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Parliament": [
+    55.9519,
+    -3.1748
+  ],
+  "OFFICE FOR NATIONAL STATISTICS": [
+    51.5846,
+    -2.996
+  ],
+  "SCOTTISH GOVERNMENT": [
+    55.9533,
+    -3.1883
+  ],
+  "Sustrans": [
+    51.4493,
+    -2.5832
+  ],
+  "Public Health Scotland": [
+    55.9485,
+    -3.2021
+  ],
+  "Dept Levelling Up, Housing & Communities": [
+    51.502,
+    -0.1343
+  ],
+  "Medical Research Council (MRC)": [
+    51.5274,
+    -0.1313
+  ],
+  "Cycling Scotland": [
+    55.86,
+    -4.2579
+  ],
+  "Government of the UK": [
+    51.502,
+    -0.1343
+  ],
+  "Glasgow Centre for Population Health": [
+    55.8555,
+    -4.2488
+  ],
+  "NHS Health Scotland": [
+    55.9485,
+    -3.2021
+  ],
+  "Cabinet Office": [
+    51.5033,
+    -0.1279
+  ],
+  "Improbable": [
+    51.5236,
+    -0.0845
+  ],
+  "United Nations (UN)": [
+    46.2264,
+    6.1403
+  ],
+  "Ordnance Survey": [
+    50.9379,
+    -1.471
+  ],
+  "DEPARTMENT FOR WORK AND PENSIONS": [
+    51.502,
+    -0.1343
+  ],
+  "Local Government Association": [
+    51.5192,
+    -0.1072
+  ],
+  "World Health Organization": [
+    46.2339,
+    6.1337
+  ],
+  "Zero Waste Scotland": [
+    56.1165,
+    -3.9369
+  ],
+  "ENVIRONMENT AGENCY": [
+    51.4525,
+    -2.613
+  ],
+  "Star Refrigeration Ltd": [
+    55.8553,
+    -4.2714
+  ],
+  "Experian": [
+    53.016,
+    -1.15
+  ],
+  "Ipsos-MORI": [
+    51.5219,
+    -0.141
+  ],
+  "Unilever UK & Ireland": [
+    51.5027,
+    -0.1117
+  ],
+  "PepsiCo International Limited": [
+    51.4672,
+    -0.4878
+  ],
+  "Royal Institution of Chartered Surveyors": [
+    51.5015,
+    -0.1347
+  ],
+  "Home Office": [
+    51.502,
+    -0.1343
+  ],
+  "The Electoral Commission": [
+    51.5008,
+    -0.1356
+  ],
+  "Royal Society of Edinburgh (RSE)": [
+    55.9533,
+    -3.1919
+  ],
+  "Johnson Matthey (United Kingdom)": [
+    51.52,
+    -0.09
+  ],
+  "UK Health Security Agency": [
+    51.532,
+    -0.125
+  ],
+  "Arup": [
+    51.5204,
+    -0.0874
+  ],
+  "NESTA": [
+    51.5168,
+    -0.0941
+  ],
+  "Wikimedia UK": [
+    55.9533,
+    -3.1883
+  ],
+  "FinTech North": [
+    53.7976,
+    -1.544
+  ],
+  "Commonwealth Scientific and Industrial Research Organisation": [
+    -35.2809,
+    149.13
+  ],
+  "NHS England": [
+    51.5126,
+    -0.1413
+  ],
+  "Procter & Gamble": [
+    55.9139,
+    -3.3228
+  ],
+  "LEEDS TEACHING HOSPITALS NHS TRUST": [
+    53.8067,
+    -1.5218
+  ],
+  "LEEDS CITY COUNCIL": [
+    53.7996,
+    -1.5491
+  ],
+  "World Health Organization (WHO)": [
+    46.2339,
+    6.1337
+  ],
+  "Department for Science, Innovation & Technology": [
+    51.502,
+    -0.1343
+  ],
+  "Glasgow Council for the Voluntary Sector": [
+    55.8596,
+    -4.2584
+  ],
+  "Ramboll UK": [
+    51.5174,
+    -0.1208
+  ],
+  "Royal Town Planning Institute": [
+    51.5194,
+    -0.087
+  ],
+  "Chartered Institute of Housing": [
+    52.052,
+    -0.735
+  ],
+  "PepsiCo": [
+    51.4672,
+    -0.4878
+  ],
+  "Public Health Dorset": [
+    50.722,
+    -1.8808
+  ],
+  "Transport Systems Catapult": [
+    52.0406,
+    -0.7594
+  ],
+  "British Standards Institute (BSI Group)": [
+    51.3902,
+    -0.0885
+  ],
+  "Open Data Institute": [
+    51.5223,
+    -0.0856
+  ],
+  "National Institute of Economic and Social Research (NIESR)": [
+    51.515,
+    -0.1272
+  ],
+  "National Institute for Health and Care Excellence (NICE)": [
+    53.4668,
+    -2.2339
+  ],
+  "Aarhus University": [
+    56.1671,
+    10.2026
+  ],
+  "Abiola Ajimobi Technical University": [
+    7.3776,
+    3.947
+  ],
+  "Abrar University": [
+    2.0369,
+    45.3182
+  ],
+  "Ahmadu Bello University": [
+    11.1536,
+    7.6486
+  ],
+  "Airlangga University": [
+    -7.2696,
+    112.753
+  ],
+  "Albert Ludwig University of Freiburg": [
+    47.9942,
+    7.8493
+  ],
+  "Amoud University": [
+    9.56,
+    43.3498
+  ],
+  "Ardhi University": [
+    -6.7704,
+    39.2383
+  ],
+  "Arizona State University": [
+    33.4242,
+    -111.9281
+  ],
+  "Ateneo de Manila University": [
+    14.6395,
+    121.0774
+  ],
+  "Autonomous Latin American University": [
+    6.2518,
+    -75.5636
+  ],
+  "Beijing Normal University": [
+    39.9617,
+    116.3669
+  ],
+  "Benadir University": [
+    2.0469,
+    45.3182
+  ],
+  "Bule Hora University": [
+    5.5961,
+    38.2617
+  ],
+  "Burao University": [
+    9.5229,
+    45.5338
+  ],
+  "California Institute of Technology": [
+    34.1376,
+    -118.1252
+  ],
+  "California State University Fullerton": [
+    33.8829,
+    -117.8868
+  ],
+  "California State University, Fullerton": [
+    33.8829,
+    -117.8868
+  ],
+  "Catholic University of Health and Allied Sciences": [
+    -2.5195,
+    32.9003
+  ],
+  "Changchun University": [
+    43.8805,
+    125.3228
+  ],
+  "Chiang Mai University": [
+    18.8025,
+    98.9526
+  ],
+  "Chinese Academy of Sciences": [
+    39.9777,
+    116.3286
+  ],
+  "Chinese University of Hong Kong": [
+    22.4197,
+    114.2068
+  ],
+  "COVENTRY UNIVERSITY": [
+    52.4068,
+    -1.5197
+  ],
+  "CRANFIELD UNIVERSITY": [
+    52.0729,
+    -0.6283
+  ],
+  "De La Salle University": [
+    14.5647,
+    120.9932
+  ],
+  "De Montfort University": [
+    52.629,
+    -1.139
+  ],
+  "Deakin University": [
+    -37.8477,
+    145.1151
+  ],
+  "Duke University": [
+    36.0014,
+    -78.9382
+  ],
+  "East Africa University": [
+    2.0369,
+    45.338
+  ],
+  "Edge Hill University": [
+    53.5564,
+    -2.8868
+  ],
+  "Edna Adan University": [
+    9.5618,
+    44.0638
+  ],
+  "Eindhoven University of Technology": [
+    51.4484,
+    5.4897
+  ],
+  "Erasmus University Rotterdam": [
+    51.9172,
+    4.5253
+  ],
+  "ETH Zurich": [
+    47.3764,
+    8.5479
+  ],
+  "European University Institute": [
+    43.7541,
+    11.2498
+  ],
+  "Federal Technological University of Paraná": [
+    -25.44,
+    -49.271
+  ],
+  "Federal University of Acre": [
+    -9.9559,
+    -67.87
+  ],
+  "Federal University of Rio de Janeiro": [
+    -22.8626,
+    -43.2232
+  ],
+  "Gadjah Mada University": [
+    -7.7705,
+    110.3781
+  ],
+  "George Washington University": [
+    38.8997,
+    -77.0487
+  ],
+  "Georgia Institute of Technology": [
+    33.7756,
+    -84.3963
+  ],
+  "Hamelmalo College of Agriculture": [
+    15.8657,
+    38.4384
+  ],
+  "Hanbat National University": [
+    36.3513,
+    127.3007
+  ],
+  "Haramaya University": [
+    9.4125,
+    42.0139
+  ],
+  "Harare Institute of Technology": [
+    -17.8199,
+    31.0502
+  ],
+  "Harper Adams University": [
+    52.7773,
+    -2.4266
+  ],
+  "Hasanuddin University": [
+    -5.1319,
+    119.488
+  ],
+  "Heidelberg University": [
+    49.4101,
+    8.7066
+  ],
+  "Hirosaki University": [
+    40.588,
+    140.464
+  ],
+  "Hiroshima University": [
+    34.3997,
+    132.7147
+  ],
+  "Hokkaido University": [
+    43.0714,
+    141.3414
+  ],
+  "HUAZHONG UNIVERSITY OF SCIENCE AND TECHNOLOGY": [
+    30.5127,
+    114.4131
+  ],
+  "Hubei University of Education": [
+    30.581,
+    114.3155
+  ],
+  "Icesi University": [
+    3.3414,
+    -76.5308
+  ],
+  "Indian Institute of Technology Bombay": [
+    19.1334,
+    72.9133
+  ],
+  "Indian Inst of Technology (IIT) Bombay": [
+    19.1334,
+    72.9133
+  ],
+  "Indiana University": [
+    39.1682,
+    -86.523
+  ],
+  "Iowa State University": [
+    42.0262,
+    -93.6465
+  ],
+  "IT University of Copenhagen": [
+    55.6596,
+    12.5916
+  ],
+  "Jawaharlal Nehru University, India": [
+    28.5403,
+    77.1669
+  ],
+  "Jigjiga University": [
+    9.35,
+    42.796
+  ],
+  "Karlstad University": [
+    59.4044,
+    13.5799
+  ],
+  "Kenyatta University": [
+    -1.1772,
+    36.9282
+  ],
+  "Kerala University of Health Sciences": [
+    9.5918,
+    76.5222
+  ],
+  "Khulna University": [
+    22.8024,
+    89.532
+  ],
+  "London South Bank University": [
+    51.4986,
+    -0.103
+  ],
+  "Los Almendros College": [
+    -33.4489,
+    -70.6693
+  ],
+  "Maastricht University (UM)": [
+    50.846,
+    3.5739
+  ],
+  "Malawi University of Business and Applied Sciences": [
+    -15.8078,
+    35.0096
+  ],
+  "Massachusetts Institute of Technology": [
+    42.3601,
+    -71.0942
+  ],
+  "Massey University": [
+    -40.3523,
+    175.6117
+  ],
+  "Mekelle University": [
+    13.4975,
+    39.468
+  ],
+  "Mogadishu University": [
+    2.0369,
+    45.3182
+  ],
+  "Moi University": [
+    0.2897,
+    35.2913
+  ],
+  "Monash University": [
+    -37.9117,
+    145.134
+  ],
+  "Monterrey Institute of Technology": [
+    25.6513,
+    -100.2896
+  ],
+  "Nankai University": [
+    39.0984,
+    117.1634
+  ],
+  "National Taiwan University": [
+    25.0174,
+    121.5397
+  ],
+  "Nelson Mandela African Institute for Science and Technology": [
+    -3.4028,
+    36.7973
+  ],
+  "Nicolae Titulescu University": [
+    44.4268,
+    26.0937
+  ],
+  "Nicolaus Copernicus University": [
+    53.0196,
+    18.6114
+  ],
+  "Nicolaus Copernicus University in Torun": [
+    53.0196,
+    18.6114
+  ],
+  "Nottingham Trent University": [
+    52.9585,
+    -1.1539
+  ],
+  "Nugaal University": [
+    8.2831,
+    49.183
+  ],
+  "Ohio State University": [
+    40.0067,
+    -83.0305
+  ],
+  "OSCE Academy": [
+    42.8746,
+    74.5698
+  ],
+  "Oxford Brookes University": [
+    51.7536,
+    -1.2254
+  ],
+  "Peking University": [
+    39.9869,
+    116.3054
+  ],
+  "Penn State University": [
+    40.7982,
+    -77.8599
+  ],
+  "Polytechnic University of the Philippines": [
+    14.5977,
+    121.011
+  ],
+  "Purdue University": [
+    40.4237,
+    -86.9212
+  ],
+  "RMIT University": [
+    -37.8089,
+    144.9631
+  ],
+  "Rochester Institute of Technology": [
+    43.0845,
+    -77.6749
+  ],
+  "Royal Institute of Technology": [
+    59.35,
+    18.07
+  ],
+  "Royal Institute of Technology KTH Sweden": [
+    59.35,
+    18.07
+  ],
+  "Royal Veterinary College": [
+    51.5363,
+    -0.1318
+  ],
+  "Sao Paulo State University": [
+    -22.3965,
+    -49.6306
+  ],
+  "Seoul National University": [
+    37.4602,
+    126.9522
+  ],
+  "Shandong University": [
+    36.6694,
+    117.0182
+  ],
+  "SHEFFIELD HALLAM UNIVERSITY": [
+    53.3778,
+    -1.4663
+  ],
+  "Sheffield Hallam University": [
+    53.3778,
+    -1.4663
+  ],
+  "SIMAD University": [
+    2.0469,
+    45.3182
+  ],
+  "Southampton Solent University": [
+    50.9083,
+    -1.404
+  ],
+  "Stuttgart State Academy of Art and Design": [
+    48.7854,
+    9.1831
+  ],
+  "Sun Yat-sen University": [
+    23.0951,
+    113.297
+  ],
+  "Syracuse University": [
+    43.0392,
+    -76.1351
+  ],
+  "Takasaki City University of Economics": [
+    36.3146,
+    139.0113
+  ],
+  "Technical University of Munich": [
+    48.1497,
+    11.568
+  ],
+  "TEESSIDE UNIVERSITY": [
+    54.5716,
+    -1.2349
+  ],
+  "Tokyo Institute of Technology": [
+    35.6044,
+    139.6843
+  ],
+  "Tsinghua University China": [
+    39.9998,
+    116.3266
+  ],
+  "University at Buffalo (SUNY)": [
+    42.9988,
+    -78.7868
+  ],
+  "University Corporation for Atmospheric Research": [
+    39.9779,
+    -105.275
+  ],
+  "University Institution Greater School of Antioquia": [
+    6.2662,
+    -75.5667
+  ],
+  "University Libre Bruxelles (Université Libre de Bruxelles ULB)": [
+    50.8116,
+    4.3825
+  ],
+  "University Of New South Wales": [
+    -33.9173,
+    151.2313
+  ],
+  "University of Antioquia": [
+    6.2676,
+    -75.5681
+  ],
+  "University of Antwerp": [
+    51.2213,
+    4.4031
+  ],
+  "University of Arizona": [
+    32.2318,
+    -110.9506
+  ],
+  "University of Asmara": [
+    15.3368,
+    38.9389
+  ],
+  "University of Barcelona": [
+    41.3867,
+    2.1645
+  ],
+  "University of Bergen": [
+    60.3876,
+    5.3239
+  ],
+  "University of Bolton": [
+    53.5766,
+    -2.4274
+  ],
+  "University of Calabar": [
+    4.9535,
+    8.3462
+  ],
+  "University of Calgary": [
+    51.0772,
+    -114.1316
+  ],
+  "University of California, Davis": [
+    38.5382,
+    -121.7617
+  ],
+  "University of Cartagena": [
+    10.4241,
+    -75.5494
+  ],
+  "University of Chichester": [
+    50.8416,
+    -0.7806
+  ],
+  "University of Copenhagen": [
+    55.6798,
+    12.572
+  ],
+  "University of Derby": [
+    52.9382,
+    -1.4944
+  ],
+  "University of Djibouti": [
+    11.554,
+    43.144
+  ],
+  "University of East London": [
+    51.5084,
+    0.0574
+  ],
+  "University of Ghent": [
+    51.0468,
+    3.7272
+  ],
+  "University of Gondar": [
+    12.6055,
+    37.4494
+  ],
+  "University of Greenwich": [
+    51.4836,
+    0.0014
+  ],
+  "University of Gujrat": [
+    32.5731,
+    74.087
+  ],
+  "University of Hargeisa": [
+    9.5618,
+    44.0638
+  ],
+  "University of Hasanuddin": [
+    -5.1319,
+    119.488
+  ],
+  "University of Helsinki": [
+    60.1695,
+    24.9354
+  ],
+  "University of Huddersfield": [
+    53.6435,
+    -1.777
+  ],
+  "University of Hull": [
+    53.7714,
+    -0.3667
+  ],
+  "University of Jimma": [
+    7.667,
+    36.8237
+  ],
+  "University of Lagos": [
+    6.5178,
+    3.3896
+  ],
+  "University of Minnesota": [
+    44.974,
+    -93.2277
+  ],
+  "University of Montpellier": [
+    43.6319,
+    3.8615
+  ],
+  "University of Oslo": [
+    59.9396,
+    10.7234
+  ],
+  "University of Otago": [
+    -45.8693,
+    170.5144
+  ],
+  "University of Paris 1 Pantheon Sorbonne": [
+    48.8461,
+    2.3447
+  ],
+  "University of Pattimura": [
+    -3.6973,
+    128.1826
+  ],
+  "University of Pernambuco": [
+    -8.0504,
+    -34.8745
+  ],
+  "University of Philippines Manila": [
+    14.5808,
+    120.9873
+  ],
+  "University of Portsmouth": [
+    50.7989,
+    -1.099
+  ],
+  "University of South Australia": [
+    -34.9285,
+    138.6007
+  ],
+  "University of Southern California": [
+    34.0224,
+    -118.2851
+  ],
+  "University of Sunderland": [
+    54.9068,
+    -1.3834
+  ],
+  "University of Toronto": [
+    43.6629,
+    -79.3957
+  ],
+  "University of Tsukuba": [
+    36.0891,
+    140.1055
+  ],
+  "University of Westminster": [
+    51.5176,
+    -0.175
+  ],
+  "University of Wroclaw": [
+    51.114,
+    17.0362
+  ],
+  "University of Zimbabwe": [
+    -17.7853,
+    31.0524
+  ],
+  "University of the Basque Country": [
+    43.332,
+    -2.97
+  ],
+  "University of the Philippines": [
+    14.6538,
+    121.0684
+  ],
+  "University of the Philippines Diliman": [
+    14.6538,
+    121.0684
+  ],
+  "University of the West of England": [
+    51.5001,
+    -2.5481
+  ],
+  "Vietnam National University": [
+    21.0385,
+    105.7818
+  ],
+  "Washington State University": [
+    46.7298,
+    -117.1817
+  ],
+  "Weizmann Institute of Science": [
+    31.9047,
+    34.8065
+  ],
+  "Western University": [
+    43.0096,
+    -81.2737
+  ],
+  "Wroclaw University of Environmental and Life Sciences": [
+    51.1129,
+    17.0611
+  ],
+  "Red Sea University": [
+    19.6107,
+    37.2163
+  ],
+  "CITY OF GLASGOW COLLEGE": [
+    55.8608,
+    -4.2461
+  ],
+  "GLASGOW CLYDE COLLEGE": [
+    55.8464,
+    -4.2927
+  ],
+  "GLASGOW KELVIN COLLEGE": [
+    55.8807,
+    -4.2461
+  ],
+  "Green Templeton College": [
+    51.76,
+    -1.263
+  ],
+  "Courtauld Institute of Art": [
+    51.5107,
+    -0.117
+  ],
+  "Courtauld Institute of Art (University of London)": [
+    51.5107,
+    -0.117
+  ],
+  "London School of Economics and Political Science": [
+    51.5144,
+    -0.1165
+  ],
+  "London School of Economics and Political Science (University of London)": [
+    51.5144,
+    -0.1165
+  ],
+  "London School of Hygiene and Tropical Medicine (LSHTM)": [
+    51.5207,
+    -0.1306
+  ],
+  "Technion - Israel Institue of Technology": [
+    32.7775,
+    35.0217
+  ],
+  "ACAS": [
+    51.5074,
+    -0.1278
+  ],
+  "Advisory, Conciliation and Arbitration Service": [
+    51.5074,
+    -0.1278
+  ],
+  "All Party Parliamentary Group": [
+    51.4995,
+    -0.1248
+  ],
+  "Arts & Humanities Research Council (AHRC)": [
+    51.5074,
+    -0.1278
+  ],
+  "BELFAST CITY COUNCIL": [
+    54.5973,
+    -5.9301
+  ],
+  "BIRMINGHAM CITY COUNCIL": [
+    52.4796,
+    -1.9026
+  ],
+  "BRADFORD METROPOLITAN DISTRICT COUNCIL": [
+    53.796,
+    -1.7594
+  ],
+  "BRIGHTON & HOVE CITY COUNCIL": [
+    50.8225,
+    -0.1372
+  ],
+  "BRISTOL CITY COUNCIL": [
+    51.4545,
+    -2.5879
+  ],
+  "Bristol City Council": [
+    51.4545,
+    -2.5879
+  ],
+  "CARDIFF CAPITAL REGION": [
+    51.4816,
+    -3.1791
+  ],
+  "CITY OF EDINBURGH COUNCIL": [
+    55.9533,
+    -3.1883
+  ],
+  "COVENTRY CITY COUNCIL": [
+    52.4068,
+    -1.5197
+  ],
+  "Department for Communities and Local Government": [
+    51.502,
+    -0.1343
+  ],
+  "Department for Culture Media and Sport": [
+    51.502,
+    -0.1343
+  ],
+  "Department for Digital, Culture, Media & Sport": [
+    51.502,
+    -0.1343
+  ],
+  "Department For Environment, Food And Rural Affairs (DEFRA)": [
+    51.502,
+    -0.1343
+  ],
+  "Department of Education": [
+    51.502,
+    -0.1343
+  ],
+  "Department of Health and Social Care": [
+    51.502,
+    -0.1343
+  ],
+  "Department of Transport": [
+    51.502,
+    -0.1343
+  ],
+  "Dept for Digital, Culture, Media & Sport": [
+    51.502,
+    -0.1343
+  ],
+  "Department of Foreign Affairs and Trade": [
+    53.3498,
+    -6.2603
+  ],
+  "Dail Eireann": [
+    53.3408,
+    -6.254
+  ],
+  "Dublin City Council": [
+    53.3498,
+    -6.2603
+  ],
+  "Economic and Social Research Council": [
+    51.5074,
+    -0.1278
+  ],
+  "Financial Conduct Authority": [
+    51.5072,
+    -0.087
+  ],
+  "Food Standards Agency": [
+    51.5074,
+    -0.1278
+  ],
+  "GREATER MANCHESTER COMBINED AUTHORITY": [
+    53.4808,
+    -2.2426
+  ],
+  "Greater London Authority (GLA)": [
+    51.5074,
+    -0.041
+  ],
+  "HIGH VALUE MANUFACTURING CATAPULT": [
+    52.4862,
+    -1.8904
+  ],
+  "HISTORIC ROYAL PALACES": [
+    51.5057,
+    -0.076
+  ],
+  "INNOVATE UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Innovate UK": [
+    51.5074,
+    -0.1278
+  ],
+  "LIVERPOOL CITY COUNCIL": [
+    53.4084,
+    -2.9916
+  ],
+  "Liverpool City Region Combined Authority": [
+    53.4084,
+    -2.9916
+  ],
+  "London Borough of Barking and Dagenham Council": [
+    51.5407,
+    0.1313
+  ],
+  "Low Pay Commission": [
+    51.5074,
+    -0.1278
+  ],
+  "MANCHESTER CITY COUNCIL": [
+    53.4808,
+    -2.2426
+  ],
+  "MET OFFICE": [
+    50.727,
+    -3.474
+  ],
+  "Meteorological Office UK": [
+    50.727,
+    -3.474
+  ],
+  "Metropolitan Police Service": [
+    51.5024,
+    -0.1406
+  ],
+  "Ministry of Housing, Communities & L.Gov": [
+    51.502,
+    -0.1343
+  ],
+  "Natural Environment Research Council": [
+    51.5074,
+    -0.1278
+  ],
+  "NEWCASTLE CITY COUNCIL": [
+    54.9783,
+    -1.6174
+  ],
+  "NOTTINGHAM CITY COUNCIL": [
+    52.9548,
+    -1.1581
+  ],
+  "National Police Chief's Council": [
+    51.5074,
+    -0.1278
+  ],
+  "OFFSHORE RENEWABLE ENERGY CATAPULT": [
+    51.4893,
+    -3.1683
+  ],
+  "Ofcom": [
+    51.5015,
+    -0.111
+  ],
+  "Ofgem Office of Gas and Electricity Markets": [
+    51.5074,
+    -0.1278
+  ],
+  "PUBLIC HEALTH ENGLAND": [
+    51.5074,
+    -0.1278
+  ],
+  "Public Health Agency (Northern Ireland)": [
+    54.5973,
+    -5.9301
+  ],
+  "Public Health Wales": [
+    51.4816,
+    -3.1791
+  ],
+  "Public Health Wales NHS Trust": [
+    51.4816,
+    -3.1791
+  ],
+  "Public Policy Institute for Wales": [
+    51.4816,
+    -3.1791
+  ],
+  "Science and Technology Facilities Council": [
+    51.5743,
+    -1.3137
+  ],
+  "SCOTTISH ENVIRONMENT PROTECTION AGENCY": [
+    55.9533,
+    -3.1883
+  ],
+  "SOUTH CAMBRIDGESHIRE DISTRICT COUNCIL": [
+    52.194,
+    0.1315
+  ],
+  "WELSH GOVERNMENT": [
+    51.4816,
+    -3.1791
+  ],
+  "West Midlands Combined Authority": [
+    52.4862,
+    -1.8904
+  ],
+  "West Midlands Police": [
+    52.4862,
+    -1.8904
+  ],
+  "West Midlands Violence Reduction Unit": [
+    52.4862,
+    -1.8904
+  ],
+  "West Yorkshire Combined Authority": [
+    53.8008,
+    -1.5491
+  ],
+  "West Yorkshire Combined Authorities": [
+    53.8008,
+    -1.5491
+  ],
+  "West of England Combined Authority": [
+    51.4545,
+    -2.5879
+  ],
+  "Westminster City Council": [
+    51.4973,
+    -0.1372
+  ],
+  "Aberdeen City Council": [
+    57.1497,
+    -2.0943
+  ],
+  "Adur and Worthing Councils": [
+    50.8282,
+    -0.3733
+  ],
+  "Barnsley Metropolitan Borough Council": [
+    53.5529,
+    -1.4811
+  ],
+  "Cardiff Council": [
+    51.4816,
+    -3.1791
+  ],
+  "Cheshire West and Chester Council": [
+    53.191,
+    -2.893
+  ],
+  "Cumbria Constabulary": [
+    54.8915,
+    -2.9445
+  ],
+  "Durham Constabulary": [
+    54.7668,
+    -1.5724
+  ],
+  "Essex County Council": [
+    51.7343,
+    0.4691
+  ],
+  "FROME TOWN COUNCIL": [
+    51.2282,
+    -2.3214
+  ],
+  "Hull City Council": [
+    53.7458,
+    -0.3367
+  ],
+  "Lothian Valuation Joint Board": [
+    55.9533,
+    -3.1883
+  ],
+  "Merseyside Police": [
+    53.4084,
+    -2.9916
+  ],
+  "Merseyside Police Service": [
+    53.4084,
+    -2.9916
+  ],
+  "North Lanarkshire Council": [
+    55.8614,
+    -3.9613
+  ],
+  "North Tyneside Metropolitan Borough Coun": [
+    55.0188,
+    -1.4854
+  ],
+  "Northumbria Police": [
+    55.0005,
+    -1.7401
+  ],
+  "Northumbria Police Force": [
+    55.0005,
+    -1.7401
+  ],
+  "Renfreshire Council": [
+    55.8453,
+    -4.4329
+  ],
+  "Renfrewshire Council": [
+    55.8453,
+    -4.4329
+  ],
+  "Salford City Council": [
+    53.4876,
+    -2.2891
+  ],
+  "Sheffield City Council": [
+    53.3811,
+    -1.4701
+  ],
+  "Sheffield City Partnership": [
+    53.3811,
+    -1.4701
+  ],
+  "South Tyneside Council": [
+    54.9632,
+    -1.4313
+  ],
+  "Southampton City Council": [
+    50.9097,
+    -1.4044
+  ],
+  "Southend-on-Sea Borough Council": [
+    51.5389,
+    0.7134
+  ],
+  "Southwark Council": [
+    51.5024,
+    -0.0818
+  ],
+  "Staffordshire Police": [
+    52.8311,
+    -2.0249
+  ],
+  "Wycombe District Council": [
+    51.6287,
+    -0.7482
+  ],
+  "Almeria Council": [
+    36.8381,
+    -2.4597
+  ],
+  "Administrative Data Research Centre for Scotland": [
+    55.9445,
+    -3.1892
+  ],
+  "Architecture and Design Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "BRE Scotland": [
+    55.8713,
+    -4.2887
+  ],
+  "Beatson Institute": [
+    55.9021,
+    -4.3354
+  ],
+  "Bike for Good": [
+    55.86,
+    -4.258
+  ],
+  "Carers Trust Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Code the City": [
+    57.1497,
+    -2.0943
+  ],
+  "CREATe (RCUK Centre for Copyright and New Business Models in the Creative Economy)": [
+    55.8721,
+    -4.2882
+  ],
+  "Creative Carbon Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Creative Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Data-Driven Innovation Programme": [
+    55.9445,
+    -3.1892
+  ],
+  "Digital Office for Scottish Local Government": [
+    55.86,
+    -4.258
+  ],
+  "Education Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Fife Migrants Forum": [
+    56.1134,
+    -3.1544
+  ],
+  "Film Hub Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Fin Tech Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Food Standards Scotland (FSS)": [
+    57.1497,
+    -2.0943
+  ],
+  "General Teaching Council for Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Glasgow Chambers of Commerce": [
+    55.86,
+    -4.258
+  ],
+  "Glasgow City Health and Social Care Part": [
+    55.86,
+    -4.258
+  ],
+  "Glasgow City Region": [
+    55.86,
+    -4.258
+  ],
+  "Glasgow Film Theatre": [
+    55.8638,
+    -4.2655
+  ],
+  "Glasgow Life": [
+    55.86,
+    -4.258
+  ],
+  "Glasgow Natural History Society": [
+    55.86,
+    -4.258
+  ],
+  "Glasgow Science Festival": [
+    55.86,
+    -4.258
+  ],
+  "GLASGOW SCIENCE CENTRE": [
+    55.8581,
+    -4.2929
+  ],
+  "Glasgow Women's Library": [
+    55.8486,
+    -4.2168
+  ],
+  "Greenspace Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Health and Social Care North Lanarkshire": [
+    55.8614,
+    -3.9613
+  ],
+  "Historic Environment Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Homes for Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Hunterian Museum and Art Gallery": [
+    55.8721,
+    -4.2882
+  ],
+  "Jobs and Business Glasgow": [
+    55.86,
+    -4.258
+  ],
+  "Maryhill Integration Network": [
+    55.8893,
+    -4.2753
+  ],
+  "NatureScot": [
+    57.4778,
+    -4.2247
+  ],
+  "Police Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Poverty Alliance": [
+    55.86,
+    -4.258
+  ],
+  "Registers of Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "ScotRail Railways Limited": [
+    55.86,
+    -4.258
+  ],
+  "Scotland's Rural College": [
+    55.914,
+    -3.3228
+  ],
+  "Scotland's Towns Partnership": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Association For Marine Science": [
+    56.452,
+    -5.4381
+  ],
+  "Scottish Carbon Capture and Storage": [
+    55.9445,
+    -3.1892
+  ],
+  "Scottish Catholic International Aid Fund": [
+    55.86,
+    -4.258
+  ],
+  "Scottish Cities Alliance": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Comm for Health and Wellbeing": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Communities Climate Action Network": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Community Development Centre": [
+    55.86,
+    -4.258
+  ],
+  "Scottish Enterprise": [
+    55.86,
+    -4.258
+  ],
+  "Scottish Environment LINK": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Federation of Housing Assoc": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Food and Drink Federation": [
+    55.9533,
+    -3.1883
+  ],
+  "Scottish Football Association": [
+    55.8582,
+    -4.2491
+  ],
+  "Scottish Power Ltd": [
+    55.86,
+    -4.258
+  ],
+  "Seafood Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Seven Lochs Wetland Park": [
+    55.865,
+    -4.1233
+  ],
+  "Skills Development Scotland": [
+    55.86,
+    -4.258
+  ],
+  "SNIFFER": [
+    55.9533,
+    -3.1883
+  ],
+  "South Lanarkshire Health and Social Care": [
+    55.7735,
+    -4.0474
+  ],
+  "STRATHCLYDE PARTNERSHIP FOR TRANSPORT": [
+    55.86,
+    -4.258
+  ],
+  "Strathclyde Partnership for Transport": [
+    55.86,
+    -4.258
+  ],
+  "Sunny G Community Radio": [
+    55.86,
+    -4.258
+  ],
+  "The Data Lab - Innovation Centre": [
+    55.9445,
+    -3.1892
+  ],
+  "Transport Scotland": [
+    55.86,
+    -4.258
+  ],
+  "Voluntary Action North Lanarkshire": [
+    55.783,
+    -3.98
+  ],
+  "Voluntary Action South Lanarkshire": [
+    55.7735,
+    -4.0474
+  ],
+  "What Works Scotland": [
+    55.8721,
+    -4.2882
+  ],
+  "Wellbeing Economy Alliance Scotland": [
+    55.9533,
+    -3.1883
+  ],
+  "Wheatley Group": [
+    55.86,
+    -4.258
+  ],
+  "CITYLETS": [
+    55.9533,
+    -3.1883
+  ],
+  "National Manufacturing Institute Scotland": [
+    55.8114,
+    -4.3067
+  ],
+  "Information Services Division (ISD)": [
+    55.9533,
+    -3.1883
+  ],
+  "Improvement Service": [
+    55.9533,
+    -3.1883
+  ],
+  "BIRMINGHAM WOMEN'S AND CHILDREN'S NHS FOUNDATION TRUST": [
+    52.4617,
+    -1.9
+  ],
+  "IMPERIAL COLLEGE HEALTHCARE NHS TRUST": [
+    51.5133,
+    -0.1756
+  ],
+  "NHS Cheshire and Merseyside": [
+    53.4084,
+    -2.9916
+  ],
+  "NHS Employers": [
+    51.5074,
+    -0.1278
+  ],
+  "NHS Greater Glasgow and Clyde (NHSGGC)": [
+    55.86,
+    -4.258
+  ],
+  "NHS Lothian": [
+    55.9533,
+    -3.1883
+  ],
+  "NHS Manchester": [
+    53.4808,
+    -2.2426
+  ],
+  "NHS National Services Scotland (NSS)": [
+    55.9533,
+    -3.1883
+  ],
+  "ROYAL DEVON AND EXETER NHS FOUNDATION TRUST": [
+    50.727,
+    -3.5141
+  ],
+  "Mersey Care NHS Foundation Trust": [
+    53.4084,
+    -2.9916
+  ],
+  "Somerset NHS Foundation Trust": [
+    51.0271,
+    -2.9849
+  ],
+  "Southern Health NHS Foundation Trust": [
+    50.934,
+    -1.396
+  ],
+  "University Hospital Southampton NHS Foundation Trust": [
+    50.934,
+    -1.396
+  ],
+  "Wessex Cancer Alliance": [
+    50.934,
+    -1.396
+  ],
+  "C40 Cities": [
+    51.5074,
+    -0.1278
+  ],
+  "C40 Cities Climate Leadership Group": [
+    51.5074,
+    -0.1278
+  ],
+  "European Commission": [
+    50.8439,
+    4.3826
+  ],
+  "European Gravitational Observatory": [
+    43.6314,
+    10.5045
+  ],
+  "European Trade Union Institute (ETUI)": [
+    50.846,
+    4.3697
+  ],
+  "FAO (Food & Agricultural Org of the UN)": [
+    41.8816,
+    12.489
+  ],
+  "ICAN Int Campn Abolish Nuclear Weapons": [
+    46.2264,
+    6.1403
+  ],
+  "International Institute for Applied Systems Analysis": [
+    48.1791,
+    16.2349
+  ],
+  "Intl Inst Applied Systems Analysis IIASA": [
+    48.1791,
+    16.2349
+  ],
+  "International Labour Organisation (ILO)": [
+    46.2264,
+    6.1403
+  ],
+  "International Labour Organization (ILO)": [
+    46.2264,
+    6.1403
+  ],
+  "International Livestock Research Institute (ILRI)": [
+    -1.2689,
+    36.7238
+  ],
+  "International Organization for Migration": [
+    46.2264,
+    6.1403
+  ],
+  "Organisation for Economic Co-operation and Development OECD": [
+    48.8627,
+    2.337
+  ],
+  "UN Habitat Global Urban Observatory": [
+    -1.2921,
+    36.8219
+  ],
+  "UN Habitat, Kenya": [
+    -1.2921,
+    36.8219
+  ],
+  "UNECE (UN Economic Commission Europe)": [
+    46.2264,
+    6.1403
+  ],
+  "UNHCR (UN High Commissioner f Refugees)": [
+    46.2264,
+    6.1403
+  ],
+  "United Nations Educational, Scientific and Cultural Organization": [
+    48.8499,
+    2.3066
+  ],
+  "United Nations Environment Prog (UNEP)": [
+    -1.2689,
+    36.7238
+  ],
+  "World Bank": [
+    38.899,
+    -77.0427
+  ],
+  "World Health Organization Regional Office for Europe": [
+    55.6761,
+    12.5684
+  ],
+  "World Health Organization Regional Office for the Eastern Mediterranean": [
+    30.0444,
+    31.2357
+  ],
+  "World Meteorological Organization": [
+    46.2321,
+    6.1448
+  ],
+  "World Organisation for Animal Health": [
+    48.8528,
+    2.2894
+  ],
+  "EcoHealth Alliance": [
+    40.758,
+    -73.9855
+  ],
+  "Babraham Institute": [
+    52.1345,
+    0.206
+  ],
+  "Broad Institute": [
+    42.3628,
+    -71.0806
+  ],
+  "Brookhaven National Laboratory": [
+    40.8681,
+    -72.8868
+  ],
+  "British Antarctic Survey": [
+    52.2139,
+    0.086
+  ],
+  "Chatham House": [
+    51.5073,
+    -0.1188
+  ],
+  "Culham Science Centre": [
+    51.6602,
+    -1.2283
+  ],
+  "DSTL Porton Down": [
+    51.1329,
+    -1.7136
+  ],
+  "German Development Institute": [
+    50.7342,
+    7.1044
+  ],
+  "German Development Institute (DIE)": [
+    50.7342,
+    7.1044
+  ],
+  "Helmholtz Association of German Research Centres": [
+    52.52,
+    13.405
+  ],
+  "Human Sciences Research Council (HSRC)": [
+    -25.748,
+    28.2293
+  ],
+  "INFN Sezione di Perugia": [
+    43.1107,
+    12.3908
+  ],
+  "INFN Sezione di Pisa": [
+    43.7228,
+    10.4017
+  ],
+  "Institute for Government": [
+    51.5075,
+    -0.1284
+  ],
+  "Isaac Newton Institute for Mathematical Sciences": [
+    52.2084,
+    0.0997
+  ],
+  "Kavli Institute for Theoretical Sciences": [
+    39.9999,
+    116.3266
+  ],
+  "Kenya Medical Research Institute": [
+    -1.3015,
+    36.8113
+  ],
+  "Kilimanjaro Clinical Res Institute KCRI": [
+    -3.3361,
+    37.3408
+  ],
+  "Kilimanjaro Clinical Research Institute": [
+    -3.3361,
+    37.3408
+  ],
+  "LIGO": [
+    30.5611,
+    -90.7742
+  ],
+  "LIGO Lab": [
+    30.5611,
+    -90.7742
+  ],
+  "LIGO India (RRCAT)": [
+    22.7196,
+    75.7872
+  ],
+  "LIGO Scientific Collaboration": [
+    30.5611,
+    -90.7742
+  ],
+  "Max Planck Society": [
+    48.1411,
+    11.565
+  ],
+  "National Aeronautics and Space Administration (NASA)": [
+    38.883,
+    -77.0169
+  ],
+  "National Centre for Social Research (NatCen)": [
+    51.5274,
+    -0.12
+  ],
+  "National Institute for Medical Research, Tanzania": [
+    -6.8014,
+    39.2718
+  ],
+  "National Institute for Nuclear Physics": [
+    41.8016,
+    12.607
+  ],
+  "National Institute for Subatomic Physics Nikhef": [
+    52.3564,
+    4.9512
+  ],
+  "National Institute of Agricultural Botany": [
+    52.233,
+    0.1055
+  ],
+  "National Institute of Economic and Social Research": [
+    51.5095,
+    -0.1275
+  ],
+  "National Institutes of Health (NIH)": [
+    39.0003,
+    -77.1042
+  ],
+  "National Nuclear Laboratory": [
+    54.431,
+    -2.7747
+  ],
+  "National Veterinary Institute Ethiopia": [
+    9.018,
+    38.7528
+  ],
+  "Netherlands Organization for Applied Scientific Research (TNO)": [
+    52.0566,
+    4.3176
+  ],
+  "Norwegian Veterinary Institute": [
+    59.9458,
+    10.8685
+  ],
+  "Plymouth Marine Laboratory": [
+    50.366,
+    -4.1494
+  ],
+  "QUADRAM INSTITUTE BIOSCIENCE": [
+    52.6218,
+    1.2186
+  ],
+  "Quadram Institute Bioscience": [
+    52.6218,
+    1.2186
+  ],
+  "Roslin Technologies": [
+    55.8576,
+    -3.1735
+  ],
+  "Royal Botanic Garden Edinburgh": [
+    55.9651,
+    -3.2093
+  ],
+  "Royal Botanic Garden Edinburgh (RBGE)": [
+    55.9651,
+    -3.2093
+  ],
+  "Royal Botanic Gardens, Kew": [
+    51.4787,
+    -0.2955
+  ],
+  "ROYAL BOTANIC GARDENS, KEW": [
+    51.4787,
+    -0.2955
+  ],
+  "Rwanda Biomedical Center": [
+    -1.9547,
+    30.0574
+  ],
+  "Statistics Netherlands": [
+    52.0866,
+    5.1243
+  ],
+  "Statistics Norway": [
+    59.915,
+    10.7568
+  ],
+  "WZB Berlin Social Science Center": [
+    52.507,
+    13.326
+  ],
+  "Danube Delta National Inst for Research": [
+    45.178,
+    29.657
+  ],
+  "Danube Delta National Institute for Research and Development": [
+    45.178,
+    29.657
+  ],
+  "Armauer Hansen Research Institute": [
+    9.018,
+    38.7528
+  ],
+  "Ethiopian Institute of Agricultural Res": [
+    9.018,
+    38.7528
+  ],
+  "Ethiopian Public Health Institute (EPHI)": [
+    9.018,
+    38.7528
+  ],
+  "Getulio Vargas Foundation": [
+    -22.9416,
+    -43.1796
+  ],
+  "National Geophysical Research Institute": [
+    17.4183,
+    78.5532
+  ],
+  "Noguchi Memorial Inst for Medical Res": [
+    5.6505,
+    -0.1862
+  ],
+  "NAHDIC (Nat Animal Health Ctr, Ethiopia)": [
+    9.018,
+    38.7528
+  ],
+  "Telethon Kids Institute": [
+    -31.944,
+    115.8611
+  ],
+  "The Wistar Institute of Anatomy & Biolog": [
+    39.9475,
+    -75.1916
+  ],
+  "Tanzania Veterinary Laboratory Agency": [
+    -6.8014,
+    39.2718
+  ],
+  "Tanzania Wildlife Research Institute": [
+    -3.3731,
+    36.6943
+  ],
+  "Cancer Research UK Cambridge Institute": [
+    52.166,
+    0.139
+  ],
+  "Horizon Digital Economy Research": [
+    52.9533,
+    -1.1875
+  ],
+  "Horizon Centre for Doctoral Training": [
+    52.9533,
+    -1.1875
+  ],
+  "Centre for Process Innovation": [
+    54.563,
+    -1.278
+  ],
+  "Center for Digital Built Britain": [
+    52.2053,
+    0.1218
+  ],
+  "Digital Catapult": [
+    51.5317,
+    -0.1231
+  ],
+  "Consumer Data Research Centre (CDRC)": [
+    51.5246,
+    -0.134
+  ],
+  "Institute of Occupational Medicine (IOM)": [
+    55.9533,
+    -3.1883
+  ],
+  "Higher Education Statistical Agency": [
+    51.3794,
+    -2.3281
+  ],
+  "RSSL (Reading Scientific Services Ltd)": [
+    51.4414,
+    -0.9418
+  ],
+  "Geological Survey of Brazil": [
+    -15.7975,
+    -47.8919
+  ],
+  "Bradford Institute for Health Research (BIHR)": [
+    53.796,
+    -1.7594
+  ],
+  "NCAR": [
+    39.9779,
+    -105.275
+  ],
+  "National Biofilm Innovation Centre": [
+    50.934,
+    -1.396
+  ],
+  "National Biofilms Innovation Centre  (NBIC)": [
+    50.934,
+    -1.396
+  ],
+  "Tyndall Centre, Climate Change Research": [
+    52.6218,
+    1.2399
+  ],
+  "Institute for Molecular Medicine Finland": [
+    60.1884,
+    24.8286
+  ],
+  "European Academy Bolzano EURAC": [
+    46.4993,
+    11.3489
+  ],
+  "European Institute for Energy Research": [
+    49.0096,
+    8.4044
+  ],
+  "Farr Institute of Health Informatics Research": [
+    51.5246,
+    -0.134
+  ],
+  "Wellcome Genome Campus": [
+    52.0835,
+    0.1864
+  ],
+  "Wellcome Sanger Institute": [
+    52.0835,
+    0.1864
+  ],
+  "The Wellcome Trust Sanger Institute": [
+    52.0835,
+    0.1864
+  ],
+  "National Center for Scientific Research (Centre National de la Recherche Scientifique CNRS)": [
+    48.8566,
+    2.3522
+  ],
+  "FETPAFI (Field Epid Training Program)": [
+    9.018,
+    38.7528
+  ],
+  "Onderstepoort Biological Products": [
+    -25.65,
+    28.18
+  ],
+  "Research Institute for Tropical Medicine": [
+    14.5281,
+    121.0231
+  ],
+  "National Cancer Institute of Mexico": [
+    19.2959,
+    -99.1941
+  ],
+  "National Center for Natural Disaster Monitoring and Alarms": [
+    -15.7975,
+    -47.8919
+  ],
+  "ARM Limited": [
+    52.2109,
+    0.0905
+  ],
+  "ARUP Group": [
+    51.5236,
+    -0.0874
+  ],
+  "ASDA": [
+    53.7996,
+    -1.5491
+  ],
+  "ASDA Stores Limited": [
+    53.7996,
+    -1.5491
+  ],
+  "AXA": [
+    48.8739,
+    2.2833
+  ],
+  "Admiral Group Plc": [
+    51.4816,
+    -3.1791
+  ],
+  "Alstom Ltd (UK)": [
+    52.7666,
+    -1.2224
+  ],
+  "Atom Bank plc": [
+    54.524,
+    -1.5573
+  ],
+  "BSI Group": [
+    51.3902,
+    -0.0885
+  ],
+  "Bloomberg Associates": [
+    51.5131,
+    -0.0843
+  ],
+  "Capita": [
+    51.5074,
+    -0.1278
+  ],
+  "Capital One Bank Plc": [
+    52.0568,
+    -1.34
+  ],
+  "Cargill": [
+    53.5866,
+    -2.509
+  ],
+  "Croda Europe Ltd": [
+    53.5847,
+    -0.6497
+  ],
+  "Deloitte MCS Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "Deloitte Touche Tohmatsu": [
+    51.5074,
+    -0.1278
+  ],
+  "Deloitte UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Ernst and Young LLP": [
+    51.5155,
+    -0.0938
+  ],
+  "Eversheds Sutherland LLP": [
+    51.5167,
+    -0.1034
+  ],
+  "Google": [
+    51.5327,
+    -0.1185
+  ],
+  "GSK": [
+    51.5074,
+    -0.1278
+  ],
+  "Grant Thornton": [
+    51.5074,
+    -0.1278
+  ],
+  "Hargreaves Lansdown": [
+    51.4545,
+    -2.5879
+  ],
+  "IBM": [
+    51.531,
+    -0.1028
+  ],
+  "Korn Ferry": [
+    51.5074,
+    -0.1278
+  ],
+  "Mars Chocolate UK Ltd": [
+    51.391,
+    -0.113
+  ],
+  "Mastercard UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Morrison Supermarkets plc": [
+    53.7938,
+    -1.7553
+  ],
+  "NatWest Group": [
+    55.9475,
+    -3.1951
+  ],
+  "Nestle UK Ltd": [
+    51.22,
+    -0.76
+  ],
+  "Rolls Royce Group Plc": [
+    52.9222,
+    -1.4824
+  ],
+  "Sage (UK) Ltd": [
+    54.9783,
+    -1.605
+  ],
+  "Sage UK Limited": [
+    54.9783,
+    -1.605
+  ],
+  "Sainsbury's": [
+    51.5192,
+    -0.1244
+  ],
+  "Slimming World": [
+    52.8889,
+    -1.2767
+  ],
+  "Thales UK Limited": [
+    51.2977,
+    -0.5633
+  ],
+  "Thermo Fisher Scientific (International)": [
+    51.5074,
+    -0.1278
+  ],
+  "Unilever": [
+    51.5089,
+    -0.1214
+  ],
+  "Vodafone": [
+    51.5074,
+    -0.1278
+  ],
+  "Vodafone Group Services Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Walmart": [
+    36.3729,
+    -94.2088
+  ],
+  "YouGov": [
+    51.5074,
+    -0.1278
+  ],
+  "Strava, Inc": [
+    37.7749,
+    -122.4194
+  ],
+  "STRAVA METRO": [
+    37.7749,
+    -122.4194
+  ],
+  "British Academy of Management (BAM)": [
+    51.5074,
+    -0.1278
+  ],
+  "British Broadcasting Corporation (BBC)": [
+    51.5188,
+    -0.1446
+  ],
+  "The British Broadcasting Corporation (BBC)": [
+    51.5188,
+    -0.1446
+  ],
+  "British Film Institute (BFI)": [
+    51.5065,
+    -0.115
+  ],
+  "British Council": [
+    51.5189,
+    -0.1323
+  ],
+  "British Nutrition Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "British Trust for Ornithology": [
+    52.4319,
+    1.2396
+  ],
+  "British Waterways Board": [
+    51.5074,
+    -0.1278
+  ],
+  "British Red Cross": [
+    51.5074,
+    -0.1278
+  ],
+  "Butterfly Conservation": [
+    51.5066,
+    -2.5093
+  ],
+  "Campaign for Nuclear Disarmament": [
+    51.5155,
+    -0.1346
+  ],
+  "Child Poverty Action Group (CPAG)": [
+    51.5074,
+    -0.1278
+  ],
+  "CIPD": [
+    51.5074,
+    -0.1278
+  ],
+  "Chartered Institute of Personnel and Development (CIPD)": [
+    51.5074,
+    -0.1278
+  ],
+  "Comic Relief": [
+    51.5074,
+    -0.1278
+  ],
+  "Crisis": [
+    51.5033,
+    -0.0913
+  ],
+  "Design Council": [
+    51.5074,
+    -0.1278
+  ],
+  "Into Film": [
+    51.5074,
+    -0.1278
+  ],
+  "John Muir Trust": [
+    56.8231,
+    -5.1024
+  ],
+  "Leonard Cheshire Disability": [
+    51.5074,
+    -0.1278
+  ],
+  "Living Streets": [
+    51.5074,
+    -0.1278
+  ],
+  "Mencap": [
+    51.5074,
+    -0.1278
+  ],
+  "Mental Health Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "National Housing Federation": [
+    51.5074,
+    -0.1278
+  ],
+  "New Economics Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "Oxfam GB": [
+    51.7548,
+    -1.2575
+  ],
+  "Raspberry Pi Foundation": [
+    52.2053,
+    0.1218
+  ],
+  "Refugee Council (UK)": [
+    51.5074,
+    -0.1278
+  ],
+  "The Refugee Council": [
+    51.5074,
+    -0.1278
+  ],
+  "Resolution Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "Royal Geographical Society": [
+    51.5013,
+    -0.1756
+  ],
+  "Royal Museums Greenwich": [
+    51.4769,
+    -0.0005
+  ],
+  "Royal Society for the Protection of Birds": [
+    52.1036,
+    -0.7499
+  ],
+  "Royal Statistical Society": [
+    51.5074,
+    -0.1278
+  ],
+  "Royal Town Planning Institute RTPI": [
+    51.5189,
+    -0.0874
+  ],
+  "Sir John Soane's Museum": [
+    51.517,
+    -0.1178
+  ],
+  "Tate": [
+    51.491,
+    -0.1272
+  ],
+  "The Health Foundation (UK)": [
+    51.5074,
+    -0.1278
+  ],
+  "The Royal Society": [
+    51.5065,
+    -0.1321
+  ],
+  "The Scottish Parliament": [
+    55.9519,
+    -3.1748
+  ],
+  "The Smith Institute": [
+    51.5074,
+    -0.1278
+  ],
+  "Victoria and Albert Museum": [
+    51.4966,
+    -0.1722
+  ],
+  "Museum of Modern Art": [
+    40.7614,
+    -73.9776
+  ],
+  "Salvation Army": [
+    51.5154,
+    -0.0822
+  ],
+  "Shelter": [
+    51.5074,
+    -0.1278
+  ],
+  "Wellcome Trust": [
+    51.5274,
+    -0.1359
+  ],
+  "Action on Smoking and Health (ASH)": [
+    51.5074,
+    -0.1278
+  ],
+  "Association of Commonwealth Universities": [
+    51.5074,
+    -0.1278
+  ],
+  "Geographical Association": [
+    53.3811,
+    -1.4701
+  ],
+  "Trades Union Congress": [
+    51.5189,
+    -0.1385
+  ],
+  "Trades Union Congress (TUC)": [
+    51.5189,
+    -0.1385
+  ],
+  "Town & Country Planning Assoc (TCPA)": [
+    51.5074,
+    -0.1278
+  ],
+  "Town & Country Planning Association": [
+    51.5074,
+    -0.1278
+  ],
+  "TOWN AND COUNTRY PLANNING ASSOCIATION": [
+    51.5074,
+    -0.1278
+  ],
+  "SAVE Britain's Heritage": [
+    51.5074,
+    -0.1278
+  ],
+  "Zooniverse": [
+    51.7548,
+    -1.2544
+  ],
+  "Administrative Data Research Network": [
+    51.5074,
+    -0.1278
+  ],
+  "Atkins Global (UK)": [
+    51.5074,
+    -0.1278
+  ],
+  "Burning Glass Technologies": [
+    42.3541,
+    -71.0603
+  ],
+  "CILIP (Library and Info Professionals)": [
+    51.5074,
+    -0.1278
+  ],
+  "Core Cities UK": [
+    51.5074,
+    -0.1278
+  ],
+  "CycleStreets": [
+    52.2053,
+    0.1218
+  ],
+  "EIT Food": [
+    51.496,
+    -1.629
+  ],
+  "European Healthy Stadia Network": [
+    53.4631,
+    -2.2913
+  ],
+  "FDM Group": [
+    51.5074,
+    -0.1278
+  ],
+  "FixMyStreet": [
+    51.5074,
+    -0.1278
+  ],
+  "GOOD THINGS FOUNDATION": [
+    53.3811,
+    -1.4701
+  ],
+  "GSM Association (GSMA)": [
+    51.5074,
+    -0.1278
+  ],
+  "Hometrack Data Systems Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "NETWORK RAIL LTD": [
+    51.5074,
+    -0.1278
+  ],
+  "Northern Ireland Housing Executive": [
+    54.5973,
+    -5.9301
+  ],
+  "Northern Housing Consortium": [
+    54.9783,
+    -1.6174
+  ],
+  "Northumbrian Water Group plc": [
+    54.9783,
+    -1.6174
+  ],
+  "Pladis Global": [
+    51.5074,
+    -0.1278
+  ],
+  "Rail Safety and Standards Board (RSSB)": [
+    51.5074,
+    -0.1278
+  ],
+  "Rightmove PLC": [
+    51.5074,
+    -0.1278
+  ],
+  "SETsquared Partnership": [
+    51.3794,
+    -2.3281
+  ],
+  "The Co-operative Group Ltd": [
+    53.4808,
+    -2.2426
+  ],
+  "The Conservation Volunteers": [
+    52.9588,
+    -1.1538
+  ],
+  "The Food Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "The York Policy Engine": [
+    53.9471,
+    -1.0553
+  ],
+  "URBED (Urbanism Environment and Design)": [
+    53.4808,
+    -2.2426
+  ],
+  "UK Active": [
+    51.5074,
+    -0.1278
+  ],
+  "UK Clinical Research Collaboration": [
+    51.5074,
+    -0.1278
+  ],
+  "techUK": [
+    51.5074,
+    -0.1278
+  ],
+  "Yorkshire Water": [
+    53.7938,
+    -1.7553
+  ],
+  "Zoopla Property Group Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "UOG - Urban Big Data Centre": [
+    55.8721,
+    -4.2882
+  ],
+  "Universities and Colleges Admissions Service": [
+    51.8994,
+    -2.0783
+  ],
+  "WISERD": [
+    51.4876,
+    -3.1775
+  ],
+  "Brighton & Hove Chamber of Commerce": [
+    50.8225,
+    -0.1372
+  ],
+  "Bristol City of Sanctuary": [
+    51.4545,
+    -2.5879
+  ],
+  "The Dunhill Medical Trust": [
+    51.5074,
+    -0.1278
+  ],
+  "The Abbeyfield Research Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "Lagos State Government": [
+    6.4541,
+    3.3947
+  ],
+  "Government of Kenya": [
+    -1.2921,
+    36.8219
+  ],
+  "Government of Wales": [
+    51.4816,
+    -3.1791
+  ],
+  "Government of the Republic of the Philippines": [
+    14.5995,
+    120.9842
+  ],
+  "Spanish Government": [
+    40.4168,
+    -3.7038
+  ],
+  "Spanish National Research Council (CSIC)": [
+    40.4397,
+    -3.691
+  ],
+  "Spanish Parliament": [
+    40.4168,
+    -3.7038
+  ],
+  "American Planning Association": [
+    38.9072,
+    -77.0369
+  ],
+  "Agriculture and Agri-Food Canada": [
+    45.4215,
+    -75.6972
+  ],
+  "Australian Housing & Urban Research Inst": [
+    -37.8136,
+    144.9631
+  ],
+  "Australian Research Council": [
+    -35.2809,
+    149.13
+  ],
+  "Australia Telescope National Facility": [
+    -33.8688,
+    151.2093
+  ],
+  "Canadian Housing Evidence Collaborative": [
+    43.6532,
+    -79.3832
+  ],
+  "Canadian Institute of Planners": [
+    45.4215,
+    -75.6972
+  ],
+  "Gambling Research Exchange Ontario": [
+    43.2557,
+    -79.8711
+  ],
+  "Planning Institute of Australia": [
+    -35.2809,
+    149.13
+  ],
+  "Protein Industries Canada": [
+    52.1332,
+    -106.67
+  ],
+  "South African Council for Planners": [
+    -25.7461,
+    28.1879
+  ],
+  "Singapore Food Agency": [
+    1.3521,
+    103.8198
+  ],
+  "AidData": [
+    37.2707,
+    -76.7075
+  ],
+  "Bike Citizens": [
+    47.0707,
+    15.4395
+  ],
+  "Fab Lab Barcelona": [
+    41.3867,
+    2.1645
+  ],
+  "Deep Blue Srl": [
+    41.8784,
+    12.509
+  ],
+  "NIZO Food Research": [
+    52.2166,
+    5.9732
+  ],
+  "Cultural Heritage Agency of Netherlands": [
+    52.0816,
+    5.1262
+  ],
+  "Plantagon International AB": [
+    59.3293,
+    18.0686
+  ],
+  "Friedrich-Ebert-Stiftung:": [
+    50.7342,
+    7.1044
+  ],
+  "KB, National Library of the Netherlands": [
+    52.081,
+    4.3252
+  ],
+  "Royal Tropical Institute, Netherlands KIT": [
+    52.3584,
+    4.9169
+  ],
+  "Indo-German Chamber of Commerce": [
+    19.076,
+    72.8777
+  ],
+  "German Mexican Chamber of Commerce": [
+    19.4326,
+    -99.1332
+  ],
+  "Institute of Electrical and Electronics Engineers (IEEE)": [
+    40.809,
+    -74.0556
+  ],
+  "International Neuroinformatics Coordinating Facility": [
+    59.35,
+    18.07
+  ],
+  "International Life Sciences Institute": [
+    38.9072,
+    -77.0369
+  ],
+  "Internet Society": [
+    38.9204,
+    -77.2275
+  ],
+  "Japan Society for the Promotion of Science (JSPS)": [
+    35.6762,
+    139.6503
+  ],
+  "Iseal Alliance": [
+    51.5074,
+    -0.1278
+  ],
+  "Nuclear Age Peace Foundation (NAPF)": [
+    34.4208,
+    -119.6982
+  ],
+  "Reaching Critical Will (RCW)": [
+    40.7128,
+    -74.006
+  ],
+  "The Flowminder Foundation": [
+    59.3293,
+    18.0686
+  ],
+  "The Getty Conservation Institute": [
+    34.078,
+    -118.4741
+  ],
+  "Pushkin House": [
+    51.5186,
+    -0.0782
+  ],
+  "Institute of Transport Economics (Norway)": [
+    59.9139,
+    10.7522
+  ],
+  "One Voice Wales": [
+    52.0559,
+    -3.621
+  ],
+  "Vétérinaires Sans Frontières - Germany": [
+    52.52,
+    13.405
+  ],
+  "FEPS (Foundation for Euro Prog Studies)": [
+    50.846,
+    4.3697
+  ],
+  "Foundation of European Progressive Studies": [
+    50.846,
+    4.3697
+  ],
+  "ECOaction (Uganda)": [
+    0.3476,
+    32.5825
+  ],
+  "Gov't of Kenya Zoonotic Disease Unit": [
+    -1.2921,
+    36.8219
+  ],
+  "Global Animal Health Tanzania": [
+    -6.8014,
+    39.2718
+  ],
+  "Humanitarian Initiative Just Relief Aid": [
+    0.3476,
+    32.5825
+  ],
+  "Ministry of Health, Uganda": [
+    0.3476,
+    32.5825
+  ],
+  "Ministry of Livestock & Fisheries Dev": [
+    -6.8014,
+    39.2718
+  ],
+  "Ministry of Livestock and Fisheries Development": [
+    -6.8014,
+    39.2718
+  ],
+  "Ministry of Health and Social Welfare": [
+    -6.8014,
+    39.2718
+  ],
+  "Northern Corridor Community Volunteers": [
+    0.3476,
+    32.5825
+  ],
+  "Community-based Sociotherapy Rwanda": [
+    -1.9403,
+    29.8739
+  ],
+  "Women Environmental Programme": [
+    9.0579,
+    7.4951
+  ],
+  "Zimbabwe Council of Churches": [
+    -17.8292,
+    31.0522
+  ],
+  "Zimbabwe Diaspora Network UK": [
+    51.5074,
+    -0.1278
+  ],
+  "IGAD Sheikh Technical Veterinary School": [
+    10.6299,
+    45.0344
+  ],
+  "IGAD Sheikh Technical Veterinary School and Reference Centre": [
+    10.6299,
+    45.0344
+  ],
+  "El Pacífico Community Action and Recovery Working Group": [
+    3.3759,
+    -76.5508
+  ],
+  "Confederacion Patronal de la Republica M": [
+    19.4326,
+    -99.1332
+  ],
+  "Nacional Financiera Banca de Desarrollo": [
+    19.4326,
+    -99.1332
+  ],
+  "Ruta N": [
+    6.2662,
+    -75.5667
+  ],
+  "Secretariat for the Environment of the State of Acre (SEMA)": [
+    -9.9559,
+    -67.87
+  ],
+  "City Hall of São Paulo": [
+    -23.5505,
+    -46.6333
+  ],
+  "E-Money Brazil Institute": [
+    -23.5505,
+    -46.6333
+  ],
+  "Ministry of Education (Mexico)": [
+    19.4326,
+    -99.1332
+  ],
+  "Ministry of Energy and Mine - Cuba": [
+    23.1136,
+    -82.3666
+  ],
+  "Ministry of Energy and Mines": [
+    23.1136,
+    -82.3666
+  ],
+  "Placetas Municipal Assembly": [
+    22.3144,
+    -79.6547
+  ],
+  "Placetas Municipal Assembly Pop Power": [
+    22.3144,
+    -79.6547
+  ],
+  "Provincial Address Villa Clara": [
+    22.4058,
+    -79.9553
+  ],
+  "Villa Clara Provincial Government": [
+    22.4058,
+    -79.9553
+  ],
+  "Town Hall San Martin Tilcajete": [
+    16.8569,
+    -96.7936
+  ],
+  "AB Colombia": [
+    4.711,
+    -74.0721
+  ],
+  "POLISH EXPATS ASSOCIATION CIC": [
+    51.5074,
+    -0.1278
+  ],
+  "Uber Technologies Inc.": [
+    37.7749,
+    -122.4194
+  ],
+  "Ministry of Health": [
+    51.502,
+    -0.1343
+  ],
+  "Ministry of Environment": [
+    51.502,
+    -0.1343
+  ],
+  "Ministry of Skill Development India": [
+    28.7041,
+    77.1025
+  ],
+  "Ministry of Scientific Research and Innovation": [
+    3.848,
+    11.5021
+  ],
+  "Sustainable Development Laboratory": [
+    51.5074,
+    -0.1278
+  ],
+  "Sustainable Development Laboratory (PZR)": [
+    51.5074,
+    -0.1278
+  ],
+  "Administrative Department of Disaster Risk Management (DAGRD)": [
+    6.2518,
+    -75.5636
+  ],
+  "National Institute of Urban Affairs": [
+    28.7041,
+    77.1025
+  ],
+  "Kagoma Australia": [
+    -33.8688,
+    151.2093
+  ],
+  "ORDNANCE SURVEY LIMITED": [
+    50.9379,
+    -1.471
+  ],
+  "The Autonomy Institute": [
+    51.5074,
+    -0.1278
+  ],
+  "Cent for Climate Change & Social Transfo": [
+    55.8721,
+    -4.2882
+  ],
+  "Centre for Applied Education Research": [
+    51.5074,
+    -0.1278
+  ],
+  "Citizens Advice Liverpool": [
+    53.4084,
+    -2.9916
+  ],
+  "City Arts Nottingham Ltd": [
+    52.9548,
+    -1.1581
+  ],
+  "City St George’s, University of London": [
+    51.5074,
+    -0.1278
+  ],
+  "Embassy of France, London": [
+    51.5074,
+    -0.1278
+  ],
+  "Good For Nothing, Chester Chapter": [
+    53.1911,
+    -2.8931
+  ],
+  "Institute of Food Science & Technology": [
+    51.5074,
+    -0.1278
+  ],
+  "Learn Sheffield": [
+    53.3811,
+    -1.4701
+  ],
+  "Leeds Playhouse": [
+    53.8008,
+    -1.5491
+  ],
+  "Nottingham Contemporary Ltd  CCAN": [
+    52.9548,
+    -1.1581
+  ],
+  "Nottingham Lakeside Arts": [
+    52.9548,
+    -1.1581
+  ],
+  "Oxford Community Foundation": [
+    51.752,
+    -1.2577
+  ],
+  "Sheffield and Rotherham Wildlife Trust": [
+    53.3811,
+    -1.4701
+  ],
+  "Adzuna": [
+    51.4697,
+    -0.2093
+  ],
+  "Banco Preventório": [
+    -22.9346,
+    -43.0996
+  ],
+  "Bhatia Best Solicitors": [
+    52.9187,
+    -1.4762
+  ],
+  "Bio Base Europe": [
+    51.1362,
+    3.7896
+  ],
+  "Bionical": [
+    52.8609,
+    -1.5536
+  ],
+  "Bluesky International": [
+    52.7231,
+    -1.3771
+  ],
+  "Broadway Cinema": [
+    52.9543,
+    -1.1437
+  ],
+  "Centre for Innovation Excellence": [
+    52.199,
+    0.1219
+  ],
+  "Decathlon UK": [
+    53.4115,
+    -2.1689
+  ],
+  "Drax": [
+    53.7255,
+    -0.9815
+  ],
+  "Finnebrogue": [
+    54.36,
+    -5.7146
+  ],
+  "Gooch & Housego (United Kingdom)": [
+    50.916,
+    -2.9156
+  ],
+  "Impact Arts": [
+    55.9585,
+    -3.1831
+  ],
+  "Infosys": [
+    12.9716,
+    77.5946
+  ],
+  "Institut Teknologi Adhi Tama Surabaya": [
+    -7.2909,
+    112.7791
+  ],
+  "Institute of Mental Health": [
+    1.3828,
+    103.8835
+  ],
+  "Kennedys Law": [
+    55.9424,
+    -3.2078
+  ],
+  "Landratsamt Rhein Neckar Kreis": [
+    49.406,
+    8.6838
+  ],
+  "Marine and Atmospheric Research": [
+    -42.8872,
+    147.3389
+  ],
+  "Mayden": [
+    52.8726,
+    -0.0412
+  ],
+  "Peter Brett Associates": [
+    51.0141,
+    -3.0682
+  ],
+  "Samworth Brothers": [
+    53.2983,
+    -1.0746
+  ],
+  "Sunamp (United Kingdom)": [
+    55.9461,
+    -2.8978
+  ],
+  "Sussex Innovation Centre": [
+    50.8642,
+    -0.0833
+  ],
+  "Telefonica S.A": [
+    40.4168,
+    -3.7038
+  ],
+  "Which?": [
+    51.5243,
+    -0.1445
+  ],
+  "4 Day Week Campaign UK": [
+    51.5074,
+    -0.1278
+  ],
+  "4 Day Week Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "5Rights": [
+    51.5074,
+    -0.1278
+  ],
+  "Abellio Group": [
+    51.5074,
+    -0.1278
+  ],
+  "Be the Business": [
+    51.5074,
+    -0.1278
+  ],
+  "British American Security Info Council": [
+    51.5074,
+    -0.1278
+  ],
+  "British Games Institute (BGI)": [
+    51.5074,
+    -0.1278
+  ],
+  "Burges Salmon LLP": [
+    51.4545,
+    -2.5879
+  ],
+  "Centre for Homelessness Impact": [
+    51.5074,
+    -0.1278
+  ],
+  "Centre for Progressive Policy": [
+    51.5074,
+    -0.1278
+  ],
+  "Chilled Food Association": [
+    51.5074,
+    -0.1278
+  ],
+  "Climate Outreach": [
+    51.752,
+    -1.2577
+  ],
+  "Common Weal": [
+    55.8642,
+    -4.2518
+  ],
+  "Community Planning Alliance": [
+    51.5074,
+    -0.1278
+  ],
+  "Digital Poverty Alliance": [
+    51.5074,
+    -0.1278
+  ],
+  "First Group": [
+    55.8596,
+    -4.2584
+  ],
+  "FOUNDATION EARTH": [
+    55.9533,
+    -3.1883
+  ],
+  "Gatsby Charitable Foundation": [
+    51.5074,
+    -0.1278
+  ],
+  "GS1 UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Great Western Credit Union": [
+    55.8642,
+    -4.2518
+  ],
+  "Housing Quality Network": [
+    53.7996,
+    -1.5491
+  ],
+  "Housing Studies Association": [
+    51.5074,
+    -0.1278
+  ],
+  "Mott Macdonald UK Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "National Heart & Lung Inst": [
+    51.4988,
+    -0.1749
+  ],
+  "OPEN MEDICAL LTD": [
+    55.9533,
+    -3.1883
+  ],
+  "Oatly UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Parent Zone": [
+    51.5074,
+    -0.1278
+  ],
+  "Paths for All": [
+    56.1165,
+    -3.9369
+  ],
+  "Perth & Kinross Association of Voluntary Service": [
+    56.395,
+    -3.4308
+  ],
+  "Petras Internet of Things Hub": [
+    51.5246,
+    -0.134
+  ],
+  "Planning Democracy": [
+    55.9533,
+    -3.1883
+  ],
+  "Quorn Foods Limited": [
+    52.765,
+    -1.227
+  ],
+  "Red Light Management": [
+    51.5074,
+    -0.1278
+  ],
+  "Save Our Sanctuary": [
+    55.8642,
+    -4.2518
+  ],
+  "School Food Matters": [
+    51.5074,
+    -0.1278
+  ],
+  "South West Water Ltd": [
+    50.3755,
+    -4.1427
+  ],
+  "The PSHE Association": [
+    51.5074,
+    -0.1278
+  ],
+  "The UK in a Changing Europe": [
+    51.5074,
+    -0.1278
+  ],
+  "West Lothian Drug and Alcohol Service": [
+    55.907,
+    -3.5219
+  ],
+  "White Rose University Consortium": [
+    53.8067,
+    -1.555
+  ],
+  "Wildlife & Countryside Link": [
+    51.5074,
+    -0.1278
+  ],
+  "Women's Environmental Network": [
+    51.5074,
+    -0.1278
+  ],
+  "Working Families": [
+    51.5074,
+    -0.1278
+  ],
+  "Youth Employment UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Clyde Space": [
+    55.8642,
+    -4.2518
+  ],
+  "CereProc Ltd": [
+    55.9533,
+    -3.1883
+  ],
+  "John Gilbert Architects": [
+    55.8642,
+    -4.2518
+  ],
+  "Science Ceilidh": [
+    55.8642,
+    -4.2518
+  ],
+  "Stanley Black and Decker": [
+    41.1918,
+    -73.1954
+  ],
+  "Roche (UK)": [
+    51.4553,
+    -0.2096
+  ],
+  "SLR Consulting Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "O2 Telefonica Europe plc": [
+    51.5074,
+    -0.1278
+  ],
+  "Afrique One": [
+    5.36,
+    -4.0083
+  ],
+  "Eberbach City Administration": [
+    49.4644,
+    8.9866
+  ],
+  "HarvestPlus": [
+    38.8951,
+    -77.0364
+  ],
+  "GEIRI Europe": [
+    52.0907,
+    5.1214
+  ],
+  "Plastics Europe": [
+    50.8476,
+    4.3572
+  ],
+  "The Bengal Chamber of Commerce": [
+    22.5726,
+    88.3639
+  ],
+  "iMMAP": [
+    38.8951,
+    -77.0364
+  ],
+  "AB Mauri (UK) Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Devro PLC": [
+    55.8642,
+    -4.2518
+  ],
+  "AQUA Cultured Foods": [
+    51.5074,
+    -0.1278
+  ],
+  "Entocycle": [
+    51.5074,
+    -0.1278
+  ],
+  "Innocent Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Jacobs Douwe Egberts UK Production Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Mondelez UK R and D Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Operation Wallacea": [
+    53.2283,
+    -0.5478
+  ],
+  "Whitby Seafoods Limited": [
+    54.4862,
+    -0.6133
+  ],
+  "Tobii Dynavox": [
+    57.7089,
+    11.9746
+  ],
+  "Design Commission for Wales (DCFW Ltd)": [
+    51.4816,
+    -3.1791
+  ],
+  "Natural Resources (Wales) Limited": [
+    51.4816,
+    -3.1791
+  ],
+  "Polish Social and Cultural Association (POSK)": [
+    51.4928,
+    -0.2371
+  ],
+  "Roma Support Group (RSG)": [
+    51.5074,
+    -0.1278
+  ],
+  "Friends, Families and Travellers": [
+    50.8225,
+    -0.1372
+  ],
+  "Vizzuality": [
+    40.4168,
+    -3.7038
+  ],
+  "Advice Robo": [
+    51.5074,
+    -0.1278
+  ],
+  "AirDNA": [
+    40.015,
+    -105.2705
+  ],
+  "Austin-Smith & Lord": [
+    55.8642,
+    -4.2518
+  ],
+  "B3 Media": [
+    51.5074,
+    -0.1278
+  ],
+  "Beatroute Arts": [
+    55.8642,
+    -4.2518
+  ],
+  "BehindLogin": [
+    51.5074,
+    -0.1278
+  ],
+  "Beko PLC R&D Centre": [
+    51.5074,
+    -0.1278
+  ],
+  "Better Dairy Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "Bezos Centre for Sustainable Protein": [
+    51.752,
+    -1.2577
+  ],
+  "BioPower Technologies": [
+    55.8642,
+    -4.2518
+  ],
+  "Biopower Technologies UK": [
+    55.8642,
+    -4.2518
+  ],
+  "Blueskeye AI": [
+    52.9388,
+    -1.1966
+  ],
+  "Brain plus": [
+    51.5074,
+    -0.1278
+  ],
+  "Bridge2Food": [
+    52.0907,
+    5.1214
+  ],
+  "CCRS BROKERS LIMITED": [
+    51.5074,
+    -0.1278
+  ],
+  "CHAP Solutions": [
+    53.8067,
+    -1.555
+  ],
+  "Cairn Research Ltd": [
+    51.752,
+    -1.2577
+  ],
+  "Central Research Laboratories Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Centrala": [
+    52.4862,
+    -1.8904
+  ],
+  "Climate Action Against Disinformation": [
+    51.5074,
+    -0.1278
+  ],
+  "Community Mappers": [
+    51.5074,
+    -0.1278
+  ],
+  "Cuebiq": [
+    40.7128,
+    -74.006
+  ],
+  "Cyanocapture": [
+    51.5074,
+    -0.1278
+  ],
+  "Davidsons Feeds": [
+    57.1645,
+    -2.0999
+  ],
+  "Decipher Impact Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "DeepSearch Labs": [
+    51.5074,
+    -0.1278
+  ],
+  "Deltagen UK Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Devenish Nutrition Ltd (UK)": [
+    54.5973,
+    -5.9301
+  ],
+  "Drive2Survive": [
+    51.5074,
+    -0.1278
+  ],
+  "Duynie Feed UK (Royal Cosun)": [
+    51.5869,
+    4.7741
+  ],
+  "ERS Remediation": [
+    51.5074,
+    -0.1278
+  ],
+  "East Midlands Special Operations Unit": [
+    52.9388,
+    -1.1966
+  ],
+  "Eat Curious": [
+    51.5074,
+    -0.1278
+  ],
+  "Economic Statistics Centre of Excellence": [
+    51.5074,
+    -0.1278
+  ],
+  "Elder Research": [
+    38.8816,
+    -77.1711
+  ],
+  "ElectriCChain": [
+    51.5074,
+    -0.1278
+  ],
+  "Ethical Equity": [
+    51.5074,
+    -0.1278
+  ],
+  "European Thermodynamics (United Kingdom)": [
+    52.6219,
+    -1.125
+  ],
+  "Evolutor Ltd": [
+    55.8642,
+    -4.2518
+  ],
+  "Extracellular": [
+    55.9533,
+    -3.1883
+  ],
+  "FeTu Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "FinTech West": [
+    51.4545,
+    -2.5879
+  ],
+  "Food Authenticity Network": [
+    51.5074,
+    -0.1278
+  ],
+  "Galinsky Works LTD": [
+    51.5074,
+    -0.1278
+  ],
+  "Good Food Institute Europe ASBL (GFI Europe)": [
+    50.8476,
+    4.3572
+  ],
+  "HGF Limited": [
+    55.9533,
+    -3.1883
+  ],
+  "HQN Ltd": [
+    53.7996,
+    -1.5491
+  ],
+  "HUQ INDUSTRIES LIMITED": [
+    51.5074,
+    -0.1278
+  ],
+  "Hot Knife Media": [
+    51.5074,
+    -0.1278
+  ],
+  "Huq Industries Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "IOTICS": [
+    51.5074,
+    -0.1278
+  ],
+  "Improving Market Opportunities": [
+    51.5074,
+    -0.1278
+  ],
+  "Industrial Biotechnology Innovation C": [
+    56.4579,
+    -2.9783
+  ],
+  "Institute of Grocery Distribution": [
+    52.8788,
+    -1.0824
+  ],
+  "Institute of Infection and Global Health": [
+    53.4055,
+    -2.9673
+  ],
+  "Institute of Manpower Studies": [
+    50.8674,
+    -0.0873
+  ],
+  "Integrated Transport Planning": [
+    52.9388,
+    -1.1966
+  ],
+  "Intelligent Growth Solutions Ltd": [
+    55.9533,
+    -3.1883
+  ],
+  "Isomerase Therapeutics Ltd": [
+    52.2053,
+    0.1218
+  ],
+  "Joules Energy Efficiency Services Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Keracol Limited,": [
+    51.5074,
+    -0.1278
+  ],
+  "Kino Industries Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "LGC": [
+    51.4198,
+    -0.3452
+  ],
+  "Learning Cities Networks (LCN)": [
+    51.5074,
+    -0.1278
+  ],
+  "Live Cinema Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Live Cinema UK": [
+    51.5074,
+    -0.1278
+  ],
+  "Locomizer": [
+    51.5074,
+    -0.1278
+  ],
+  "Lokku Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "Lumiere Property": [
+    51.5074,
+    -0.1278
+  ],
+  "Methods Analytics Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Microlise Group Ltd": [
+    52.9388,
+    -1.1966
+  ],
+  "Micropelt Gmbh": [
+    47.999,
+    7.8421
+  ],
+  "Montagu Evans": [
+    51.5074,
+    -0.1278
+  ],
+  "MoreLife": [
+    53.7996,
+    -1.5491
+  ],
+  "NANOMATION LTD": [
+    51.5074,
+    -0.1278
+  ],
+  "NayaOne": [
+    51.5074,
+    -0.1278
+  ],
+  "Nextek": [
+    51.5074,
+    -0.1278
+  ],
+  "Northern Gritstone": [
+    53.3811,
+    -1.4886
+  ],
+  "Northern Health Science Alliance Ltd": [
+    53.4668,
+    -2.2339
+  ],
+  "OGGS": [
+    51.5074,
+    -0.1278
+  ],
+  "OLIO Exchange Ltd.": [
+    51.5074,
+    -0.1278
+  ],
+  "Onergia": [
+    51.5074,
+    -0.1278
+  ],
+  "Open Aye": [
+    55.8642,
+    -4.2518
+  ],
+  "PAMIS": [
+    56.4579,
+    -2.9783
+  ],
+  "Phycofoods Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Potter Clarkson": [
+    52.9388,
+    -1.1966
+  ],
+  "Rettie & Co": [
+    55.8642,
+    -4.2518
+  ],
+  "Ridgeview Wines": [
+    50.9265,
+    -0.0285
+  ],
+  "SIMBA Chain (UK)": [
+    51.5074,
+    -0.1278
+  ],
+  "SKYLARK LASERS LIMITED": [
+    51.5074,
+    -0.1278
+  ],
+  "SLR Consulting Limited (UK)": [
+    51.5074,
+    -0.1278
+  ],
+  "SPARK South West Ltd": [
+    50.7184,
+    -3.5339
+  ],
+  "School Food Plan Alliance": [
+    51.5074,
+    -0.1278
+  ],
+  "Sciteb": [
+    51.5074,
+    -0.1278
+  ],
+  "Seccl Technology Limited": [
+    51.3794,
+    -2.3281
+  ],
+  "Siemens Process Systems Engineering Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Socitm": [
+    52.4862,
+    -1.8904
+  ],
+  "Soltropy Ltd, UK": [
+    55.9533,
+    -3.1883
+  ],
+  "Springboard": [
+    51.5074,
+    -0.1278
+  ],
+  "Stratiphy": [
+    51.5074,
+    -0.1278
+  ],
+  "Sustain (food and farming alliance)": [
+    51.5074,
+    -0.1278
+  ],
+  "TAMOCO LIMITED": [
+    51.5074,
+    -0.1278
+  ],
+  "Tamoco Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "Testlands Wellbeing Hub": [
+    51.0886,
+    -1.5024
+  ],
+  "The Freedom Community Trust": [
+    51.5074,
+    -0.1278
+  ],
+  "The Fresh Produce Consortium": [
+    52.3813,
+    -1.5616
+  ],
+  "The Space": [
+    51.5074,
+    -0.1278
+  ],
+  "Timecentres UK Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Tramshed Tech Ltd": [
+    51.4816,
+    -3.1791
+  ],
+  "UK Edible Insect Association": [
+    51.5074,
+    -0.1278
+  ],
+  "Uncommon Bio Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "UniEuropa": [
+    50.8476,
+    4.3572
+  ],
+  "Upcycled Plant Power Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Urban Tide": [
+    55.9533,
+    -3.1883
+  ],
+  "Varian Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Verint Systems UK Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "VoiceBox": [
+    51.5074,
+    -0.1278
+  ],
+  "WhiteCap Consulting Ltd": [
+    53.7996,
+    -1.5491
+  ],
+  "Whitespace": [
+    55.8642,
+    -4.2518
+  ],
+  "WhytHawk": [
+    51.5074,
+    -0.1278
+  ],
+  "World Commerce & Contracting": [
+    51.5074,
+    -0.1278
+  ],
+  "XenZone": [
+    53.7996,
+    -1.5491
+  ],
+  "myfood24": [
+    53.8067,
+    -1.555
+  ],
+  "52 North Initiative for Geospatial Open Source Software GmbH": [
+    51.9607,
+    7.6261
+  ],
+  "52' North Initiative GmbH": [
+    51.9607,
+    7.6261
+  ],
+  "BAORGG SAPI de CV": [
+    19.4326,
+    -99.1332
+  ],
+  "BAORGG": [
+    19.4326,
+    -99.1332
+  ],
+  "Einstein Institute Digital Future": [
+    52.52,
+    13.405
+  ],
+  "Midwest Aero Engines": [
+    39.7684,
+    -86.1581
+  ],
+  "M-Real UK Ltd": [
+    51.5074,
+    -0.1278
+  ],
+  "Terra Nuova": [
+    41.9028,
+    12.4964
+  ],
+  "THIS (Plant Meat Ltd)": [
+    51.5074,
+    -0.1278
+  ],
+  "Voi Technology": [
+    59.3293,
+    18.0686
+  ],
+  "Aviatrix": [
+    37.3382,
+    -121.8863
+  ],
+  "Camelamos Naquerar": [
+    51.5074,
+    -0.1278
+  ],
+  "Khetane": [
+    51.5074,
+    -0.1278
+  ],
+  "Ando Glaso": [
+    55.8642,
+    -4.2518
+  ],
+  "Ando Glaso - Dance": [
+    55.8642,
+    -4.2518
+  ],
+  "Council of African & Caribbean Churches": [
+    51.5074,
+    -0.1278
+  ],
+  "Solidarity Committee": [
+    55.8642,
+    -4.2518
+  ],
+  "Gypsy Media Company- Thirsty Bear Forge": [
+    51.5074,
+    -0.1278
+  ],
+  "Peace Building and Community Development": [
+    51.5074,
+    -0.1278
+  ],
+  "Tastebuds Collective": [
+    55.8642,
+    -4.2518
+  ],
+  "Commonwealth Association of Planners": [
+    51.5074,
+    -0.1278
+  ],
+  "Art and Global Health Center": [
+    51.5074,
+    -0.1278
+  ],
+  "NIHR MindTech HTC": [
+    52.9388,
+    -1.1966
+  ],
+  "National Biomedical Research Unit": [
+    51.5074,
+    -0.1278
+  ],
+  "GEO collaboration": [
+    52.2053,
+    0.1218
+  ],
+  "King's College(queen Elizabeth": [
+    51.5115,
+    -0.116
+  ],
+  "Graphic Medicine International Collect": [
+    51.5074,
+    -0.1278
+  ],
+  "International Society of City and Region": [
+    51.5074,
+    -0.1278
+  ],
+  "NCC Engagement and Consultation": [
+    52.9388,
+    -1.1966
+  ],
+  "Public Health Nutrition Research": [
+    51.5074,
+    -0.1278
+  ],
+  "Snape Signals Research": [
+    52.1543,
+    1.4972
+  ],
+  "Adaptive Riders Collective": [
+    51.5074,
+    -0.1278
+  ],
+  "AgriFood X Limited": [
+    51.5074,
+    -0.1278
+  ],
+  "Agrifood for Net Zero Network+": [
+    51.5074,
+    -0.1278
+  ],
+  "Artists Open Houses": [
+    50.8225,
+    -0.1372
+  ],
+  "Jackson Park Watch": [
+    41.7868,
+    -87.5787
+  ],
+  "Mike Lewis": [
+    51.5074,
+    -0.1278
+  ],
+  "NEW ERA FOODS LTD": [
+    51.5074,
+    -0.1278
+  ],
+  "VIRIDIAN SEEDS LTD": [
+    51.5074,
+    -0.1278
+  ],
+  "BPES Equipment": [
+    51.5074,
+    -0.1278
+  ],
+  "DEBISAMCO Corporation": [
+    51.5074,
+    -0.1278
+  ],
+  "ITM Mechanical Solutions": [
+    51.5074,
+    -0.1278
+  ],
+  "Justice and Empowerment Initiative (Jei)": [
+    6.4541,
+    3.3947
+  ],
+  "AlbinoMosquito": [
+    51.5074,
+    -0.1278
+  ]
+}
