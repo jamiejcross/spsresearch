@@ -28,6 +28,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .page-header h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--navy)}
 .page-header p{color:var(--muted);font-size:0.85rem;margin-top:0.15rem}
 
+/* ── Tabs ── */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 2.5rem;background:#fff}
+.tab-btn{padding:0.8rem 1.3rem;font-size:0.84rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
+.tab-panel{display:none;padding:2rem 2.5rem}
+.tab-panel.active{display:block}
+
 /* ── Globe Container ── */
 #globe-wrap{position:relative;width:100%;height:calc(100vh - 150px);min-height:500px;background:#ffffff;overflow:hidden}
 #globeViz{width:100%;height:100%}
@@ -67,8 +75,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 </div>
 
 <div class="page-header">
-  <h1>3D Research Collaboration Globe</h1>
+  <h1>International Research Collaborations</h1>
   <p id="globe-subtitle">UKRI-funded research partnerships across <strong id="org-count">—</strong> organisations worldwide</p>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="network">People Network</button>
+  <button class="tab-btn" data-tab="partners">Project Partners</button>
+  <a href="globe.html"><button class="tab-btn" data-tab="geography">International Collaborations</button></a>
+  <button class="tab-btn" data-tab="timeline">Category Timeline</button>
+  <button class="tab-btn" data-tab="table">Project Table</button>
 </div>
 
 <div id="globe-wrap">
@@ -543,6 +560,15 @@ function handleArcHover(arc){
   } else {
     tooltip.style.display = 'none';
   }
+}
+
+function onAllCsvLoaded(){
+  document.getElementById('loading').style.display='none';
+  document.querySelectorAll('.tab-panel,.tab-bar').forEach(e=>e.style.visibility='visible');
+  buildPartnerIndex();
+  const data = getFilteredData();
+  buildOverview(data);
+  buildTable(data);
 }
 
 // Track cursor for tooltip positioning
