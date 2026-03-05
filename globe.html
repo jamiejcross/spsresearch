@@ -28,14 +28,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .page-header h1{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--navy)}
 .page-header p{color:var(--muted);font-size:0.85rem;margin-top:0.15rem}
 
-/* ── Tabs ── */
-.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 2.5rem;background:#fff}
-.tab-btn{padding:0.8rem 1.3rem;font-size:0.84rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
-.tab-btn:hover{color:var(--text)}
-.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
-.tab-panel{display:none;padding:2rem 2.5rem}
-.tab-panel.active{display:block}
-
 /* ── Globe Container ── */
 #globe-wrap{position:relative;width:100%;height:calc(100vh - 150px);min-height:500px;background:#ffffff;overflow:hidden}
 #globeViz{width:100%;height:100%}
@@ -44,7 +36,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 #loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:0.95rem;color:var(--muted);z-index:5}
 
 /* ── Legend ── */
-.globe-legend{position:absolute;top:64px;right:20px;background:#fff;padding:0.8rem 1rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.9;font-size:0.78rem;z-index:10}
+.globe-legend{position:absolute;bottom:20px;right:20px;background:#fff;padding:0.8rem 1rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.9;font-size:0.78rem;z-index:10}
 .globe-legend h4{margin:0 0 0.4rem;font-size:0.82rem;color:var(--navy);font-weight:600}
 .globe-legend label{display:flex;align-items:center;gap:0.4rem;cursor:pointer}
 .globe-legend .legend-circle{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
@@ -56,6 +48,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .globe-status-toggle button:first-child{border-radius:6px 0 0 6px}
 .globe-status-toggle button:last-child{border-radius:0 6px 6px 0;border-left:none}
 .globe-status-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ── Institutional Legend ── */
+.globe-legend-inst{position:absolute;bottom:130px;right:20px;background:#fff;padding:0.8rem 1rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.9;font-size:0.78rem;z-index:10}
+.globe-legend-inst h4{margin:0 0 0.4rem;font-size:0.82rem;color:var(--navy);font-weight:600}
+.globe-legend-inst label{display:flex;align-items:center;gap:0.4rem;cursor:pointer}
+.globe-legend-inst input[type="checkbox"]{accent-color:var(--navy);cursor:pointer}
+.legend-star{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+/* ── Research Regions Legend ── */
+.globe-legend-regions{position:absolute;top:60px;left:20px;background:#fff;padding:0.8rem 1rem;border-radius:var(--radius);box-shadow:0 1px 5px rgba(0,0,0,0.15);line-height:1.7;font-size:0.72rem;z-index:10;max-height:calc(100vh - 260px);overflow-y:auto}
+.globe-legend-regions h4{margin:0 0 0.4rem;font-size:0.82rem;color:var(--navy);font-weight:600}
+.globe-legend-regions label{display:flex;align-items:center;gap:0.35rem;cursor:pointer;white-space:nowrap}
+.globe-legend-regions input[type="checkbox"]{accent-color:var(--navy);cursor:pointer}
+.globe-legend-regions .legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.globe-legend-regions .region-count{color:var(--muted);font-size:0.68rem;margin-left:auto;padding-left:0.5rem}
+
+/* ── Tab Bar ── */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 2.5rem;background:#fff}
+.tab-bar a{text-decoration:none}
+.tab-btn{padding:0.8rem 1.3rem;font-size:0.84rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--navy)}
 
 /* ── Tooltip ── */
 .globe-tooltip{position:fixed;background:#fff;border:1px solid var(--border);border-radius:6px;padding:0.6rem 0.8rem;font-size:0.78rem;color:var(--text);pointer-events:none;z-index:200;max-width:340px;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
@@ -75,15 +89,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 </div>
 
 <div class="page-header">
-  <h1>International Research Collaborations</h1>
+  <h1>International Collaborations</h1>
   <p id="globe-subtitle">UKRI-funded research partnerships across <strong id="org-count">—</strong> organisations worldwide</p>
 </div>
 
 <div class="tab-bar">
-  <a href="index.html"><button class="tab-btn active" data-tab="overview">Overview</button></a>
+  <a href="index.html"><button class="tab-btn" data-tab="overview">Overview</button></a>
   <a href="index.html"><button class="tab-btn" data-tab="network">People Network</button></a>
   <a href="index.html"><button class="tab-btn" data-tab="partners">Project Partners</button></a>
-  <a href="globe.html"><button class="tab-btn" data-tab="geography">International Collaborations</button></a>
+  <a href="globe.html"><button class="tab-btn active" data-tab="geography">International Collaborations</button></a>
   <a href="index.html"><button class="tab-btn" data-tab="timeline">Category Timeline</button></a>
   <a href="index.html"><button class="tab-btn" data-tab="table">Project Table</button></a>
 </div>
@@ -95,6 +109,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div class="globe-status-toggle" id="globe-status-toggle">
     <button class="active" data-mode="all">All Collaborations</button>
     <button data-mode="active">Active Projects</button>
+  </div>
+
+  <div class="globe-legend-regions" id="globe-legend-regions">
+    <h4>Staff Research Regions</h4>
+    <!-- Dynamically populated by JS -->
+  </div>
+
+  <div class="globe-legend-inst" id="globe-legend-inst">
+    <h4>Institutional Partners</h4>
+    <label><input type="checkbox" data-inst="ipp" checked>
+      <span class="legend-star" style="color:#1565c0">★</span> International Partnership</label>
+    <label><input type="checkbox" data-inst="mou" checked>
+      <span class="legend-star" style="color:#c62828">★</span> MOU Partner</label>
   </div>
 
   <div class="globe-legend" id="globe-legend">
@@ -147,8 +174,313 @@ function getOrgCoords(name){
 
 const ROLE_LABELS = {'PP_ORG':'Project Partner','COLLAB_ORG':'Collaborator','PARTICIPANT_ORG':'Participant'};
 
+/* ── Research Region centroids & colours ── */
+const REGION_CENTROIDS = {
+  'Europe':{lat:50,lng:10},'Latin America':{lat:-15,lng:-60},
+  'East Africa':{lat:-1,lng:37},'Southern Africa':{lat:-25,lng:28},
+  'North Africa':{lat:28,lng:5},'West Africa':{lat:9,lng:-2},
+  'South Asia':{lat:22,lng:78},'Middle East':{lat:30,lng:45},
+  'South-East Asia':{lat:5,lng:110},'China':{lat:35,lng:105},
+  'North-East Asia':{lat:37,lng:130},'Russia':{lat:55,lng:60},
+  'Australasia':{lat:-30,lng:140},'Pacific':{lat:-10,lng:170},
+  'North America':{lat:40,lng:-100},
+};
+const REGION_COLORS = {
+  'Europe':'#1565c0','Latin America':'#6a1b9a','East Africa':'#2e7d32',
+  'Southern Africa':'#00695c','North Africa':'#e65100','West Africa':'#ad1457',
+  'South Asia':'#c62828','Middle East':'#f9a825','South-East Asia':'#00838f',
+  'China':'#d32f2f','North-East Asia':'#1976d2','Russia':'#5d4037',
+  'Australasia':'#0277bd','Pacific':'#00897b','North America':'#283593',
+};
+
+/* ── Country centroids for staff research markers ── */
+const COUNTRY_COORDS = {
+  // Europe
+  'france':[46.6,2.2],'germany':[51.1,10.4],'spain':[40.0,-3.7],'italy':[42.5,12.5],
+  'netherlands':[52.1,5.3],'belgium':[50.5,4.0],'poland':[51.9,19.1],'greece':[39.1,21.8],
+  'portugal':[39.4,-8.2],'sweden':[60.1,18.6],'norway':[60.5,8.5],'denmark':[56.3,9.5],
+  'finland':[61.9,25.7],'ireland':[53.1,-8.0],'austria':[47.5,13.4],'switzerland':[46.8,8.2],
+  'czech republic':[49.8,15.5],'hungary':[47.2,19.5],'romania':[45.9,24.9],'bulgaria':[42.7,25.5],
+  'croatia':[45.1,15.2],'serbia':[44.0,21.0],'slovakia':[48.7,19.7],'slovenia':[46.2,14.8],
+  'bosnia':[43.9,17.7],'bosnia and herzegovina':[43.9,17.7],'macedonia':[41.5,21.7],
+  'north macedonia':[41.5,21.7],'albania':[41.2,20.2],'montenegro':[42.7,19.4],
+  'lithuania':[55.2,23.9],'latvia':[56.9,24.1],'estonia':[58.6,25.0],
+  'ukraine':[48.4,31.2],'moldova':[47.4,28.4],'belarus':[53.7,27.9],
+  'iceland':[64.9,-18.1],'luxembourg':[49.8,6.1],'malta':[35.9,14.5],
+  'cyprus':[35.1,33.4],'georgia':[42.3,43.4],'armenia':[40.1,45.0],'azerbaijan':[40.1,47.6],
+  'turkey':[39.1,35.2],'kosovo':[42.6,20.9],
+  // North Africa & Middle East
+  'egypt':[26.8,30.8],'libya':[26.3,17.2],'tunisia':[33.9,9.5],'algeria':[36.7,3.1],
+  'morocco':[31.8,-7.1],'sudan':[12.9,30.2],'iraq':[33.2,43.7],'iran':[32.4,53.7],
+  'syria':[35.0,38.5],'jordan':[30.6,36.2],'lebanon':[33.9,35.9],
+  'israel':[31.0,34.8],'palestine':[31.9,35.2],'saudi arabia':[23.9,45.1],
+  'yemen':[15.5,48.5],'oman':[21.5,55.9],'uae':[23.4,53.8],'united arab emirates':[23.4,53.8],
+  'qatar':[25.4,51.2],'bahrain':[26.0,50.6],'kuwait':[29.3,47.5],
+  // South Asia
+  'india':[20.6,79.0],'pakistan':[30.4,69.3],'bangladesh':[23.7,90.4],
+  'sri lanka':[7.9,80.8],'nepal':[28.4,84.1],'afghanistan':[33.9,67.7],
+  'bhutan':[27.5,90.4],'maldives':[3.2,73.2],
+  // East Africa
+  'kenya':[-1.3,36.8],'tanzania':[-6.4,34.9],'uganda':[1.4,32.3],
+  'ethiopia':[9.1,40.5],'rwanda':[-1.9,29.9],'somalia':[5.2,46.2],
+  'south sudan':[6.9,31.3],'eritrea':[15.2,39.8],'burundi':[-3.4,29.9],
+  'djibouti':[11.8,42.6],'madagascar':[-18.8,46.9],
+  // Southern Africa
+  'south africa':[-30.6,22.9],'mozambique':[-18.7,35.5],'zimbabwe':[-19.0,29.2],
+  'zambia':[-13.1,27.8],'malawi':[-13.3,34.3],'botswana':[-22.3,24.7],
+  'namibia':[-22.6,17.1],'lesotho':[-29.6,28.2],'swaziland':[-26.5,31.5],
+  'eswatini':[-26.5,31.5],'angola':[-11.2,17.9],
+  // West Africa
+  'nigeria':[9.1,8.7],'ghana':[7.9,-1.0],'senegal':[14.5,-14.5],
+  'mali':[17.6,-4.0],'sierra leone':[8.5,-11.8],'burkina faso':[12.2,-1.6],
+  'niger':[17.6,8.1],'chad':[15.5,18.7],'guinea':[9.9,-13.7],
+  'ivory coast':[7.5,-5.5],'cote d\'ivoire':[7.5,-5.5],
+  'togo':[8.6,1.2],'benin':[9.3,2.3],'liberia':[6.4,-9.4],
+  'mauritania':[21.0,-10.9],'gambia':[13.4,-16.6],'guinea-bissau':[12.0,-15.2],
+  'cameroon':[7.4,12.4],'congo':[-4.3,15.3],'democratic republic of congo':[-4.0,21.8],
+  'drc':[-4.0,21.8],'gabon':[-0.8,11.6],
+  // China / NE Asia
+  'china':[35.9,104.2],'taiwan':[23.7,121.0],'hong kong':[22.3,114.2],
+  'japan':[36.2,138.3],'south korea':[35.9,127.8],'north korea':[40.3,127.5],
+  'mongolia':[46.9,103.8],
+  // South-East Asia
+  'indonesia':[-0.8,113.9],'malaysia':[4.2,101.9],'thailand':[15.9,101.0],
+  'vietnam':[14.1,108.3],'philippines':[12.9,121.8],'myanmar':[21.9,95.9],
+  'singapore':[1.4,103.8],'cambodia':[12.6,105.0],'laos':[19.9,102.5],
+  'brunei':[4.5,114.7],'east timor':[-8.9,126.0],'timor-leste':[-8.9,126.0],
+  // Russia / Central Asia
+  'russia':[61.5,105.3],'russian federation':[61.5,105.3],
+  'kazakhstan':[48.0,68.0],'uzbekistan':[41.4,64.6],'turkmenistan':[38.6,59.6],
+  'kyrgyzstan':[41.2,74.8],'tajikistan':[38.9,71.3],
+  // Australasia
+  'australia':[-25.3,133.8],'new zealand':[-40.9,174.9],
+  // Pacific
+  'fiji':[-17.7,178.1],'papua new guinea':[-6.3,143.9],'samoa':[-13.8,-172.0],
+  'solomon islands':[-9.6,160.2],'vanuatu':[-15.4,166.9],'tonga':[-21.2,-175.2],
+  // North America
+  'united states':[37.1,-95.7],'usa':[37.1,-95.7],'canada':[56.1,-106.3],'mexico':[23.6,-102.6],
+  // Latin America
+  'brazil':[-14.2,-51.9],'colombia':[4.6,-74.3],'argentina':[-38.4,-63.6],
+  'chile':[-35.7,-71.5],'peru':[-9.2,-75.0],'venezuela':[6.4,-66.6],
+  'ecuador':[-1.8,-78.2],'bolivia':[-16.3,-63.6],'paraguay':[-23.4,-58.4],
+  'uruguay':[-32.5,-55.8],'guyana':[4.9,-58.9],'suriname':[3.9,-56.0],
+  'cuba':[21.5,-79.0],'haiti':[19.1,-72.3],'dominican republic':[18.7,-70.2],
+  'jamaica':[18.1,-77.3],'trinidad and tobago':[10.7,-61.2],
+  'guatemala':[15.8,-90.2],'honduras':[15.2,-86.2],'el salvador':[13.8,-88.9],
+  'nicaragua':[12.9,-85.2],'costa rica':[10.0,-84.2],'panama':[9.0,-79.5],
+  // Africa misc
+  'democratic republic of the congo':[-4.0,21.8],'republic of congo':[-0.2,15.8],
+  'central african republic':[6.6,20.9],'equatorial guinea':[1.7,10.3],
+};
+
+/* ── Institutional Partners (non-UKRI formal partnerships) ── */
+const IPP_PARTNERS = [
+  {name:'Kyoto University',lat:35.0116,lng:135.7681},
+  {name:'Nankai University',lat:39.0851,lng:117.1647},
+  {name:'OP Jindal Global University',lat:28.9931,lng:76.8773},
+  {name:'Radboud University',lat:51.8126,lng:5.8372},
+  {name:'Universitas Gadjah Mada',lat:-7.7706,lng:110.3773},
+];
+
+const MOU_PARTNERS = [
+  // USA
+  {name:'Albion College',lat:42.2448,lng:-84.7530},
+  {name:'American University',lat:38.9365,lng:-77.0878},
+  {name:'Augsburg University',lat:44.9700,lng:-93.2300},
+  {name:'Augustana University',lat:43.5400,lng:-96.7300},
+  {name:'Beloit College',lat:42.5100,lng:-89.0400},
+  {name:'Bentley University',lat:42.3900,lng:-71.2200},
+  {name:'Berry College',lat:34.2900,lng:-85.1900},
+  {name:'Canisius College',lat:42.9400,lng:-78.8600},
+  {name:'Carson-Newman College',lat:36.1200,lng:-83.4900},
+  {name:'Christopher Newport University',lat:37.0600,lng:-76.4900},
+  {name:'Converse University',lat:34.9500,lng:-81.9300},
+  {name:'Creighton University',lat:41.2600,lng:-95.9400},
+  {name:'DePauw University',lat:39.6400,lng:-86.8600},
+  {name:'Duke University',lat:36.0000,lng:-78.9400},
+  {name:'Georgetown University',lat:38.9100,lng:-77.0700},
+  {name:'Gonzaga University',lat:47.6700,lng:-117.4000},
+  {name:'Goucher College',lat:39.4100,lng:-76.6100},
+  {name:'Heidelberg University (USA)',lat:41.0500,lng:-83.4500},
+  {name:'Kings College (USA)',lat:41.2400,lng:-75.8800},
+  {name:'Lewis and Clark College',lat:45.4500,lng:-122.6700},
+  {name:'Loyola University Maryland',lat:39.3500,lng:-76.6300},
+  {name:'Loyola University New Orleans',lat:29.9300,lng:-90.1200},
+  {name:'Macalester College',lat:44.9400,lng:-93.1700},
+  {name:'McDaniel College',lat:39.5800,lng:-76.9900},
+  {name:'Muhlenberg College',lat:40.6000,lng:-75.5200},
+  {name:'North Central College',lat:41.7700,lng:-88.1500},
+  {name:'Regis University',lat:39.7900,lng:-105.0200},
+  {name:'Rutgers University',lat:40.5000,lng:-74.4500},
+  {name:'Seattle Pacific University',lat:47.6500,lng:-122.3600},
+  {name:'Siena College',lat:42.7200,lng:-73.8000},
+  {name:'Smith College',lat:42.3200,lng:-72.6400},
+  {name:'St John\'s University',lat:40.7200,lng:-73.8000},
+  {name:'St Martin\'s University',lat:47.0500,lng:-122.8100},
+  {name:'Towson University',lat:39.3900,lng:-76.6100},
+  {name:'University of Florida',lat:29.6400,lng:-82.3500},
+  {name:'University of Maine',lat:44.9000,lng:-68.6700},
+  {name:'University of Miami',lat:25.7200,lng:-80.2800},
+  {name:'University of Minnesota',lat:44.9700,lng:-93.2300},
+  {name:'University of North Carolina Chapel Hill',lat:35.9100,lng:-79.0500},
+  {name:'University of Oklahoma',lat:35.2100,lng:-97.4400},
+  {name:'University of San Diego',lat:32.7700,lng:-117.1900},
+  {name:'University of Texas Austin',lat:30.2800,lng:-97.7400},
+  {name:'University of Vermont',lat:44.4800,lng:-73.2000},
+  {name:'University of Virginia',lat:38.0300,lng:-78.5100},
+  {name:'University of Wisconsin-Madison',lat:43.0800,lng:-89.4100},
+  {name:'University of Wisconsin-Eau Claire',lat:44.8000,lng:-91.5000},
+  {name:'University of Wisconsin-Green Bay',lat:44.5300,lng:-87.9000},
+  {name:'University of Wisconsin-La Crosse',lat:43.8100,lng:-91.2300},
+  {name:'University of Wyoming',lat:41.3100,lng:-105.5700},
+  {name:'Vassar College',lat:41.6900,lng:-73.9000},
+  {name:'Westminster College (USA)',lat:41.1200,lng:-80.3300},
+  {name:'IFSA Butler University',lat:39.8400,lng:-86.1700},
+  {name:'Smithsonian Institution',lat:38.8900,lng:-77.0300},
+  // China
+  {name:'Chongqing University',lat:29.5700,lng:106.4700},
+  {name:'East China University of Politics and Law',lat:31.2400,lng:121.4500},
+  {name:'East China University of Science and Technology',lat:31.2300,lng:121.4200},
+  {name:'Fudan University',lat:31.3000,lng:121.5000},
+  {name:'National University of Defence and Technology',lat:28.2300,lng:112.9300},
+  {name:'Shanghai Jiao Tong University',lat:31.0300,lng:121.4300},
+  {name:'Shanghai University',lat:31.3200,lng:121.3900},
+  {name:'Southwestern University of Finance and Economics',lat:30.6000,lng:104.0800},
+  {name:'Tianjin University',lat:39.1100,lng:117.1700},
+  {name:'University of Electronic Science and Technology',lat:30.7700,lng:104.0400},
+  {name:'Xi\'an Jiaotong University',lat:34.2600,lng:108.9900},
+  {name:'Jiangxi University of Finance and Economics',lat:28.7200,lng:115.8300},
+  // Canada
+  {name:'McMaster University',lat:43.2600,lng:-79.9200},
+  {name:'Simon Fraser University',lat:49.2800,lng:-122.9200},
+  {name:'University of British Columbia',lat:49.2600,lng:-123.2500},
+  // Ireland
+  {name:'Dublin City University',lat:53.3900,lng:-6.2500},
+  {name:'Maynooth University',lat:53.3800,lng:-6.6000},
+  {name:'National University of Ireland',lat:53.2800,lng:-9.0600},
+  {name:'University of Dublin Trinity College',lat:53.3400,lng:-6.2600},
+  // Spain
+  {name:'Autonomous University of Madrid',lat:40.5500,lng:-3.6900},
+  {name:'Polytechnic University of Catalonia',lat:41.3900,lng:2.1100},
+  {name:'Pompeu Fabra University',lat:41.3900,lng:2.1900},
+  {name:'University of Barcelona',lat:41.3900,lng:2.1600},
+  {name:'University of Cádiz',lat:36.5300,lng:-6.2900},
+  {name:'University of Las Palmas de Gran Canaria',lat:28.0700,lng:-15.4500},
+  {name:'University of Málaga',lat:36.7200,lng:-4.4800},
+  {name:'University of Oviedo',lat:43.3500,lng:-5.8500},
+  {name:'University of Salamanca',lat:40.9600,lng:-5.6700},
+  {name:'University of Seville',lat:37.3800,lng:-5.9900},
+  {name:'University of Valencia',lat:39.4800,lng:-0.3500},
+  {name:'University of Zaragoza',lat:41.6500,lng:-0.8800},
+  // France
+  {name:'Audencia Business School',lat:47.2100,lng:-1.5500},
+  {name:'IE Business School',lat:40.4400,lng:-3.6900}, // Madrid
+  {name:'IESA',lat:48.8700,lng:2.3700},
+  {name:'ISIT',lat:48.8600,lng:2.2800},
+  {name:'Sciences Po Lyon',lat:45.7600,lng:4.8400},
+  {name:'Sciences Po',lat:48.8500,lng:2.3300},
+  {name:'Université de Lorraine',lat:48.6900,lng:6.1800},
+  {name:'University of Clermont-Auvergne',lat:45.7600,lng:3.1100},
+  {name:'University of Lille',lat:50.6100,lng:3.1400},
+  {name:'University Paris Diderot',lat:48.8300,lng:2.3800},
+  // Germany
+  {name:'Leuphana University of Lüneburg',lat:53.2300,lng:10.4100},
+  {name:'TU Braunschweig',lat:52.2700,lng:10.5300},
+  {name:'University of Freiburg',lat:48.0000,lng:7.8500},
+  {name:'University of Göttingen',lat:51.5300,lng:9.9400},
+  // Belgium
+  {name:'Catholic University of Louvain',lat:50.6700,lng:4.6200},
+  {name:'KU Leuven',lat:50.8800,lng:4.7000},
+  {name:'ULB',lat:50.8100,lng:4.3800},
+  // Other Europe
+  {name:'Masaryk University',lat:49.2000,lng:16.6100},
+  {name:'Open University of Cyprus',lat:35.1700,lng:33.3600},
+  {name:'University of Cyprus',lat:35.1400,lng:33.4100},
+  {name:'National and Kapodistrian University of Athens',lat:37.9700,lng:23.7700},
+  {name:'Jagiellonian University',lat:50.0600,lng:19.9300},
+  {name:'Kozminski University',lat:52.2400,lng:20.9600},
+  {name:'University of Warsaw',lat:52.2400,lng:21.0200},
+  {name:'University of Wrocław',lat:51.1100,lng:17.0300},
+  {name:'University of Belgrade',lat:44.8200,lng:20.4600},
+  {name:'University of Novi Sad',lat:45.2500,lng:19.8500},
+  {name:'University of Ljubljana',lat:46.0500,lng:14.5000},
+  {name:'University of Maribor',lat:46.5600,lng:15.6500},
+  {name:'UiT The Arctic University of Norway',lat:69.6800,lng:18.9700},
+  {name:'University of Bergen',lat:60.3900,lng:5.3200},
+  {name:'University of Oslo',lat:59.9400,lng:10.7200},
+  {name:'University of Bern',lat:46.9500,lng:7.4400},
+  {name:'University of Geneva',lat:46.2000,lng:6.1500},
+  {name:'University of Zurich',lat:47.3700,lng:8.5500},
+  {name:'Tallinn University',lat:59.4400,lng:24.7300},
+  {name:'University of Tartu',lat:58.3800,lng:26.7300},
+  {name:'National University of Kyiv Mohyla Academy',lat:50.4600,lng:30.5200},
+  {name:'European Humanities University',lat:54.6900,lng:25.2800},
+  {name:'Ilia State University',lat:41.7200,lng:44.7900},
+  {name:'Tel Aviv University',lat:32.1100,lng:34.8000},
+  {name:'Vytautas Magnus University',lat:54.9000,lng:23.9600},
+  {name:'Reykjavik University',lat:64.1300,lng:-21.9000},
+  // Portugal
+  {name:'University Institute Lisbon',lat:38.7500,lng:-9.1500},
+  {name:'University of Lisbon',lat:38.7500,lng:-9.1600},
+  {name:'University of Lisbon NOVA',lat:38.6600,lng:-9.2100},
+  // Italy
+  {name:'LUISS Guido Carli University',lat:41.9200,lng:12.4900},
+  {name:'University of Pisa',lat:43.7200,lng:10.4000},
+  // Asia-Pacific
+  {name:'Chinese University of Hong Kong',lat:22.4200,lng:114.2100},
+  {name:'Hong Kong University of Science and Technology',lat:22.3400,lng:114.2700},
+  {name:'University of Hong Kong',lat:22.2800,lng:114.1400},
+  {name:'University of Nottingham Malaysia',lat:2.9500,lng:101.8800},
+  {name:'USM',lat:5.3600,lng:100.3000},
+  {name:'Nanyang Technological University',lat:1.3500,lng:103.6800},
+  {name:'National University of Singapore',lat:1.3000,lng:103.7700},
+  {name:'Singapore Management University',lat:1.3000,lng:103.8500},
+  {name:'University of Glasgow Singapore SIT',lat:1.3300,lng:103.7700},
+  {name:'Fukushima University',lat:37.7500,lng:140.4700},
+  {name:'Hitotsubashi University',lat:35.6900,lng:139.4300},
+  {name:'Keio University',lat:35.6500,lng:139.7400},
+  {name:'University of Tokyo',lat:35.7100,lng:139.7600},
+  {name:'Waseda University',lat:35.7100,lng:139.7200},
+  {name:'Chulalongkorn Business School',lat:13.7400,lng:100.5300},
+  {name:'Mahidol University',lat:13.7900,lng:100.3200},
+  {name:'King Mongkut\'s Institute of Technology Ladkrabang',lat:13.7300,lng:100.7800},
+  {name:'Korea University',lat:37.5900,lng:127.0300},
+  {name:'Seoul National University',lat:37.4600,lng:126.9500},
+  {name:'Yonsei University',lat:37.5600,lng:126.9400},
+  {name:'Andalas University',lat:-0.9100,lng:100.4600},
+  {name:'Institut Teknologi Bandung',lat:-6.8900,lng:107.6100},
+  {name:'Jimbaran Consortium of Universities',lat:-8.7900,lng:115.1700},
+  {name:'IISER Pune',lat:18.5500,lng:73.8100},
+  {name:'University of Calcutta',lat:22.5800,lng:88.3600},
+  {name:'University of Delhi',lat:28.6900,lng:77.2100},
+  {name:'National Academy of Legal Studies and Research',lat:17.3700,lng:78.4800},
+  {name:'Biocon Limited',lat:12.8400,lng:77.6500},
+  // Americas
+  {name:'Pontifical Catholic University of Valparaíso',lat:-33.0500,lng:-71.6100},
+  {name:'Monterrey Institute of Technology',lat:25.6500,lng:-100.2900},
+  // Africa + Oceania
+  {name:'College of Medicine University of Malawi',lat:-15.8000,lng:35.0200},
+  {name:'Nelson Mandela Institute of Science and Technology',lat:-3.4000,lng:36.8000},
+  {name:'North West University Mafikeng',lat:-25.8300,lng:25.6300},
+  {name:'University of Cape Town',lat:-33.9600,lng:18.4600},
+  {name:'University of Johannesburg',lat:-26.1800,lng:28.0000},
+  {name:'University of Rwanda',lat:-1.9600,lng:30.0600},
+  {name:'University of Auckland',lat:-36.8500,lng:174.7700},
+  {name:'University of Otago',lat:-45.8700,lng:170.5100},
+];
+
 let _statusMode = 'all'; // 'all' or 'active'
 let _datasets = { all: null, active: null };
+
+/* ── Institutional partner state ── */
+let _instPoints = [];
+let _visibleInst = new Set(['ipp','mou']);
+
+/* ── Staff research regions state ── */
+let _staffRegionData = [];
+let _regionPoints = [];    // centroid markers per region
+let _countryPoints = [];   // per-country markers with staff names
+let _visibleRegions = new Set();  // populated dynamically after data loads
 
 /* ════════════════════════════════════════
    DATA LOADING
@@ -157,8 +489,9 @@ let _allData = [];
 let _partnerData = [];
 let _countriesGeoJson = null;
 let _loadCount = 0;
-const LOAD_TOTAL = 4;
-function dbg(msg){ console.log('[Globe] '+msg); }
+const LOAD_TOTAL = 5;
+let _dbg = null;
+function dbg(msg){ if(_dbg){ _dbg.style.display='block'; _dbg.innerHTML += msg+'<br>'; } console.log('[Globe] '+msg); }
 
 function checkLoaded(){
   _loadCount++;
@@ -233,6 +566,17 @@ fetch('org_coords.json')
     dbg('Coords JSON WARN: ' + e.message + ' — using empty coords');
     checkLoaded();
   });
+
+// 5. Staff research regions CSV
+Papa.parse('sps_staff_regions.csv',{
+  download:true, header:true, skipEmptyLines:true,
+  complete(res){
+    _staffRegionData = res.data.filter(r=>r.region);
+    dbg('CSV3 (staff regions) ok: ' + _staffRegionData.length + ' rows');
+    checkLoaded();
+  },
+  error(e){ dbg('CSV3 (staff regions) WARN: ' + e.message); checkLoaded(); }
+});
 
 /* ════════════════════════════════════════
    DATA PROCESSING
@@ -346,12 +690,113 @@ function processData(){
   dbg('ALL — Coords: ' + ds.coordHits + ' hits, ' + ds.coordMisses + ' misses');
   dbg('ALL — Points: ' + ds.points.length + ' | Arcs: ' + ds.arcs.length);
 
+  // Build institutional partner points (independent of status filter)
+  _instPoints = [];
+  IPP_PARTNERS.forEach(p => {
+    _instPoints.push({lat:p.lat, lng:p.lng, name:p.name, instType:'ipp', color:'#1565c0', label:'International Partnership Programme'});
+  });
+  MOU_PARTNERS.forEach(p => {
+    _instPoints.push({lat:p.lat, lng:p.lng, name:p.name, instType:'mou', color:'#c62828', label:'MOU Partner'});
+  });
+  dbg('Institutional partners: ' + IPP_PARTNERS.length + ' IPP + ' + MOU_PARTNERS.length + ' MOU = ' + _instPoints.length + ' total');
+
+  // ── Build staff research region data ──
+  _regionPoints = [];
+  _countryPoints = [];
+  _visibleRegions = new Set();
+
+  if(_staffRegionData.length > 0){
+    // Group by region → { staff: Set, countries: Set }
+    const regionMap = {};
+    // Group by country → Set of staff names
+    const countryStaffMap = {};
+
+    _staffRegionData.forEach(row => {
+      const region = row.region;
+      const staffName = row.staff_name;
+      if(!region || !staffName) return;
+
+      if(!regionMap[region]) regionMap[region] = { staff: new Set(), countries: new Set() };
+      regionMap[region].staff.add(staffName);
+
+      // Parse countries (semicolon-delimited)
+      const countries = (row.countries||'').split(';').map(c=>c.trim()).filter(Boolean);
+      countries.forEach(c => {
+        regionMap[region].countries.add(c);
+        const countryKey = c.toLowerCase();
+        if(!countryStaffMap[countryKey]) countryStaffMap[countryKey] = { name: c, region: region, staff: new Set() };
+        countryStaffMap[countryKey].staff.add(staffName);
+      });
+    });
+
+    // Build region centroid markers
+    Object.entries(regionMap).forEach(([region, data]) => {
+      const centroid = REGION_CENTROIDS[region];
+      if(!centroid) return;
+      _visibleRegions.add(region);
+      _regionPoints.push({
+        lat: centroid.lat, lng: centroid.lng,
+        name: region, layerType: 'region',
+        staffCount: data.staff.size,
+        staffNames: [...data.staff].sort(),
+        countries: [...data.countries].sort(),
+        color: REGION_COLORS[region] || '#555',
+      });
+    });
+
+    // Build country-level markers
+    Object.entries(countryStaffMap).forEach(([key, data]) => {
+      const coords = COUNTRY_COORDS[key];
+      if(!coords) return;
+      _countryPoints.push({
+        lat: coords[0], lng: coords[1],
+        name: data.name, region: data.region, layerType: 'country',
+        staffCount: data.staff.size,
+        staffNames: [...data.staff].sort(),
+        color: REGION_COLORS[data.region] || '#555',
+      });
+    });
+
+    dbg('Research regions: ' + _regionPoints.length + ' regions, ' + _countryPoints.length + ' countries');
+
+    // Populate legend dynamically
+    buildRegionLegend(regionMap);
+  } else {
+    dbg('No staff region data — skipping region layer');
+    document.getElementById('globe-legend-regions').style.display = 'none';
+  }
+
   const activeProjects = _allData.filter(d => d.status === 'Active');
   _datasets.active = buildDataset(activeProjects, _partnerData);
   const da = _datasets.active;
   dbg('ACTIVE — Projects: ' + activeProjects.length + ' | Points: ' + da.points.length + ' | Arcs: ' + da.arcs.length);
 
   applyDataset();
+}
+
+/* Build the research regions legend dynamically */
+function buildRegionLegend(regionMap){
+  const container = document.getElementById('globe-legend-regions');
+  if(!container) return;
+  let html = '<h4>Staff Research Regions</h4>';
+  // Sort regions by staff count descending
+  const sorted = Object.entries(regionMap).sort((a,b) => b[1].staff.size - a[1].staff.size);
+  sorted.forEach(([region, data]) => {
+    const color = REGION_COLORS[region] || '#555';
+    html += `<label><input type="checkbox" data-region="${region}" checked>
+      <span class="legend-dot" style="background:${color}"></span> ${region}
+      <span class="region-count">${data.staff.size}</span></label>`;
+  });
+  container.innerHTML = html;
+
+  // Wire checkboxes
+  container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const region = cb.dataset.region;
+      if(cb.checked) _visibleRegions.add(region); else _visibleRegions.delete(region);
+      updateGlobeFilters();
+    });
+  });
 }
 
 /* Switch between "all" and "active" datasets */
@@ -414,12 +859,12 @@ function buildGlobe(pointsData, arcsData){
     .polygonStrokeColor(()=>'rgba(160, 160, 160, 0.6)')
     .polygonAltitude(0.005)
 
-    // Points — 3D cylinders above polygon layer
-    .pointsData(pointsData)
+    // Points — 3D cylinders above polygon layer (UKRI orgs + research country markers)
+    .pointsData([...pointsData, ..._countryPoints.filter(p=>_visibleRegions.has(p.region))])
     .pointLat('lat')
     .pointLng('lng')
     .pointColor('color')
-    .pointRadius('size')
+    .pointRadius(d => d.size || (d.layerType === 'country' ? 0.15 + Math.min(d.staffCount * 0.06, 0.4) : 0.2))
     .pointAltitude(0.015)
     .pointResolution(12)
     .pointsMerge(false)
@@ -441,6 +886,41 @@ function buildGlobe(pointsData, arcsData){
     .arcDashGap(0.15)
     .arcDashInitialGap(d => d.direction === 'inward' ? 0.5 : 0)
     .arcDashAnimateTime(d => d.direction === 'outward' ? 4500 : 4500)
+
+    // HTML overlay layer (CSS2D — above all 3D geometry)
+    // Merges institutional stars + research region centroid markers
+    .htmlElementsData([
+      ..._instPoints.filter(p => _visibleInst.has(p.instType)),
+      ..._regionPoints.filter(p => _visibleRegions.has(p.name)),
+    ])
+    .htmlLat('lat')
+    .htmlLng('lng')
+    .htmlAltitude(0.02)
+    .htmlElement(d => {
+      if(d.layerType === 'region'){
+        // Region centroid: numbered circle
+        const el = document.createElement('div');
+        const sz = Math.max(22, 16 + d.staffCount * 0.5);
+        el.style.cssText = 'width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:'+d.color+
+          ';color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;'+
+          'cursor:pointer;border:2px solid rgba(255,255,255,0.8);box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+        el.textContent = d.staffCount;
+        el.title = d.name + ' (' + d.staffCount + ' staff)';
+        el.addEventListener('mouseenter', () => handleRegionHover(d));
+        el.addEventListener('mouseleave', () => handleRegionHover(null));
+        return el;
+      } else {
+        // Institutional partner: star
+        const el = document.createElement('div');
+        const sz = d.instType === 'ipp' ? 16 : 11;
+        el.style.cssText = 'font-size:'+sz+'px;color:'+d.color+';cursor:pointer;text-shadow:0 0 3px rgba(0,0,0,0.3);line-height:1;';
+        el.textContent = '★';
+        el.title = d.name;
+        el.addEventListener('mouseenter', () => handleInstHover(d));
+        el.addEventListener('mouseleave', () => handleInstHover(null));
+        return el;
+      }
+    })
 
     // Hover
     .onPointHover(handlePointHover)
@@ -492,11 +972,20 @@ function buildGlobe(pointsData, arcsData){
     if(_globe) _globe.width(container.clientWidth).height(container.clientHeight);
   });
 
-  // Wire legend toggles
-  document.querySelectorAll('.globe-legend input[type="checkbox"]').forEach(cb=>{
+  // Wire connection type legend toggles
+  document.querySelectorAll('#globe-legend input[type="checkbox"]').forEach(cb=>{
     cb.addEventListener('change',()=>{
       const cat = cb.dataset.cat;
       if(cb.checked) _visibleCats.add(cat); else _visibleCats.delete(cat);
+      updateGlobeFilters();
+    });
+  });
+
+  // Wire institutional partner legend toggles
+  document.querySelectorAll('#globe-legend-inst input[type="checkbox"]').forEach(cb=>{
+    cb.addEventListener('change',()=>{
+      const cat = cb.dataset.inst;
+      if(cb.checked) _visibleInst.add(cat); else _visibleInst.delete(cat);
       updateGlobeFilters();
     });
   });
@@ -516,9 +1005,16 @@ function buildGlobe(pointsData, arcsData){
 
 function updateGlobeFilters(){
   if(!_globe) return;
+  // UKRI points + country-level staff research markers
+  const ukriPts = _allPoints.filter(p=>p.isGlasgow || _visibleCats.has(p.category));
+  const countryPts = _countryPoints.filter(p=>_visibleRegions.has(p.region));
+  // Merge htmlElements: institutional stars + region centroid markers
+  const instFiltered = _instPoints.filter(p => _visibleInst.has(p.instType));
+  const regionFiltered = _regionPoints.filter(p => _visibleRegions.has(p.name));
   _globe
-    .pointsData(_allPoints.filter(p=>p.isGlasgow || _visibleCats.has(p.category)))
-    .arcsData(_allArcs.filter(a=>_visibleCats.has(a.category)));
+    .pointsData([...ukriPts, ...countryPts])
+    .arcsData(_allArcs.filter(a=>_visibleCats.has(a.category)))
+    .htmlElementsData([...instFiltered, ...regionFiltered]);
 }
 
 /* ════════════════════════════════════════
@@ -538,12 +1034,23 @@ function buildTagsHtml(tags){
 function handlePointHover(point){
   if(point){
     tooltip.style.display = 'block';
-    const catLabel = point.isGlasgow ? 'Hub — University of Glasgow' : CAT_COLORS[point.category].label;
-    tooltip.innerHTML = `
-      <strong>${point.name}</strong><br>
-      <em style="color:${point.color}">${catLabel}</em><br>
-      ${point.count} project${point.count>1?'s':''} · ${fmtGBP(point.value)}
-      ${buildTagsHtml(point.tags)}`;
+    if(point.layerType === 'country'){
+      // Staff research country marker
+      const staffList = point.staffNames.slice(0, 15).map(n => '• ' + n).join('<br>');
+      const moreText = point.staffNames.length > 15 ? '<br><em>… and ' + (point.staffNames.length - 15) + ' more</em>' : '';
+      tooltip.innerHTML = '<strong>' + point.name + '</strong><br>' +
+        '<em style="color:' + point.color + '">Staff Research Focus (' + point.region + ')</em><br>' +
+        '<span style="font-size:0.75rem">' + point.staffCount + ' staff member' + (point.staffCount>1?'s':'') + '</span>' +
+        '<div style="margin-top:4px;font-size:0.72rem;line-height:1.5">' + staffList + moreText + '</div>';
+    } else {
+      // UKRI organisation point
+      const catLabel = point.isGlasgow ? 'Hub — University of Glasgow' : CAT_COLORS[point.category].label;
+      tooltip.innerHTML = `
+        <strong>${point.name}</strong><br>
+        <em style="color:${point.color}">${catLabel}</em><br>
+        ${point.count} project${point.count>1?'s':''} · ${fmtGBP(point.value)}
+        ${buildTagsHtml(point.tags)}`;
+    }
   } else {
     tooltip.style.display = 'none';
   }
@@ -562,13 +1069,28 @@ function handleArcHover(arc){
   }
 }
 
-function onAllCsvLoaded(){
-  document.getElementById('loading').style.display='none';
-  document.querySelectorAll('.tab-panel,.tab-bar').forEach(e=>e.style.visibility='visible');
-  buildPartnerIndex();
-  const data = getFilteredData();
-  buildOverview(data);
-  buildTable(data);
+function handleInstHover(d){
+  if(d){
+    tooltip.style.display = 'block';
+    tooltip.innerHTML = '<strong>' + d.name + '</strong><br><em style="color:' + d.color + '">' + d.label + '</em>';
+  } else {
+    tooltip.style.display = 'none';
+  }
+}
+
+function handleRegionHover(d){
+  if(d){
+    tooltip.style.display = 'block';
+    const staffList = d.staffNames.slice(0, 20).map(n => '• ' + n).join('<br>');
+    const moreText = d.staffNames.length > 20 ? '<br><em>… and ' + (d.staffNames.length - 20) + ' more</em>' : '';
+    const countriesList = d.countries.length > 0 ? '<br><span style="color:var(--muted);font-size:0.7rem">Countries: ' + d.countries.join(', ') + '</span>' : '';
+    tooltip.innerHTML = '<strong>' + d.name + '</strong><br>' +
+      '<em style="color:' + d.color + '">' + d.staffCount + ' staff researching this region</em>' +
+      countriesList +
+      '<div style="margin-top:4px;font-size:0.72rem;line-height:1.5">' + staffList + moreText + '</div>';
+  } else {
+    tooltip.style.display = 'none';
+  }
 }
 
 // Track cursor for tooltip positioning
